@@ -1,6 +1,10 @@
 {
   "name": "biblical-hebrew-fe",
   "version": "0.0.0",
+  "description": "**A tool for learning Biblical Hebrew vocabulary**",
+  "author": "danday74",
+  "license": "UNLICENSED",
+  "private": true,
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -9,7 +13,6 @@
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "~7.2.0",
     "@angular/common": "~7.2.0",
