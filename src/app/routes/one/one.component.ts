@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core'
+import { WebsocketService } from '@app/services/websocket.service'
 
 @Component({
   selector: 'app-one',
@@ -7,7 +8,14 @@ import { Component, OnInit } from '@angular/core'
 })
 
 export class OneComponent implements OnInit {
-  constructor() {}
 
-  ngOnInit() {}
+  constructor(private websocketService: WebsocketService) {}
+
+  ngOnInit() {
+    this.websocketService.messages.subscribe(({action, payload}) => {
+      console.log('incoming message', action, payload)
+    })
+
+    this.websocketService.messages.next({action: 'message-to-server', payload: 'green'})
+  }
 }
