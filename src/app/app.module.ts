@@ -8,6 +8,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 import { environment } from '@environments/environment'
 import { EffectsModule } from '@ngrx/effects'
 import { AppEffects } from '@app/actions/app/app.effects'
+import { InitEffects } from '@app/actions/init/init.effects'
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { AppEffects } from '@app/actions/app/app.effects'
     AppRoutingModule,
     StoreModule.forRoot(reducers, {metaReducers}),
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
-    EffectsModule.forRoot([AppEffects])
+    EffectsModule.forRoot([AppEffects, InitEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

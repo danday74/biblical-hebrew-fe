@@ -11,25 +11,41 @@
       "schematics": {
         "@ngrx/schematics:component": {
           "style": "scss",
-          "skipTests": true
+          "skipTests": true,
+          "lintFix": true
         },
         "@ngrx/schematics:class": {
-          "skipTests": true
+          "skipTests": true,
+          "lintFix": true
         },
         "@ngrx/schematics:directive": {
-          "skipTests": true
+          "skipTests": true,
+          "lintFix": true
         },
         "@ngrx/schematics:guard": {
-          "skipTests": true
+          "skipTests": true,
+          "lintFix": true
         },
         "@ngrx/schematics:module": {
-          "skipTests": true
+          "skipTests": true,
+          "lintFix": true
         },
         "@ngrx/schematics:pipe": {
-          "skipTests": true
+          "skipTests": true,
+          "lintFix": true
         },
         "@ngrx/schematics:service": {
-          "skipTests": true
+          "skipTests": true,
+          "lintFix": true
+        },
+        "@ngrx/schematics:effect": {
+          "spec": false
+        },
+        "@ngrx/schematics:action": {
+          "spec": false
+        },
+        "@ngrx/schematics:reducer": {
+          "spec": false
         }
       },
       "architect": {
