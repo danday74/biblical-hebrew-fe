@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core'
 import { environment } from '@environments/environment'
 import * as io from 'socket.io-client'
-import { Observable, Subject } from 'rxjs'
+import { Observable, of, Subject } from 'rxjs'
+import { catchError, filter, map } from 'rxjs/operators'
 
 @Injectable({providedIn: 'root'})
 
@@ -30,5 +31,15 @@ export class WebsocketService {
     }
 
     this.messages = Subject.create(observer, observable)
+  }
+
+  request(action: string, payload: any = null) {
+    this.messages.next({action, payload})
+    return this.messages.pipe(
+      filter((res) => res.action === action),
+      map((res) => res.payload),
+      // take(1),
+      catchError(() => of(null))
+    )
   }
 }

@@ -9,26 +9,26 @@
       "projectType": "application",
       "prefix": "app",
       "schematics": {
-        "@schematics/angular:component": {
+        "@ngrx/schematics:component": {
           "style": "scss",
           "skipTests": true
         },
-        "@schematics/angular:class": {
+        "@ngrx/schematics:class": {
           "skipTests": true
         },
-        "@schematics/angular:directive": {
+        "@ngrx/schematics:directive": {
           "skipTests": true
         },
-        "@schematics/angular:guard": {
+        "@ngrx/schematics:guard": {
           "skipTests": true
         },
-        "@schematics/angular:module": {
+        "@ngrx/schematics:module": {
           "skipTests": true
         },
-        "@schematics/angular:pipe": {
+        "@ngrx/schematics:pipe": {
           "skipTests": true
         },
-        "@schematics/angular:service": {
+        "@ngrx/schematics:service": {
           "skipTests": true
         }
       },
@@ -155,5 +155,8 @@
       }
     }
   },
-  "defaultProject": "biblical-hebrew-fe"
+  "defaultProject": "biblical-hebrew-fe",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }
