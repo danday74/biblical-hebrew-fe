@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core'
 import { Actions, Effect } from '@ngrx/effects'
-import { catchError, filter, map, mergeMap } from 'rxjs/operators'
+import { catchError, filter, map, mergeMap, tap } from 'rxjs/operators'
 import { getActionHttpPath, getLoadedAction } from '@app/utils/utils'
 import { HttpClient } from '@angular/common/http'
 import { of } from 'rxjs'
+import * as Debug from 'debug'
+
+const debug = Debug('bh:effects:generic')
 
 @Injectable()
 
@@ -20,6 +23,7 @@ export class GenericEffects {
       loadedAction: getLoadedAction(action)
     })),
     filter(obj => obj.loadedAction != null),
+    tap(obj => debug('HTTP GET', obj.path)),
     mergeMap((obj) =>
       this.http.get(obj.path).pipe(
         map(res => ({...obj, res})),
