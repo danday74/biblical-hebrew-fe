@@ -8,5 +8,5 @@ export class InitAction implements Action {
   readonly type = InitActionTypes.Init
 }
 
-export type InitActions =
-  | InitAction
+// export type InitActions =
+//   | InitAction

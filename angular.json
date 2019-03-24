@@ -64,7 +64,9 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": [],
+            "scripts": [
+              "node_modules/replace-last/replaceLast.js"
+            ],
             "es5BrowserSupport": true
           },
           "configurations": {

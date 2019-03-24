@@ -1,4 +1,6 @@
+// noinspection JSUnusedGlobalSymbols
 export const environment = {
-  wsUrl: 'ws://biblical-hebrew.com:3000',
-  production: true
+  production: true,
+  httpPhp: 'http://localhost:3000',
+  wsPhp: 'ws://localhost:3000'
 }

@@ -1,23 +1,23 @@
 import { Injectable } from '@angular/core'
 import { environment } from '@environments/environment'
 import * as io from 'socket.io-client'
-import { Observable, of, Subject } from 'rxjs'
-import { catchError, filter, map, take } from 'rxjs/operators'
+import { Observable, Subject } from 'rxjs'
+import { CustomAction } from '@app/actions/custom-action'
 
 @Injectable({providedIn: 'root'})
 
-export class WebsocketService {
+export class WebSocketService {
 
   private socket: any
-  messages: Subject<{ action: string, payload: any }>
+  messages: Subject<CustomAction>
 
   constructor() {
 
-    this.socket = io(environment.wsUrl)
+    this.socket = io(environment.wsPhp)
 
     const observable = new Observable(observor => {
-      this.socket.on('message', (data: { action: string, payload: any }) => {
-        observor.next(data)
+      this.socket.on('message', (action: CustomAction) => {
+        observor.next(action)
       })
       return () => {
         this.socket.disconnect()
@@ -25,21 +25,11 @@ export class WebsocketService {
     })
 
     const observer = {
-      next: (data: { action: string, payload: any }) => {
-        this.socket.emit('message', data)
+      next: (action: CustomAction) => {
+        this.socket.emit('message', action)
       }
     }
 
     this.messages = Subject.create(observer, observable)
-  }
-
-  request(action: string, payload: any = null) {
-    this.messages.next({action, payload})
-    return this.messages.pipe(
-      filter((res) => res.action === action),
-      map((res) => res.payload),
-      take(1),
-      catchError(() => of(null))
-    )
   }
 }
