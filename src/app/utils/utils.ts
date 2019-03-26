@@ -1,12 +1,14 @@
 import { Action } from '@ngrx/store'
 import { environment } from '@environments/environment'
 import { ActionsLookup } from '@app/actions/actions-lookup'
+import { CustomAction } from '@app/actions/custom-action'
 
 declare var replaceLast: (str, pattern, replacement) => string
 
-export const getActionHttpPath = (action: Action) => {
-  const httpPath = action.type.replace(/\[/g, '').replace(/]/g, '')
+export const getActionHttpPath = (action: CustomAction) => {
+  let httpPath = action.type.replace(/\[/g, '').replace(/]/g, '')
     .replace(/ /g, '-').toLowerCase()
+  if (action.payload) httpPath = `${httpPath}/${action.payload}`
   return environment.httpPhp + '/' + httpPath
 }
 

@@ -1,4 +1,7 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
+import { select, Store } from '@ngrx/store'
+import { State } from '@app/reducers'
+import { selectUser } from '@app/actions/app/app.selectors'
 
 @Component({
   selector: 'app-root',
@@ -6,4 +9,13 @@ import { Component } from '@angular/core'
   styleUrls: ['./app.component.scss']
 })
 
-export class AppComponent {}
+export class AppComponent implements OnInit {
+
+  public user$
+
+  constructor(private store: Store<State>) {}
+
+  ngOnInit() {
+    this.user$ = this.store.pipe(select(selectUser))
+  }
+}

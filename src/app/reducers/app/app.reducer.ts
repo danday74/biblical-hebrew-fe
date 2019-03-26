@@ -2,10 +2,12 @@ import { AppActions, AppActionTypes } from '@app/actions/app/app.actions'
 
 export interface AppState {
   questions: any
+  user: any
 }
 
 export const initialAppState: AppState = {
-  questions: {}
+  questions: {},
+  user: null
 }
 
 export function appReducer(state = initialAppState, action: AppActions): AppState {
@@ -15,6 +17,12 @@ export function appReducer(state = initialAppState, action: AppActions): AppStat
       return {
         ...state,
         questions: action.payload
+      }
+
+    case AppActionTypes.UserLoaded:
+      return {
+        ...state,
+        user: action.payload
       }
 
     default:
