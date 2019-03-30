@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router'
 
 const routes: Routes = [
   {path: 'questions', loadChildren: './routes/questions/questions.module#QuestionsModule'},
-  {path: 'two', loadChildren: './routes/two/two.module#TwoModule'},
+  {path: 'challenges', loadChildren: './routes/challenges/challenges.module#ChallengesModule'},
   {path: '**', redirectTo: '/questions'}
 ]
 
