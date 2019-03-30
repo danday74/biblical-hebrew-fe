@@ -12,15 +12,21 @@ import { InitEffects } from '@app/actions/init/init.effects'
 import { HttpClientModule } from '@angular/common/http'
 import { GenericEffects } from '@app/actions/generic/generic.effects'
 import * as Debug from 'debug'
+import { NavbarComponent } from './base/navbar/navbar.component'
+import { UserFinderComponent } from './base/user-finder/user-finder.component'
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavbarComponent,
+    UserFinderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FontAwesomeModule,
     StoreModule.forRoot(reducers, {metaReducers}),
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
     EffectsModule.forRoot([AppEffects, GenericEffects, InitEffects])

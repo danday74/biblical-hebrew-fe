@@ -1,6 +1,10 @@
-<div *ngIf="user$ | async as user">{{ user.name }}</div>
-<a routerLink="questions">questions</a>
-<a routerLink="challenges">challenges</a>
-<a routerLink="scores">scores</a>
-<a routerLink="options">options</a>
-<router-outlet></router-outlet>
+<ng-container *ngIf="(user$ | async) != null; else noUser">
+  <app-navbar></app-navbar>
+  <div class="outlet-wrapper">
+    <router-outlet></router-outlet>
+  </div>
+</ng-container>
+
+<ng-template #noUser>
+  <app-user-finder></app-user-finder>
+</ng-template>

@@ -1,0 +1,18 @@
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" routerLinkActive="active" routerLink="questions">Questions</a>
+      <a class="nav-item nav-link" routerLinkActive="active" routerLink="challenges">Challenges</a>
+      <a class="nav-item nav-link" routerLinkActive="active" routerLink="scores">Scores</a>
+      <a class="nav-item nav-link" routerLinkActive="active" routerLink="options">Options</a>
+    </div>
+    <span class="ml-auto">
+      <span class="logged-in-as">Logged in as <span class="username">{{ (user$ | async).name }}</span></span>
+      <fa-icon class="logout" [icon]="faSignOutAlt" (click)="logout()"></fa-icon>
+    </span>
+  </div>
+</nav>

@@ -1,0 +1,29 @@
+@import '../../globals';
+
+.navbar {
+  background-color: darken($bhBlue, 20%) !important;
+  user-select: none;
+  color: #CCC;
+
+  .logged-in-as {
+    font-size: 0.9rem;
+    margin-right: 50px;
+
+    .username {
+      color: #FFF;
+      font-size: 1rem;
+    }
+  }
+
+  .logout {
+    position: absolute;
+    top: 8px;
+    right: 20px;
+    font-size: 1.7em;
+
+    &:hover {
+      color: #FFF;
+      cursor: pointer;
+    }
+  }
+}
