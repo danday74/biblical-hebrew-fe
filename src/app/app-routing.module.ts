@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 
 const routes: Routes = [
-  {path: 'one', loadChildren: './routes/one/one.module#OneModule'},
+  {path: 'questions', loadChildren: './routes/questions/questions.module#QuestionsModule'},
   {path: 'two', loadChildren: './routes/two/two.module#TwoModule'},
-  {path: '**', redirectTo: '/one'}
+  {path: '**', redirectTo: '/questions'}
 ]
 
 @NgModule({
