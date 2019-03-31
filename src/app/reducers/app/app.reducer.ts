@@ -19,12 +19,6 @@ export function appReducer(state = initialAppState, action: AppActions): AppStat
         questions: action.payload
       }
 
-    case AppActionTypes.UserLoaded:
-      return {
-        ...state,
-        user: action.payload
-      }
-
     default:
       return state
   }
