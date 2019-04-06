@@ -1,7 +1,17 @@
+@import 'styles/cross-browser';
+
 html {
   overflow-y: scroll;
 }
 
+html.supported .unsupported {
+  display: none;
+}
+
 body {
   min-width: 750px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }

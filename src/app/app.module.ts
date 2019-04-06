@@ -15,6 +15,7 @@ import * as Debug from 'debug'
 import { NavbarComponent } from './base/navbar/navbar.component'
 import { UserFinderComponent } from './base/user-finder/user-finder.component'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
+import { FormsModule } from '@angular/forms'
 
 @NgModule({
   declarations: [
@@ -24,9 +25,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     HttpClientModule,
+    FormsModule,
     FontAwesomeModule,
+    AppRoutingModule,
     StoreModule.forRoot(reducers, {metaReducers}),
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
     EffectsModule.forRoot([AppEffects, GenericEffects, InitEffects])

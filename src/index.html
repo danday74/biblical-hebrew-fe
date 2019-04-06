@@ -6,8 +6,27 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <style>
+    .unsupported {
+      text-align: center;
+      margin-top: 100px;
+      opacity: 0;
+    }
+
+    .unsupported .oops {
+      color: #5687B8
+    }
+
+    .unsupported .text {
+      color: #888
+    }
+  </style>
 </head>
 <body>
+<div class="unsupported animated fadeIn delay-1s slower">
+  <h1 class="oops">Oops</h1>
+  <p class="text"><strong>Biblical Hebrew</strong> does not support this browser</p>
+</div>
 <app-root></app-root>
 </body>
 </html>

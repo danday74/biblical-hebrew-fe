@@ -1,10 +1,14 @@
-<ng-container *ngIf="(user$ | async) != null; else noUser">
-  <app-navbar></app-navbar>
-  <div class="outlet-wrapper">
-    <router-outlet></router-outlet>
-  </div>
-</ng-container>
+<ng-container *ngIf="supported">
 
-<ng-template #noUser>
-  <app-user-finder></app-user-finder>
-</ng-template>
+  <ng-container *ngIf="(user$ | async) != null; else noUser">
+    <app-navbar></app-navbar>
+    <div class="outlet-wrapper">
+      <router-outlet></router-outlet>
+    </div>
+  </ng-container>
+
+  <ng-template #noUser>
+    <app-user-finder></app-user-finder>
+  </ng-template>
+
+</ng-container>

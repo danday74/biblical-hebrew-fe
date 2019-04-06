@@ -1,0 +1,9 @@
+// hide edge password reveal on input
+input::-ms-reveal {
+  display: none;
+}
+
+// hide edge clear on input
+input::-ms-clear {
+  display: none;
+}
