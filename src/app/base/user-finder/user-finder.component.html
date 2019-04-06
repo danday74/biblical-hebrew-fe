@@ -1,3 +1,82 @@
-<p>
-  user-finder works!
-</p>
+<div class="user-finder-wrapper animated fadeIn slow">
+
+  <!-- Biblical Hebrew image -->
+  <div>
+    <img class="biblical-hebrew animated" [ngClass]="{bounceInDown: animateNow, animateNow: animateNow}"
+         src="/assets/images/biblical-hebrew/biblical-hebrew-darken-orange-5-tiny.png">
+  </div>
+
+  <div class="user-finder">
+
+    <!-- Board and text -->
+    <div>
+      <img class="blank-board" src="/assets/images/blank-board/blank-board-tiny.png">
+      <ng-container *ngIf="!boardTextUpdateInProgress">
+        <div class="board-text board-text-1 animated fadeIn">{{ boardText1 }}</div>
+        <div class="board-text board-text-2 animated fadeIn">{{ boardText2 }}</div>
+      </ng-container>
+    </div>
+
+    <form (ngSubmit)="onSubmit($event)" (keydown.enter)="$event.preventDefault()" #loginForm="ngForm">
+
+      <!-- Username -->
+      <div class="form-row">
+        <div class="col-8 mb-3 offset-2">
+          <div class="input-group">
+            <input class="form-control" spellcheck="false" autofocus
+                   name="bhUsername" placeholder="Username" #bhUsername="ngModel"
+                   minlength="3" maxlength="15" [pattern]="pattern" required="required"
+                   [ngModel]="username" (ngModelChange)="usernameChange($event)" (keyup.enter)="onEnter($event)">
+          </div>
+        </div>
+        <div class="col-2 mb-3">
+          <ng-container *ngIf="!bhUsername.errors">
+            <fa-icon class="success" [icon]="faCheck"></fa-icon>
+          </ng-container>
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="form-row">
+        <div class="col-8 mb-3 offset-2">
+          <div class="input-group">
+            <input #passwordInput class="form-control" spellcheck="false" autocomplete="new-password"
+                   name="bhPassword" placeholder="Password" #bhPassword="ngModel"
+                   minlength="3" maxlength="15" [pattern]="pattern" required="required"
+                   [ngModel]="password" (ngModelChange)="passwordChange($event)" (keyup.enter)="onEnter($event)" [type]="showPassword ? 'text' : 'password'">
+            <div class="input-group-append input-group-eye" (mousedown)="showPwd()" (mouseup)="noShowPwd()" (mouseleave)="noShowPwd()">
+              <span class="input-group-text"><fa-icon class="eye" [ngClass]="{disabled: !password.length}" [icon]="faEye"></fa-icon></span>
+            </div>
+          </div>
+        </div>
+        <div class="col-2 mb-3">
+          <ng-container *ngIf="!bhPassword.errors">
+            <fa-icon class="success" [icon]="faCheck"></fa-icon>
+          </ng-container>
+        </div>
+      </div>
+
+      <!-- Submit -->
+      <div class="form-row">
+        <div class="col-8 mb-3 offset-2">
+          <button #submitButton type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">
+            <span>{{ userExists === 'yes' ? 'Login' : 'Submit' }}</span>
+          </button>
+        </div>
+        <div class="col-2 mb-3">&nbsp;</div>
+      </div>
+
+    </form>
+
+    <!-- Small print -->
+    <div class="row">
+      <div class="col-8 mb-3 offset-2">
+        <div class="small-print">
+          <div><strong class="small-print-strong">Enter a username and password.</strong> Existing users can login.</div>
+          <div>First time visitors may create a new account here.</div>
+        </div>
+      </div>
+      <div class="col-2 mb-3">&nbsp;</div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,79 @@
+@import '../../globals';
+
+.user-finder-wrapper {
+  text-align: center;
+  user-select: none;
+}
+
+img.biblical-hebrew {
+  margin-top: 25px;
+  opacity: 0;
+
+  &.animateNow {
+    opacity: 1;
+  }
+}
+
+.user-finder {
+  position: relative;
+  top: -65px;
+  display: inline-block;
+}
+
+img.blank-board {
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+.board-text {
+  color: #888;
+  position: absolute;
+  transform: rotate(-18deg);
+  font-size: 1.5rem;
+  width: 131px;
+}
+
+.board-text-1 {
+  margin-top: -250px;
+  margin-left: 102px;
+}
+
+.board-text-2 {
+  margin-top: -221px;
+  margin-left: 112px;
+}
+
+form {
+  margin-top: -5px;
+}
+
+.success {
+  font-size: 1.5em;
+  color: darken($successGreen, 5%);
+}
+
+.input-group-eye {
+  cursor: pointer;
+
+  .input-group-text {
+    background-color: #F9F9F9;
+  }
+
+  .eye {
+    color: #888;
+
+    &.disabled {
+      opacity: 0.5;
+    }
+  }
+}
+
+button {
+  min-width: 80px;
+}
+
+.small-print {
+  color: #888;
+  font-size: 0.8em;
+  margin: 5px -100px 0;
+}
