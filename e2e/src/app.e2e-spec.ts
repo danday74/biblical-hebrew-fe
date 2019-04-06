@@ -1,23 +1,23 @@
-import { AppPage } from './app.po';
-import { browser, logging } from 'protractor';
+import { AppPage } from './app.po'
+import { browser, logging } from 'protractor'
 
 describe('workspace-project App', () => {
-  let page: AppPage;
+  let page: AppPage
 
   beforeEach(() => {
-    page = new AppPage();
-  });
+    page = new AppPage()
+  })
 
-  it('should display welcome message', () => {
-    page.navigateTo();
-    expect(page.getTitleText()).toEqual('Welcome to biblical-hebrew-fe!');
-  });
+  it('should display smallprint', () => {
+    page.navigateTo().then()
+    expect(page.getSmallPrintStrongText()).toEqual('Enter a username and password.').then()
+  })
 
   afterEach(async () => {
     // Assert that there are no errors emitted from the browser
-    const logs = await browser.manage().logs().get(logging.Type.BROWSER);
+    const logs = await browser.manage().logs().get(logging.Type.BROWSER)
     expect(logs).not.toContain(jasmine.objectContaining({
-      level: logging.Level.SEVERE,
-    } as logging.Entry));
-  });
-});
+      level: logging.Level.SEVERE
+    } as logging.Entry))
+  })
+})

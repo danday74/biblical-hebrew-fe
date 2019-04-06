@@ -1,11 +1,14 @@
-import { browser, by, element } from 'protractor';
+import { browser, by, element } from 'protractor'
 
 export class AppPage {
+
+  // noinspection JSMethodCanBeStatic
   navigateTo() {
-    return browser.get(browser.baseUrl) as Promise<any>;
+    return browser.get(browser.baseUrl) as Promise<any>
   }
 
-  getTitleText() {
-    return element(by.css('app-root h1')).getText() as Promise<string>;
+  // noinspection JSMethodCanBeStatic
+  getSmallPrintStrongText() {
+    return element(by.css('app-root .small-print-strong')).getText() as Promise<string>
   }
 }

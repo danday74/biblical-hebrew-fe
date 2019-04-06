@@ -62,14 +62,16 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/animate.css/animate.min.css",
+              "src/styles.scss"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/popper.js/dist/umd/popper.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "node_modules/replace-last/replaceLast.js"
+              "node_modules/replace-last/replaceLast.js",
+              "node_modules/slugify/index.js"
             ],
             "es5BrowserSupport": true
           },
@@ -103,7 +105,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "biblical-hebrew-fe:build"
+            "browserTarget": "biblical-hebrew-fe:build",
+            "port": 4000
           },
           "configurations": {
             "production": {

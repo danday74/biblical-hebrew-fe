@@ -1,0 +1,36 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "mocha": false,
+    "node": true
+  },
+  "extends": "eslint:recommended",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  },
+  "plugins": [],
+  "rules": {
+    "arrow-parens": [
+      2,
+      "as-needed"
+    ],
+    "comma-dangle": [
+      2,
+      "never"
+    ],
+    "no-console": 0,
+    "quotes": [
+      2,
+      "single"
+    ],
+    "semi": [
+      2,
+      "never"
+    ]
+  },
+  "globals": {
+    "jasmine": false
+  }
+}
