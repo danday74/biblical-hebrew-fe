@@ -26,7 +26,7 @@
             <input class="form-control" spellcheck="false" autofocus
                    name="bhUsername" placeholder="Username" #bhUsername="ngModel"
                    minlength="3" maxlength="15" [pattern]="pattern" required="required"
-                   [ngModel]="username" (ngModelChange)="usernameChange($event)" (keyup.enter)="onEnter($event)">
+                   [ngModel]="user.username" (ngModelChange)="usernameChange($event)" (keyup.enter)="onEnter($event)">
           </div>
         </div>
         <div class="col-2 mb-3">
@@ -43,9 +43,10 @@
             <input #passwordInput class="form-control" spellcheck="false" autocomplete="new-password"
                    name="bhPassword" placeholder="Password" #bhPassword="ngModel"
                    minlength="3" maxlength="15" [pattern]="pattern" required="required"
-                   [ngModel]="password" (ngModelChange)="passwordChange($event)" (keyup.enter)="onEnter($event)" [type]="showPassword ? 'text' : 'password'">
+                   [ngModel]="user.password" (ngModelChange)="passwordChange($event)" (keyup.enter)="onEnter($event)"
+                   [type]="showPassword ? 'text' : 'password'">
             <div class="input-group-append input-group-eye" (mousedown)="showPwd()" (mouseup)="noShowPwd()" (mouseleave)="noShowPwd()">
-              <span class="input-group-text"><fa-icon class="eye" [ngClass]="{disabled: !password.length}" [icon]="faEye"></fa-icon></span>
+              <span class="input-group-text"><fa-icon class="eye" [ngClass]="{disabled: !user.password.length}" [icon]="faEye"></fa-icon></span>
             </div>
           </div>
         </div>

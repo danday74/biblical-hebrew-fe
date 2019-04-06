@@ -26,8 +26,10 @@ export class UserFinderComponent implements OnInit {
   boardText2 = DEFAULT_BOARD_TEXT_2
   boardTextUpdateInProgress = false
 
-  username = ''
-  password = ''
+  user = {
+    username: '',
+    password: ''
+  }
 
   animateNow = false
   userExists = 'no'
@@ -51,12 +53,12 @@ export class UserFinderComponent implements OnInit {
 
   usernameChange(username) {
     this.store.dispatch(new GetUserExistsAction(username))
-    this.username = username
+    this.user.username = username
     this.updateBoardText()
   }
 
   passwordChange(password) {
-    this.password = password
+    this.user.password = password
     this.updateBoardText()
   }
 
@@ -66,7 +68,7 @@ export class UserFinderComponent implements OnInit {
 
     if (this.userExists === 'yes') {
       this.boardText1 = 'Shalom'
-      this.boardText2 = this.username
+      this.boardText2 = this.user.username
     } else if (this.userExists === 'no') {
       this.boardText1 = DEFAULT_BOARD_TEXT_1
       this.boardText2 = DEFAULT_BOARD_TEXT_2
@@ -75,7 +77,7 @@ export class UserFinderComponent implements OnInit {
       this.boardText2 = 'is down'
     }
 
-    if (this.hasInvalidChars(this.username) || this.hasInvalidChars(this.password)) {
+    if (this.hasInvalidChars(this.user.username) || this.hasInvalidChars(this.user.password)) {
       this.boardText1 = 'Disallowed'
       this.boardText2 = 'Characters'
     }
@@ -102,7 +104,7 @@ export class UserFinderComponent implements OnInit {
 
   private doLogin() {
     console.log('doLogin')
-    this.store.dispatch(new UserRequestedAction(this.username))
+    this.store.dispatch(new UserRequestedAction(this.user))
   }
 
   private doSignUp() {
