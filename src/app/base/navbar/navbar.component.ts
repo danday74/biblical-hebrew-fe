@@ -3,6 +3,7 @@ import { select, Store } from '@ngrx/store'
 import { State } from '@app/reducers'
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import { selectUser } from '@app/actions/users/users.selectors'
+import { LogoutAction } from '@app/actions/users/users.actions'
 
 @Component({
   selector: 'app-navbar',
@@ -22,6 +23,6 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
-    console.log('logging out')
+    this.store.dispatch(new LogoutAction())
   }
 }

@@ -4,7 +4,7 @@ import { State } from '@app/reducers'
 import { debounce } from 'lodash'
 import { faCheck, faEye } from '@fortawesome/free-solid-svg-icons'
 import { selectUserExists } from '@app/actions/users/users.selectors'
-import { GetUserExistsAction } from '@app/actions/users/users.actions'
+import { GetUserExistsAction, UserRequestedAction } from '@app/actions/users/users.actions'
 
 const DEFAULT_BOARD_TEXT_1 = 'Have we'
 const DEFAULT_BOARD_TEXT_2 = 'met?'
@@ -92,8 +92,21 @@ export class UserFinderComponent implements OnInit {
     return str && !RegExp(this.pattern).test(str)
   }
 
-  onSubmit(val) {
-    console.log('onSubmit', val)
+  onSubmit() {
+    if (this.userExists === 'yes') {
+      this.doLogin()
+    } else {
+      this.doSignUp()
+    }
+  }
+
+  private doLogin() {
+    console.log('doLogin')
+    this.store.dispatch(new UserRequestedAction(this.username))
+  }
+
+  private doSignUp() {
+    console.log('doSignUp')
   }
 
   showPwd() {

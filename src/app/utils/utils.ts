@@ -16,3 +16,8 @@ export const getLoadedAction = (action: Action) => {
   const key = replaceLast(action.type, 'Requested', 'Loaded')
   return ActionsLookup[key]
 }
+
+export const getFailedAction = (action: Action) => {
+  const key = replaceLast(action.type, 'Requested', 'Failed')
+  return ActionsLookup[key]
+}
