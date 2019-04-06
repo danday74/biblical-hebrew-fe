@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core'
 import { select, Store } from '@ngrx/store'
 import { State } from '@app/reducers'
-import { debounce } from 'lodash'
+import { cloneDeep, debounce } from 'lodash'
 import { faCheck, faEye } from '@fortawesome/free-solid-svg-icons'
 import { selectUserExists } from '@app/actions/users/users.selectors'
 import { GetUserExistsAction, UserRequestedAction } from '@app/actions/users/users.actions'
@@ -104,7 +104,7 @@ export class UserFinderComponent implements OnInit {
 
   private doLogin() {
     console.log('doLogin')
-    this.store.dispatch(new UserRequestedAction(this.user))
+    this.store.dispatch(new UserRequestedAction(cloneDeep(this.user)))
   }
 
   private doSignUp() {
