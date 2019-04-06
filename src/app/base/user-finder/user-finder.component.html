@@ -60,7 +60,7 @@
       <!-- Submit -->
       <div class="form-row">
         <div class="col-8 mb-3 offset-2">
-          <button #submitButton type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">
+          <button #submitButton type="submit" class="btn btn-primary" [disabled]="!loginForm.valid || badCredentials">
             <span>{{ userExists === 'yes' ? 'Login' : 'Submit' }}</span>
           </button>
         </div>

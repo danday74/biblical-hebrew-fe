@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core'
-import { select, Store } from '@ngrx/store'
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core'
+import { ActionsSubject, select, Store } from '@ngrx/store'
 import { State } from '@app/reducers'
 import { cloneDeep, debounce } from 'lodash'
 import { faCheck, faEye } from '@fortawesome/free-solid-svg-icons'
 import { selectUserExists } from '@app/actions/users/users.selectors'
-import { GetUserExistsAction, UserRequestedAction } from '@app/actions/users/users.actions'
+import { GetUserExistsAction, UserRequestedAction, UsersActions, UsersActionTypes } from '@app/actions/users/users.actions'
+import { filter } from 'rxjs/operators'
 
 const DEFAULT_BOARD_TEXT_1 = 'Have we'
 const DEFAULT_BOARD_TEXT_2 = 'met?'
@@ -35,8 +36,9 @@ export class UserFinderComponent implements OnInit {
   userExists = 'no'
   showPassword = false
   pattern = '^[a-zA-Z0-9\u0590-\u05FF]+$'
+  badCredentials = false
 
-  constructor(private store: Store<State>) {
+  constructor(private store: Store<State>, private actionsSubject$: ActionsSubject) {
     this.usernameChange = debounce(this.usernameChange, 300, {leading: false, trailing: true})
     this.onSubmit = debounce(this.onSubmit, 300, {leading: true, trailing: false})
   }
@@ -49,15 +51,23 @@ export class UserFinderComponent implements OnInit {
       this.userExists = userExists
       this.updateBoardText()
     })
+    this.actionsSubject$.pipe(
+      filter((action: UsersActions) => action.type === UsersActionTypes.UserFailed)
+    ).subscribe(() => {
+      this.badCredentials = true
+      this.updateBoardText()
+    })
   }
 
   usernameChange(username) {
     this.store.dispatch(new GetUserExistsAction(username))
+    this.badCredentials = false
     this.user.username = username
     this.updateBoardText()
   }
 
   passwordChange(password) {
+    this.badCredentials = false
     this.user.password = password
     this.updateBoardText()
   }
@@ -82,6 +92,11 @@ export class UserFinderComponent implements OnInit {
       this.boardText2 = 'Characters'
     }
 
+    if (this.badCredentials) {
+      this.boardText1 = 'Incorrect'
+      this.boardText2 = 'Password'
+    }
+
     if (this.boardText1 !== prevBoardText1 || this.boardText2 !== prevBoardText2) {
       this.boardTextUpdateInProgress = true
       setTimeout(() => {
@@ -103,7 +118,6 @@ export class UserFinderComponent implements OnInit {
   }
 
   private doLogin() {
-    console.log('doLogin')
     this.store.dispatch(new UserRequestedAction(cloneDeep(this.user)))
   }
 
