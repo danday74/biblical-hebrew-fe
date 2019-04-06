@@ -1,5 +1,5 @@
-import { AppActionTypes, QuestionsLoadedAction } from '@app/actions/app/app.actions'
+import { QuestionsActionTypes, QuestionsLoadedAction } from './questions/questions.actions'
 
 export const ActionsLookup = {
-  [AppActionTypes.QuestionsLoaded]: QuestionsLoadedAction
+  [QuestionsActionTypes.QuestionsLoaded]: QuestionsLoadedAction
 }

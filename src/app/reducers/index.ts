@@ -1,17 +1,20 @@
 import { ActionReducerMap, MetaReducer } from '@ngrx/store'
 import { environment } from '@environments/environment'
-import { appReducer, AppState } from './app/app.reducer'
+import { questionsReducer, QuestionsState } from './questions/questions.reducer'
+import { usersReducer, UsersState } from './users/users.reducer'
 import { storeFreeze } from 'ngrx-store-freeze'
 import * as Debug from 'debug'
 
 const debug = Debug('bh:logger')
 
 export interface State {
-  app: AppState
+  questions: QuestionsState,
+  users: UsersState
 }
 
 export const reducers: ActionReducerMap<State> = {
-  app: appReducer
+  questions: questionsReducer,
+  users: usersReducer
 }
 
 export function logger(reducer) {

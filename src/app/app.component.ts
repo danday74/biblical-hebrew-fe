@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { select, Store } from '@ngrx/store'
 import { State } from '@app/reducers'
-import { selectUser } from '@app/actions/app/app.selectors'
+import { selectUser } from './actions/users/users.selectors'
 import * as Bowser from 'bowser'
 import * as $ from 'jquery'
 

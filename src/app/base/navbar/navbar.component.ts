@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core'
 import { select, Store } from '@ngrx/store'
 import { State } from '@app/reducers'
-import { selectUser } from '@app/actions/app/app.selectors'
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
+import { selectUser } from '@app/actions/users/users.selectors'
 
 @Component({
   selector: 'app-navbar',

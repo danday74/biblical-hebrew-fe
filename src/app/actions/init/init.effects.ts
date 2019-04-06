@@ -2,9 +2,9 @@ import { Injectable, Injector } from '@angular/core'
 import { Actions, Effect, ofType } from '@ngrx/effects'
 import { InitAction, InitActionTypes } from '@app/actions/init/init.actions'
 import { defer, of } from 'rxjs'
-import { QuestionsRequestedAction } from '@app/actions/app/app.actions'
 import { mergeMap } from 'rxjs/operators'
 import { ServiceLocator } from '@app/service-locator.service'
+import { QuestionsRequestedAction } from '@app/actions/questions/questions.actions'
 
 @Injectable()
 

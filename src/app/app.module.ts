@@ -7,7 +7,6 @@ import { metaReducers, reducers } from './reducers'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 import { environment } from '@environments/environment'
 import { EffectsModule } from '@ngrx/effects'
-import { AppEffects } from '@app/actions/app/app.effects'
 import { InitEffects } from '@app/actions/init/init.effects'
 import { HttpClientModule } from '@angular/common/http'
 import { GenericEffects } from '@app/actions/generic/generic.effects'
@@ -16,6 +15,7 @@ import { NavbarComponent } from './base/navbar/navbar.component'
 import { UserFinderComponent } from './base/user-finder/user-finder.component'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { FormsModule } from '@angular/forms'
+import { UsersEffects } from './actions/users/users.effects'
 
 @NgModule({
   declarations: [
@@ -31,7 +31,7 @@ import { FormsModule } from '@angular/forms'
     AppRoutingModule,
     StoreModule.forRoot(reducers, {metaReducers}),
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
-    EffectsModule.forRoot([AppEffects, GenericEffects, InitEffects])
+    EffectsModule.forRoot([UsersEffects, GenericEffects, InitEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]
