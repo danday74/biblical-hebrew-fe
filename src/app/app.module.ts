@@ -16,12 +16,14 @@ import { UserFinderComponent } from './base/user-finder/user-finder.component'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { FormsModule } from '@angular/forms'
 import { UsersEffects } from './actions/users/users.effects'
+import { BlankComponent } from './base/blank/blank.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    UserFinderComponent
+    UserFinderComponent,
+    BlankComponent
   ],
   imports: [
     BrowserModule,

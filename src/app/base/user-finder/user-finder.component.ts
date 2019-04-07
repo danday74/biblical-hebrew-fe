@@ -6,6 +6,7 @@ import { faCheck, faEye } from '@fortawesome/free-solid-svg-icons'
 import { selectUserExists } from '@app/actions/users/users.selectors'
 import { GetUserExistsAction, UserRequestedAction, UsersActions, UsersActionTypes } from '@app/actions/users/users.actions'
 import { filter } from 'rxjs/operators'
+import { Router } from '@angular/router'
 
 const DEFAULT_BOARD_TEXT_1 = 'Have we'
 const DEFAULT_BOARD_TEXT_2 = 'met?'
@@ -38,7 +39,7 @@ export class UserFinderComponent implements OnInit {
   pattern = '^[a-zA-Z0-9\u0590-\u05FF]+$'
   badCredentials = false
 
-  constructor(private store: Store<State>, private actionsSubject$: ActionsSubject) {
+  constructor(private store: Store<State>, private actionsSubject$: ActionsSubject, private router: Router) {
     this.usernameChange = debounce(this.usernameChange, 300, {leading: false, trailing: true})
     this.onSubmit = debounce(this.onSubmit, 300, {leading: true, trailing: false})
   }
@@ -119,6 +120,10 @@ export class UserFinderComponent implements OnInit {
 
   private doLogin() {
     this.store.dispatch(new UserRequestedAction(cloneDeep(this.user)))
+    const originalUrl = this.router.url
+    this.router.navigateByUrl('/blank', {replaceUrl: true}).then(() => {
+      this.router.navigateByUrl(originalUrl, {replaceUrl: true}).then()
+    })
   }
 
   private doSignUp() {
