@@ -18,6 +18,7 @@ export class StorageService {
     })
   }
 
+  // noinspection JSMethodCanBeStatic
   setLocalStorage(key, value) {
     value = JSON.stringify(value)
     localStorage.setItem(key, value)
@@ -32,6 +33,7 @@ export class StorageService {
     }
   }
 
+  // noinspection JSMethodCanBeStatic
   getLocalStorage(key) {
     let value = localStorage.getItem(key)
     if (value != null) {
