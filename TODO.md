@@ -13,3 +13,5 @@ make username case sensitive due to Chrome passwords
 Test Hebrew username
 
 Disallow mixed username? How does app handle it?
+
+some flickering on logout
