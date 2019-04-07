@@ -6,7 +6,9 @@ export enum UsersActionTypes {
   UserRequested = '[Users] User Requested',
   UserLoaded = '[Users] User Loaded',
   UserFailed = '[Users] User Failed',
-  Logout = '[Users] Logout'
+  Logout = '[Users] Logout',
+  GetLastUserLoggedIn = '[Users] Get Last User Logged In',
+  SetLastUserLoggedIn = '[Users] Set Last User Logged In'
 }
 
 export class GetUserExistsAction implements Action {
@@ -41,6 +43,16 @@ export class LogoutAction implements Action {
   readonly type = UsersActionTypes.Logout
 }
 
+export class GetLastUserLoggedInAction implements Action {
+  readonly type = UsersActionTypes.GetLastUserLoggedIn
+}
+
+export class SetLastUserLoggedInAction implements Action {
+  readonly type = UsersActionTypes.SetLastUserLoggedIn
+
+  constructor(public payload: any) {}
+}
+
 export type UsersActions =
   | GetUserExistsAction
   | SetUserExistsAction
@@ -48,3 +60,5 @@ export type UsersActions =
   | UserLoadedAction
   | UserFailedAction
   | LogoutAction
+  | GetLastUserLoggedInAction
+  | SetLastUserLoggedInAction

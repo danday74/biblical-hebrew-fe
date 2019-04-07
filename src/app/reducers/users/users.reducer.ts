@@ -3,11 +3,13 @@ import { UsersActions, UsersActionTypes } from '@app/actions/users/users.actions
 export interface UsersState {
   user: any
   userExists: string
+  lastUserLoggedIn: string
 }
 
 export const initialUsersState: UsersState = {
   user: null,
-  userExists: 'no'
+  userExists: 'no',
+  lastUserLoggedIn: null
 }
 
 export function usersReducer(state = initialUsersState, action: UsersActions): UsersState {
@@ -30,6 +32,12 @@ export function usersReducer(state = initialUsersState, action: UsersActions): U
         ...state,
         user: initialUsersState.user,
         userExists: initialUsersState.userExists
+      }
+
+    case UsersActionTypes.SetLastUserLoggedIn:
+      return {
+        ...state,
+        lastUserLoggedIn: action.payload
       }
 
     default:

@@ -5,6 +5,7 @@ import { defer, of } from 'rxjs'
 import { mergeMap } from 'rxjs/operators'
 import { ServiceLocator } from '@app/service-locator.service'
 import { QuestionsRequestedAction } from '@app/actions/questions/questions.actions'
+import { GetLastUserLoggedInAction } from '@app/actions/users/users.actions'
 
 @Injectable()
 
@@ -14,7 +15,8 @@ export class InitEffects {
   appInit$ = this.actions$.pipe(
     ofType<InitAction>(InitActionTypes.Init),
     mergeMap(() => of(
-      new QuestionsRequestedAction()
+      new QuestionsRequestedAction(),
+      new GetLastUserLoggedInAction()
     ))
   )
 

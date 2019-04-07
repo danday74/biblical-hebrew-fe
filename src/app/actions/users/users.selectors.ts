@@ -3,12 +3,17 @@ import { UsersState } from '@app/reducers/users/users.reducer'
 
 const selectUsersState = createFeatureSelector<UsersState>('users')
 
+export const selectUser = createSelector(
+  selectUsersState,
+  usersState => usersState.user
+)
+
 export const selectUserExists = createSelector(
   selectUsersState,
   usersState => usersState.userExists
 )
 
-export const selectUser = createSelector(
+export const selectLastUserLoggedIn = createSelector(
   selectUsersState,
-  usersState => usersState.user
+  usersState => usersState.lastUserLoggedIn
 )

@@ -3,8 +3,14 @@ import { ActionsSubject, select, Store } from '@ngrx/store'
 import { State } from '@app/reducers'
 import { cloneDeep, debounce } from 'lodash'
 import { faCheck, faEye } from '@fortawesome/free-solid-svg-icons'
-import { selectUserExists } from '@app/actions/users/users.selectors'
-import { GetUserExistsAction, UserRequestedAction, UsersActions, UsersActionTypes } from '@app/actions/users/users.actions'
+import { selectUserExists, selectUser, selectLastUserLoggedIn } from '@app/actions/users/users.selectors'
+import {
+  GetUserExistsAction,
+  SetLastUserLoggedInAction,
+  UserRequestedAction,
+  UsersActions,
+  UsersActionTypes
+} from '@app/actions/users/users.actions'
 import { filter } from 'rxjs/operators'
 import { Router } from '@angular/router'
 
@@ -48,9 +54,24 @@ export class UserFinderComponent implements OnInit {
     setTimeout(() => {
       this.animateNow = true
     }, 2000)
+    this.store.pipe(select(selectUser)).pipe(
+      filter(user => !!user)
+    ).subscribe(user => {
+      const originalUrl = this.router.url
+      this.router.navigateByUrl('/blank', {replaceUrl: true}).then(() => {
+        return this.router.navigateByUrl(originalUrl, {replaceUrl: true})
+      }).then(() => {
+        this.store.dispatch(new SetLastUserLoggedInAction({slug: user.slug, name: user.name}))
+      })
+    })
     this.store.pipe(select(selectUserExists)).subscribe(userExists => {
       this.userExists = userExists
       this.updateBoardText()
+    })
+    this.store.pipe(
+      select(selectLastUserLoggedIn)
+    ).subscribe((lastUserLoggedIn: any) => {
+      this.usernameChange(lastUserLoggedIn.name)
     })
     this.actionsSubject$.pipe(
       filter((action: UsersActions) => action.type === UsersActionTypes.UserFailed)
@@ -120,10 +141,6 @@ export class UserFinderComponent implements OnInit {
 
   private doLogin() {
     this.store.dispatch(new UserRequestedAction(cloneDeep(this.user)))
-    const originalUrl = this.router.url
-    this.router.navigateByUrl('/blank', {replaceUrl: true}).then(() => {
-      this.router.navigateByUrl(originalUrl, {replaceUrl: true}).then()
-    })
   }
 
   private doSignUp() {
