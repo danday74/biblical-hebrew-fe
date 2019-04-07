@@ -13,9 +13,15 @@ import {
 } from '@app/actions/users/users.actions'
 import { filter } from 'rxjs/operators'
 import { Router } from '@angular/router'
+import { getRandomItemFromArray } from '@app/utils/utils'
 
 const DEFAULT_BOARD_TEXT_1 = 'Have we'
 const DEFAULT_BOARD_TEXT_2 = 'met?'
+
+const LOGIN_ANIMATIONS = [
+  'bounceOut', 'bounceOutUp', 'bounceOutDown', 'fadeOut', 'fadeOutUp', 'fadeOutDown', 'flipOutX', 'flipOutY',
+  'zoomOut', 'zoomOutUp', 'zoomOutDown', 'zoomOutLeft', 'zoomOutRight'
+]
 
 @Component({
   selector: 'app-user-finder',
@@ -39,7 +45,9 @@ export class UserFinderComponent implements OnInit {
     password: ''
   }
 
-  animateNow = false
+  loginAnimation: string
+  animateLoginNow = false
+  animateTitleNow = false
   userExists = 'no'
   showPassword = false
   pattern = '^[a-zA-Z0-9\u0590-\u05FF]+$'
@@ -51,18 +59,24 @@ export class UserFinderComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.loginAnimation = getRandomItemFromArray(LOGIN_ANIMATIONS)
+
     setTimeout(() => {
-      this.animateNow = true
+      this.animateTitleNow = true
     }, 2000)
     this.store.pipe(select(selectUser)).pipe(
       filter(user => !!user)
     ).subscribe(user => {
-      const originalUrl = this.router.url
-      this.router.navigateByUrl('/blank', {replaceUrl: true}).then(() => {
-        return this.router.navigateByUrl(originalUrl, {replaceUrl: true})
-      }).then(() => {
-        this.store.dispatch(new SetLastUserLoggedInAction({slug: user.slug, name: user.name}))
-      })
+      this.animateLoginNow = true
+      setTimeout(() => {
+        const originalUrl = this.router.url
+        this.router.navigateByUrl('/blank', {replaceUrl: true}).then(() => {
+          return this.router.navigateByUrl(originalUrl, {replaceUrl: true})
+        }).then(() => {
+          this.store.dispatch(new SetLastUserLoggedInAction({slug: user.slug, name: user.name}))
+        })
+      }, 2000)
     })
     this.store.pipe(select(selectUserExists)).subscribe(userExists => {
       this.userExists = userExists

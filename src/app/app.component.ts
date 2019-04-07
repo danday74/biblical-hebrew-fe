@@ -17,14 +17,24 @@ const BROWSER_BLACKLIST = ['internet-explorer']
 
 export class AppComponent implements OnInit {
 
-  public user$
+  public user: any
   public supported: boolean
 
   constructor(private store: Store<State>) {}
 
   ngOnInit() {
     this.manageBrowserSupport()
-    this.user$ = this.store.pipe(select(selectUser))
+    this.store.pipe(
+      select(selectUser)
+    ).subscribe(user => {
+      if (user) {
+        setTimeout(() => {
+          this.user = user
+        }, 2000)
+      } else {
+        this.user = user
+      }
+    })
   }
 
   private manageBrowserSupport() {

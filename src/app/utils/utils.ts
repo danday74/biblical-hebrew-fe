@@ -30,3 +30,7 @@ export const getFailedAction = (action: Action) => {
   const key = replaceLast(action.type, 'Requested', 'Failed')
   return ActionsLookup[key]
 }
+
+export const getRandomItemFromArray = (array: Array<any>) => {
+  return array[Math.floor(Math.random() * array.length)]
+}

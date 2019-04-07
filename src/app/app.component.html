@@ -1,6 +1,6 @@
 <ng-container *ngIf="supported">
 
-  <ng-container *ngIf="(user$ | async) != null; else noUser">
+  <ng-container *ngIf="user; else noUser">
     <app-navbar></app-navbar>
     <div class="outlet-wrapper">
       <router-outlet></router-outlet>
