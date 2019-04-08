@@ -83,7 +83,8 @@ export class UserFinderComponent implements OnInit {
       this.updateBoardText()
     })
     this.store.pipe(
-      select(selectLastUserLoggedIn)
+      select(selectLastUserLoggedIn),
+      filter(lastUserLoggedIn => !!lastUserLoggedIn)
     ).subscribe((lastUserLoggedIn: any) => {
       this.usernameChange(lastUserLoggedIn.name)
     })
