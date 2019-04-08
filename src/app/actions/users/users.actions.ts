@@ -26,6 +26,7 @@ export class SetUserExistsAction implements Action {
 export class UserRequestedAction implements Action {
   readonly type = UsersActionTypes.UserRequested
 
+  // noinspection JSUnusedGlobalSymbols
   constructor(public payload: any) {}
 }
 
