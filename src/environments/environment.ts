@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  httpPhp: 'http://localhost:3000',
-  wsPhp: 'ws://localhost:3000',
+  httpPhp: 'http://localhost:4001',
+  wsPhp: 'ws://localhost:4002',
   debug: 'bh:*'
 }
 

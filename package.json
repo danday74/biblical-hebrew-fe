@@ -12,7 +12,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e --port 4001"
+    "e2e": "ng e2e --port 5000"
   },
   "dependencies": {
     "@angular/animations": "~7.2.12",
