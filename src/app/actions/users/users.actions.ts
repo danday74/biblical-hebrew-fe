@@ -3,9 +3,9 @@ import { Action } from '@ngrx/store'
 export enum UsersActionTypes {
   GetUserExists = '[Users] Get User Exists',
   SetUserExists = '[Users] Set User Exists',
-  UserRequested = '[Users] User Requested',
-  UserLoaded = '[Users] User Loaded',
-  UserFailed = '[Users] User Failed',
+  Login = '[Users] Login',
+  LoginSuccess = '[Users] Login Success',
+  LoginFailed = '[Users] Login Failed',
   Logout = '[Users] Logout',
   GetLastUserLoggedIn = '[Users] Get Last User Logged In',
   SetLastUserLoggedIn = '[Users] Set Last User Logged In'
@@ -23,21 +23,19 @@ export class SetUserExistsAction implements Action {
   constructor(public payload: any) {}
 }
 
-export class UserRequestedAction implements Action {
-  readonly type = UsersActionTypes.UserRequested
-
-  // noinspection JSUnusedGlobalSymbols
+export class LoginAction implements Action {
+  readonly type = UsersActionTypes.Login
   constructor(public payload: any) {}
 }
 
-export class UserLoadedAction implements Action {
-  readonly type = UsersActionTypes.UserLoaded
+export class LoginSuccessAction implements Action {
+  readonly type = UsersActionTypes.LoginSuccess
 
   constructor(public payload: any) {}
 }
 
-export class UserFailedAction implements Action {
-  readonly type = UsersActionTypes.UserFailed
+export class LoginFailedAction implements Action {
+  readonly type = UsersActionTypes.LoginFailed
 }
 
 export class LogoutAction implements Action {
@@ -57,9 +55,9 @@ export class SetLastUserLoggedInAction implements Action {
 export type UsersActions =
   | GetUserExistsAction
   | SetUserExistsAction
-  | UserRequestedAction
-  | UserLoadedAction
-  | UserFailedAction
+  | LoginAction
+  | LoginSuccessAction
+  | LoginFailedAction
   | LogoutAction
   | GetLastUserLoggedInAction
   | SetLastUserLoggedInAction

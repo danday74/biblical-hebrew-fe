@@ -11,7 +11,7 @@
       <a class="nav-item nav-link" routerLinkActive="active" routerLink="options">Options</a>
     </div>
     <span class="ml-auto">
-      <span class="logged-in-as">Logged in as <span class="username">{{ (user$ | async).name }}</span></span>
+      <span class="logged-in-as">Logged in as <span class="username">{{ (user$ | async).username }}</span></span>
       <fa-icon class="logout" [icon]="faSignOutAlt" (click)="logout()"></fa-icon>
     </span>
   </div>

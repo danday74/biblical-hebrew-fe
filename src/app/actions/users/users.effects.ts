@@ -3,11 +3,14 @@ import { Actions, Effect, ofType } from '@ngrx/effects'
 import { map, mergeMap, tap } from 'rxjs/operators'
 import { UserService } from '@app/services/user.service'
 import {
-  SetUserExistsAction,
-  UsersActionTypes,
+  GetLastUserLoggedInAction,
   GetUserExistsAction,
+  LoginAction,
+  LoginFailedAction,
+  LoginSuccessAction,
   SetLastUserLoggedInAction,
-  GetLastUserLoggedInAction
+  SetUserExistsAction,
+  UsersActionTypes
 } from '@app/actions/users/users.actions'
 import { StorageService } from '@app/services/storage.service'
 
@@ -24,6 +27,18 @@ export class UsersEffects {
       this.userService.doesUserExist(action.payload)
     ),
     map((exists) => new SetUserExistsAction(exists))
+  )
+
+  @Effect()
+  login$ = this.actions$.pipe(
+    ofType<LoginAction>(UsersActionTypes.Login),
+    mergeMap((action) =>
+      this.userService.login(action.payload)
+    ),
+    map((user) => {
+      if (user) return new LoginSuccessAction(user)
+      return new LoginFailedAction()
+    })
   )
 
   @Effect()

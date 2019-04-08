@@ -21,7 +21,7 @@ export function usersReducer(state = initialUsersState, action: UsersActions): U
         userExists: action.payload
       }
 
-    case UsersActionTypes.UserLoaded:
+    case UsersActionTypes.LoginSuccess:
       return {
         ...state,
         user: action.payload

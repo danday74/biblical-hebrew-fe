@@ -21,4 +21,12 @@ export class UserService {
       })
     )
   }
+
+  login(credentials: any) {
+    return this.http.post(environment.httpPhp + '/login', credentials).pipe(
+      catchError(() => {
+        return of(null)
+      })
+    )
+  }
 }

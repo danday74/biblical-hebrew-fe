@@ -7,14 +7,14 @@ import { selectUser } from '@app/actions/users/users.selectors'
 
 export class StorageService {
 
-  userSlug: string
+  username: string
 
   constructor(private store: Store<State>) {
 
     this.store.pipe(
       select(selectUser)
     ).subscribe(user => {
-      this.userSlug = user ? user.slug : null
+      this.username = user ? user.username : null
     })
   }
 
@@ -25,8 +25,8 @@ export class StorageService {
   }
 
   setLocalStorageForUser(key, value) {
-    if (this.userSlug) {
-      key = this.userSlug + '-' + key
+    if (this.username) {
+      key = this.username + '-' + key
       this.setLocalStorage(key, value)
     } else {
       console.warn(`Unable to SET local storage for user with key ${key} because there is no user`)
@@ -45,8 +45,8 @@ export class StorageService {
   }
 
   getLocalStorageForUser(key) {
-    if (this.userSlug) {
-      key = this.userSlug + '-' + key
+    if (this.username) {
+      key = this.username + '-' + key
       this.getLocalStorage(key)
     } else {
       console.warn(`Unable to GET local storage for user with key ${key} because there is no user`)

@@ -25,7 +25,7 @@
         <div class="form-row">
           <div class="col-8 mb-3 offset-2">
             <div class="input-group">
-              <input class="form-control" spellcheck="false" autofocus
+              <input #usernameInput class="form-control" spellcheck="false" autofocus
                      name="bhUsername" placeholder="Username" #bhUsername="ngModel"
                      minlength="3" maxlength="15" [pattern]="pattern" required="required"
                      [ngModel]="user.username" (ngModelChange)="usernameChange($event)" (keyup.enter)="onEnter($event)">

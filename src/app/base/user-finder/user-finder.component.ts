@@ -1,19 +1,14 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core'
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { ActionsSubject, select, Store } from '@ngrx/store'
 import { State } from '@app/reducers'
 import { cloneDeep, debounce } from 'lodash'
 import { faCheck, faEye } from '@fortawesome/free-solid-svg-icons'
-import { selectUserExists, selectUser, selectLastUserLoggedIn } from '@app/actions/users/users.selectors'
-import {
-  GetUserExistsAction,
-  SetLastUserLoggedInAction,
-  UserRequestedAction,
-  UsersActions,
-  UsersActionTypes
-} from '@app/actions/users/users.actions'
-import { filter } from 'rxjs/operators'
+import { selectLastUserLoggedIn, selectUser, selectUserExists } from '@app/actions/users/users.selectors'
+import { GetUserExistsAction, LoginAction, SetLastUserLoggedInAction, UsersActions, UsersActionTypes } from '@app/actions/users/users.actions'
+import { filter, take, takeUntil } from 'rxjs/operators'
 import { Router } from '@angular/router'
 import { getRandomItemFromArray } from '@app/utils/utils'
+import { Subject } from 'rxjs'
 
 const DEFAULT_BOARD_TEXT_1 = 'Have we'
 const DEFAULT_BOARD_TEXT_2 = 'met?'
@@ -29,10 +24,14 @@ const LOGIN_ANIMATIONS = [
   styleUrls: ['./user-finder.component.scss']
 })
 
-export class UserFinderComponent implements OnInit {
+export class UserFinderComponent implements OnInit, OnDestroy {
 
+  @ViewChild('usernameInput') usernameInput: ElementRef
   @ViewChild('passwordInput') passwordInput: ElementRef
   @ViewChild('submitButton') submitButton: ElementRef
+
+  private unsubscribe$ = new Subject()
+
   faCheck = faCheck
   faEye = faEye
 
@@ -65,7 +64,10 @@ export class UserFinderComponent implements OnInit {
     setTimeout(() => {
       this.animateTitleNow = true
     }, 2000)
-    this.store.pipe(select(selectUser)).pipe(
+
+    this.store.pipe(
+      takeUntil(this.unsubscribe$),
+      select(selectUser),
       filter(user => !!user)
     ).subscribe(user => {
       this.animateLoginNow = true
@@ -74,26 +76,38 @@ export class UserFinderComponent implements OnInit {
         this.router.navigateByUrl('/blank', {replaceUrl: true}).then(() => {
           return this.router.navigateByUrl(originalUrl, {replaceUrl: true})
         }).then(() => {
-          this.store.dispatch(new SetLastUserLoggedInAction({slug: user.slug, name: user.name}))
+          this.store.dispatch(new SetLastUserLoggedInAction({username: user.username}))
         })
       }, 2000)
     })
-    this.store.pipe(select(selectUserExists)).subscribe(userExists => {
+    this.store.pipe(
+      takeUntil(this.unsubscribe$),
+      select(selectUserExists)
+    ).subscribe(userExists => {
       this.userExists = userExists
       this.updateBoardText()
     })
     this.store.pipe(
+      takeUntil(this.unsubscribe$),
       select(selectLastUserLoggedIn),
-      filter(lastUserLoggedIn => !!lastUserLoggedIn)
+      filter(lastUserLoggedIn => !!lastUserLoggedIn),
+      take(1)
     ).subscribe((lastUserLoggedIn: any) => {
-      this.usernameChange(lastUserLoggedIn.name)
+      this.usernameChange(lastUserLoggedIn.username)
+      setTimeout(() => { this.usernameInput.nativeElement.focus() }, 500)
     })
     this.actionsSubject$.pipe(
-      filter((action: UsersActions) => action.type === UsersActionTypes.UserFailed)
+      takeUntil(this.unsubscribe$),
+      filter((action: UsersActions) => action.type === UsersActionTypes.LoginFailed)
     ).subscribe(() => {
       this.badCredentials = true
       this.updateBoardText()
     })
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next()
+    this.unsubscribe$.complete()
   }
 
   usernameChange(username) {
@@ -155,7 +169,7 @@ export class UserFinderComponent implements OnInit {
   }
 
   private doLogin() {
-    this.store.dispatch(new UserRequestedAction(cloneDeep(this.user)))
+    this.store.dispatch(new LoginAction(cloneDeep(this.user)))
   }
 
   private doSignUp() {
