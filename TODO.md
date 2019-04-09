@@ -20,4 +20,6 @@ make vars private where possible
 
 tidy up server logs
 
+get auth to kick out and remember on refresh
+
 
