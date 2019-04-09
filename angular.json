@@ -98,6 +98,14 @@
                   "maximumError": "5mb"
                 }
               ]
+            },
+            "test": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.test.ts"
+                }
+              ]
             }
           }
         },
@@ -105,11 +113,16 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "browserTarget": "biblical-hebrew-fe:build",
+            "proxyConfig": "proxy.conf.json",
             "port": 4000
           },
           "configurations": {
             "production": {
               "browserTarget": "biblical-hebrew-fe:build:production"
+            },
+            "test": {
+              "browserTarget": "biblical-hebrew-fe:build:test",
+              "port": 5000
             }
           }
         },
@@ -164,6 +177,9 @@
           "configurations": {
             "production": {
               "devServerTarget": "biblical-hebrew-fe:serve:production"
+            },
+            "test": {
+              "devServerTarget": "biblical-hebrew-fe:serve:test"
             }
           }
         },
