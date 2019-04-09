@@ -15,3 +15,9 @@ Test Hebrew username
 Disallow mixed username? How does app handle it?
 
 some flickering on logout
+
+make vars private where possible
+
+tidy up server logs
+
+
