@@ -10,9 +10,6 @@ import { Router } from '@angular/router'
 import { getRandomItemFromArray } from '@app/utils/utils'
 import { Subject } from 'rxjs'
 
-const DEFAULT_BOARD_TEXT_1 = 'Have we'
-const DEFAULT_BOARD_TEXT_2 = 'met?'
-
 const LOGIN_ANIMATIONS = [
   'bounceOut', 'bounceOutUp', 'bounceOutDown', 'fadeOut', 'fadeOutUp', 'fadeOutDown', 'flipOutX', 'flipOutY',
   'zoomOut', 'zoomOutUp', 'zoomOutDown', 'zoomOutLeft', 'zoomOutRight'
@@ -35,9 +32,10 @@ export class UserFinderComponent implements OnInit, OnDestroy {
   faCheck = faCheck
   faEye = faEye
 
-  boardText1 = DEFAULT_BOARD_TEXT_1
-  boardText2 = DEFAULT_BOARD_TEXT_2
+  boardText1 = ''
+  boardText2 = ''
   boardTextUpdateInProgress = false
+  showBoardText = false
 
   user = {
     username: '',
@@ -90,11 +88,13 @@ export class UserFinderComponent implements OnInit, OnDestroy {
     this.store.pipe(
       takeUntil(this.unsubscribe$),
       select(selectLastUserLoggedIn),
-      filter(lastUserLoggedIn => !!lastUserLoggedIn),
       take(1)
     ).subscribe((lastUserLoggedIn: any) => {
-      this.usernameChange(lastUserLoggedIn.username)
-      setTimeout(() => { this.usernameInput.nativeElement.focus() }, 500)
+      if (lastUserLoggedIn) {
+        this.usernameChange(lastUserLoggedIn.username)
+        setTimeout(() => { this.usernameInput.nativeElement.focus() }, 500)
+      }
+      setTimeout(() => {this.showBoardText = true}, 500)
     })
     this.actionsSubject$.pipe(
       takeUntil(this.unsubscribe$),
@@ -131,8 +131,8 @@ export class UserFinderComponent implements OnInit, OnDestroy {
       this.boardText1 = 'Shalom'
       this.boardText2 = this.user.username
     } else if (this.userExists === 'no') {
-      this.boardText1 = DEFAULT_BOARD_TEXT_1
-      this.boardText2 = DEFAULT_BOARD_TEXT_2
+      this.boardText1 = 'Have we'
+      this.boardText2 = 'met?'
     } else {
       this.boardText1 = 'Our server'
       this.boardText2 = 'is down'
@@ -152,7 +152,7 @@ export class UserFinderComponent implements OnInit, OnDestroy {
       this.boardTextUpdateInProgress = true
       setTimeout(() => {
         this.boardTextUpdateInProgress = false
-      })
+      }, 300)
     }
   }
 

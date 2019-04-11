@@ -1,5 +1,3 @@
-bounce exit on successful submit
-
 word of the day
 
 login guy masks
@@ -21,8 +19,6 @@ make vars private where possible
 tidy up server logs
 
 get auth to kick out and remember on refresh
-
-username flashes when changing from Guest to Guest2
 
 implement captcha and password confirmation
 
