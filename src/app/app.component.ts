@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { select, Store } from '@ngrx/store'
 import { State } from '@app/reducers'
-import { selectUser } from './actions/users/users.selectors'
+import { selectSignUpInProgress, selectUser } from './actions/users/users.selectors'
 import * as Bowser from 'bowser'
 import * as $ from 'jquery'
 
@@ -19,6 +19,7 @@ export class AppComponent implements OnInit {
 
   public user: any
   public supported: boolean
+  public signUpInProgress: boolean
 
   constructor(private store: Store<State>) {}
 
@@ -34,6 +35,12 @@ export class AppComponent implements OnInit {
       } else {
         this.user = user
       }
+    })
+
+    this.store.pipe(
+      select(selectSignUpInProgress)
+    ).subscribe(signUpInProgress => {
+      this.signUpInProgress = signUpInProgress
     })
   }
 

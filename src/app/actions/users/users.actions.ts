@@ -8,7 +8,8 @@ export enum UsersActionTypes {
   LoginFailed = '[Users] Login Failed',
   Logout = '[Users] Logout',
   GetLastUserLoggedIn = '[Users] Get Last User Logged In',
-  SetLastUserLoggedIn = '[Users] Set Last User Logged In'
+  SetLastUserLoggedIn = '[Users] Set Last User Logged In',
+  SetSignUpInProgress = '[Users] Set Sign Up In Progress'
 }
 
 export class GetUserExistsAction implements Action {
@@ -25,6 +26,7 @@ export class SetUserExistsAction implements Action {
 
 export class LoginAction implements Action {
   readonly type = UsersActionTypes.Login
+
   constructor(public payload: any) {}
 }
 
@@ -52,6 +54,12 @@ export class SetLastUserLoggedInAction implements Action {
   constructor(public payload: any) {}
 }
 
+export class SetSignUpInProgressAction implements Action {
+  readonly type = UsersActionTypes.SetSignUpInProgress
+
+  constructor(public payload: boolean) {}
+}
+
 export type UsersActions =
   | GetUserExistsAction
   | SetUserExistsAction
@@ -61,3 +69,4 @@ export type UsersActions =
   | LogoutAction
   | GetLastUserLoggedInAction
   | SetLastUserLoggedInAction
+  | SetSignUpInProgressAction

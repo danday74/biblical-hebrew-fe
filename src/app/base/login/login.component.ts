@@ -4,7 +4,14 @@ import { State } from '@app/reducers'
 import { cloneDeep, debounce } from 'lodash'
 import { faCheck, faEye } from '@fortawesome/free-solid-svg-icons'
 import { selectLastUserLoggedIn, selectUser, selectUserExists } from '@app/actions/users/users.selectors'
-import { GetUserExistsAction, LoginAction, SetLastUserLoggedInAction, UsersActions, UsersActionTypes } from '@app/actions/users/users.actions'
+import {
+  GetUserExistsAction,
+  LoginAction,
+  SetLastUserLoggedInAction,
+  SetSignUpInProgressAction,
+  UsersActions,
+  UsersActionTypes
+} from '@app/actions/users/users.actions'
 import { filter, take, takeUntil } from 'rxjs/operators'
 import { Router } from '@angular/router'
 import { getRandomItemFromArray } from '@app/utils/utils'
@@ -16,12 +23,12 @@ const LOGIN_ANIMATIONS = [
 ]
 
 @Component({
-  selector: 'app-user-finder',
-  templateUrl: './user-finder.component.html',
-  styleUrls: ['./user-finder.component.scss']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
 
-export class UserFinderComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnInit, OnDestroy {
 
   @ViewChild('usernameInput') usernameInput: ElementRef
   @ViewChild('passwordInput') passwordInput: ElementRef
@@ -173,7 +180,7 @@ export class UserFinderComponent implements OnInit, OnDestroy {
   }
 
   private doSignUp() {
-    console.log('doSignUp')
+    this.store.dispatch(new SetSignUpInProgressAction(true))
   }
 
   showPwd() {

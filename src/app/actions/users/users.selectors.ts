@@ -17,3 +17,8 @@ export const selectLastUserLoggedIn = createSelector(
   selectUsersState,
   usersState => usersState.lastUserLoggedIn
 )
+
+export const selectSignUpInProgress = createSelector(
+  selectUsersState,
+  usersState => usersState.signUpInProgress
+)

@@ -4,12 +4,14 @@ export interface UsersState {
   user: any
   userExists: string
   lastUserLoggedIn: string
+  signUpInProgress: boolean
 }
 
 export const initialUsersState: UsersState = {
   user: null,
   userExists: 'no',
-  lastUserLoggedIn: null
+  lastUserLoggedIn: null,
+  signUpInProgress: false
 }
 
 export function usersReducer(state = initialUsersState, action: UsersActions): UsersState {
@@ -38,6 +40,12 @@ export function usersReducer(state = initialUsersState, action: UsersActions): U
       return {
         ...state,
         lastUserLoggedIn: action.payload
+      }
+
+    case UsersActionTypes.SetSignUpInProgress:
+      return {
+        ...state,
+        signUpInProgress: action.payload
       }
 
     default:

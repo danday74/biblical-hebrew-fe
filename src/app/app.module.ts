@@ -12,18 +12,20 @@ import { HttpClientModule } from '@angular/common/http'
 import { GenericEffects } from '@app/actions/generic/generic.effects'
 import * as Debug from 'debug'
 import { NavbarComponent } from './base/navbar/navbar.component'
-import { UserFinderComponent } from './base/user-finder/user-finder.component'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { FormsModule } from '@angular/forms'
 import { UsersEffects } from './actions/users/users.effects'
 import { BlankComponent } from './base/blank/blank.component'
+import { LoginComponent } from './base/login/login.component'
+import { SignupComponent } from './base/signup/signup.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    UserFinderComponent,
-    BlankComponent
+    LoginComponent,
+    BlankComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,

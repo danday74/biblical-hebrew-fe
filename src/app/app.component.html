@@ -10,7 +10,12 @@
   </ng-container>
 
   <ng-template #noUser>
-    <app-user-finder></app-user-finder>
+    <ng-container *ngIf="!signUpInProgress; else signUp">
+      <app-login></app-login>
+    </ng-container>
+    <ng-template #signUp>
+      <app-signup></app-signup>
+    </ng-template>
   </ng-template>
 
 </ng-container>
