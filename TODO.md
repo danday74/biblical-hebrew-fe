@@ -52,6 +52,8 @@ unlock lessons for cash
 test / monitor
 --------------
 
+does captcha make page jump down on load? needs a height?
+
 flickering on logout
 
 axe accessibility (and assistive techs)

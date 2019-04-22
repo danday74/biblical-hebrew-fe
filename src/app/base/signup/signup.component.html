@@ -1,3 +1,67 @@
-<p>
-  signup works!
-</p>
+<ng-container *ngIf="signUpInProgress">
+  <app-animate-in-out-wrapper [animateNow]="animateLoginNow">
+    <div class="signup-wrapper">
+
+      <!-- Welcome -->
+      <h4 class="welcome">Welcome {{ signUpInProgress.username }}</h4>
+
+      <div class="signup">
+
+        <!-- Signup image -->
+        <ng-container *ngIf="captchaSuccess">
+          <img alt="Man holding a key" class="signup-image with-border animated fadeIn" src="assets/images/man-key/man-key-tiny.png">
+        </ng-container>
+        <ng-container *ngIf="!captchaSuccess">
+          <img alt="No bots" class="signup-image" src="assets/images/bot/bot-tiny.png">
+        </ng-container>
+
+        <form #signUpForm="ngForm" (ngSubmit)="onSubmit()" (keydown.enter)="$event.preventDefault()" novalidate>
+
+          <!-- Captcha -->
+          <div class="form-row">
+            <div class="captcha-wrapper">
+              <re-captcha type="image" [siteKey]="siteKey" (resolved)="onCaptchaResolved($event)"></re-captcha>
+            </div>
+          </div>
+
+          <!-- Hidden username -->
+          <input name="bhUsername" [ngModel]="signUpInProgress.username">
+
+          <!-- Password -->
+          <!--suppress XmlInvalidId -->
+          <label class="password-label" for="password">
+            <span *ngIf="!loginError">Confirm password</span>
+            <span *ngIf="loginError" class="failure">{{ loginError }}</span>
+          </label>
+          <app-password [forceFailure]="loginError === incorrectPasswordText" [hideFeedback]="loginError === failedToCreateUserText"
+                        (enterKeyPress)="onEnter()" (passwordChange)="onPasswordChange($event)"></app-password>
+
+          <!-- Cancel or Submit -->
+          <div class="form-row">
+            <div class="button-wrapper">
+              <button type="button" class="btn btn-secondary mr-1" [disabled]="loginInProgress" (click)="onCancel()"> <!-- type button is needed -->
+                <span>Cancel</span>
+              </button>
+              <button #submitButton type="submit" class="btn btn-primary ml-1"
+                      [disabled]="!signUpForm.valid || loginError || loginInProgress || captchaSuccess !== true">
+                <span>Login</span>
+              </button>
+            </div>
+          </div>
+        </form>
+
+        <!-- Small print -->
+        <div class="row">
+          <div class="col-8 mb-3 offset-2">
+            <div class="small-print">
+              <div><strong class="small-print-strong">Prove you&apos;re not a bot and confirm your password</strong> to create an account.</div>
+              <div>You may then login to start your Biblical Hebrew adventure.</div>
+            </div>
+          </div>
+          <div class="col-2 mb-3">&nbsp;</div>
+        </div>
+
+      </div>
+    </div>
+  </app-animate-in-out-wrapper>
+</ng-container>

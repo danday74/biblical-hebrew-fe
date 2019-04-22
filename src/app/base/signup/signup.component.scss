@@ -1,0 +1,58 @@
+@import '../../globals';
+
+.signup-wrapper {
+  text-align: center;
+  user-select: none;
+}
+
+.signup {
+  display: inline-block;
+  width: 350px;
+}
+
+.welcome {
+  text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0, 0, 0, .1), 0 0 5px rgba(0, 0, 0, .1), 0 1px 3px rgba(0, 0, 0, .3), 0 3px 5px rgba(0, 0, 0, .2), 0 5px 10px rgba(0, 0, 0, .25), 0 10px 10px rgba(0, 0, 0, .2), 0 20px 20px rgba(0, 0, 0, .15);
+  color: $bhBlue;
+  font-size: 3em;
+  padding-top: 20px;
+}
+
+.signup-image {
+  margin-top: -5px;
+  width: 302px;
+  height: 302px;
+  position: relative;
+  left: -1px;
+
+  &.with-border {
+    border-width: 0 1px;
+    border-style: solid;
+    border-image: linear-gradient(
+        to top,
+        #D3D3D3,
+        rgba(0, 0, 0, 0) 25%
+    ) 1;
+  }
+}
+
+.captcha-wrapper {
+  margin: 0 auto;
+}
+
+input[name=bhUsername] {
+  display: none;
+}
+
+.password-label {
+  margin-top: 13px;
+  margin-bottom: 5px;
+}
+
+.button-wrapper {
+  margin: -1px auto 16px;
+}
+
+.small-print {
+  // margin-bottom: 20px; // if enable-password-manager is needed
+  margin-bottom: 65px;
+}
