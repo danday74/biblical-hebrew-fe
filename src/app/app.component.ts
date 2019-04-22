@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core'
-import { select, Store } from '@ngrx/store'
 import { State } from '@app/reducers'
-import { selectSignUpInProgress, selectUser } from './actions/users/users.selectors'
-import * as Bowser from 'bowser'
+import { getBrowser } from '@app/utils/utils'
+import { select, Store } from '@ngrx/store'
 import * as $ from 'jquery'
+import { combineLatest } from 'rxjs'
+import { filter, take } from 'rxjs/operators'
+import { selectSignUpInProgress, selectUser, selectWhoAmICheck } from './actions/users/users.selectors'
 
-declare var slugify: (str, options) => any
-
-const BROWSER_BLACKLIST = ['internet-explorer']
+const browserBlacklist = ['internet-explorer']
 
 @Component({
   selector: 'app-root',
@@ -17,18 +17,34 @@ const BROWSER_BLACKLIST = ['internet-explorer']
 
 export class AppComponent implements OnInit {
 
-  public user: any
-  public supported: boolean
   public signUpInProgress: boolean
+  public supported: boolean
+  public user: any
+  public whoAmICheck: boolean
 
   constructor(private store: Store<State>) {}
 
   ngOnInit() {
+
     this.manageBrowserSupport()
+
+    // whoami
     this.store.pipe(
-      select(selectUser)
-    ).subscribe(user => {
-      if (user) {
+      select(selectWhoAmICheck),
+      filter(whoAmICheck => whoAmICheck != null),
+      take(1)
+    ).subscribe(whoAmICheck => {
+      this.whoAmICheck = whoAmICheck
+    })
+
+    // get user and allow delay for login animation (when set login pages disappear)
+    combineLatest(
+      this.store.pipe(select(selectUser)),
+      this.store.pipe(select(selectWhoAmICheck))
+    ).pipe(
+      filter(([user, whoAmICheck]) => whoAmICheck != null)
+    ).subscribe(([user, whoAmICheck]) => {
+      if (user && whoAmICheck === false) {
         setTimeout(() => {
           this.user = user
         }, 2000)
@@ -37,6 +53,7 @@ export class AppComponent implements OnInit {
       }
     })
 
+    // show sign up page
     this.store.pipe(
       select(selectSignUpInProgress)
     ).subscribe(signUpInProgress => {
@@ -45,10 +62,8 @@ export class AppComponent implements OnInit {
   }
 
   private manageBrowserSupport() {
-    const bro = Bowser.getParser(window.navigator.userAgent)
-    const browser = bro.getBrowser()
-    browser.name = slugify(browser.name, {lower: true})
-    this.supported = !BROWSER_BLACKLIST.includes(browser.name)
-    if (this.supported) $('html').addClass('supported').addClass(browser.name)
+    const browserSlug = getBrowser().slug
+    this.supported = !browserBlacklist.includes(browserSlug)
+    if (this.supported) $('html').addClass('supported').addClass(browserSlug)
   }
 }

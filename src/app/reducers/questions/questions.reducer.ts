@@ -1,4 +1,4 @@
-import { QuestionsActionTypes, QuestionsActions } from '@app/actions/questions/questions.actions'
+import { QuestionsActions, QuestionsActionTypes } from '@app/actions/questions/questions.actions'
 
 export interface QuestionsState {
   questions: any

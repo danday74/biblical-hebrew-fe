@@ -1,25 +1,69 @@
-word of the day
-
-login guy masks
-
-search for word
-
-fave tab? or remember tab? worth it with URL?
-
-make username case sensitive due to Chrome passwords
-
-Test Hebrew username
-
-Disallow mixed username? How does app handle it?
-
-some flickering on logout
+definite
+--------
 
 make vars private where possible
 
+husky tslint and eslint (for auth unit tests too and remove git hook)
+
+all into single repo (remove repo data from all package.json)
+
+bot image should be resized to 302x302
+
+firefox trying to save password on signup
+
+if all Hebrew chars in login box change to rtl
+
+change font to nice Hebrew font for signup heading (and cross browser test)
+with fallback to normal Bootstrap font
+
+track logged in users - prevent logged in user from logging in
+
 tidy up server logs
 
-get auth to kick out and remember on refresh
+tidy up READMEs, NOTEs, TODOs
 
-implement captcha and password confirmation
+pm2 prod config
+
+nginx prod config
+
+aot build
+
+deploy
+
+allow font change on login
+
+search for word
+
+link for lesson audio
+
+word of the day
+
+maybe
+-----
+
+login guy masks
+
+fave tab? or remember tab? worth it with URL?
+
+consider changing Biblical Hebrew image color to match new colors (and font on signup?)
+
+unlock lessons for cash
+
+test / monitor
+--------------
+
+flickering on logout
+
+axe accessibility (and assistive techs)
+
+responsiveness
+
+inspect code
+
+tests
+
+cross-browser
+
+ncu
 
 

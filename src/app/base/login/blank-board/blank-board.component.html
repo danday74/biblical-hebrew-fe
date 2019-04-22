@@ -1,0 +1,7 @@
+<div>
+  <img [alt]="boardText1 + ' ' + boardText2" class="blank-board" src="/assets/images/blank-board/blank-board-tiny.png">
+  <ng-container *ngIf="showBoardText">
+    <div class="board-text board-text-1 animated fadeIn text-truncate" [title]="boardText1">{{ boardText1 }}</div>
+    <div class="board-text board-text-2 animated fadeIn text-truncate" [title]="boardText2">{{ boardText2 }}</div>
+  </ng-container>
+</div>

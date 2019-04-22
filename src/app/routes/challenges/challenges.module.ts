@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
+import { NgModule } from '@angular/core'
 import { ChallengesRoutingModule } from './challenges-routing.module'
 import { ChallengesComponent } from './challenges.component'
 

@@ -1,10 +1,12 @@
-import { Action } from '@ngrx/store'
-import { environment } from '@environments/environment'
 import { ActionsLookup } from '@app/actions/actions-lookup'
 import { CustomAction } from '@app/actions/custom-action'
-import { forOwn } from 'lodash'
+import { environment } from '@environments/environment'
+import { Action } from '@ngrx/store'
+import * as Bowser from 'bowser'
+import { cloneDeep, forOwn } from 'lodash'
 
 declare var replaceLast: (str, pattern, replacement) => string
+declare var slugify: (str, options) => any
 
 export const getActionHttpPath = (action: CustomAction) => {
   let httpPath = action.type.replace(/\[/g, '').replace(/]/g, '')
@@ -29,6 +31,13 @@ export const getLoadedAction = (action: Action) => {
 export const getFailedAction = (action: Action) => {
   const key = replaceLast(action.type, 'Requested', 'Failed')
   return ActionsLookup[key]
+}
+
+export const getBrowser = () => {
+  const bro = Bowser.getParser(window.navigator.userAgent)
+  const browser = cloneDeep(bro.getBrowser())
+  browser.slug = slugify(browser.name, {lower: true})
+  return browser
 }
 
 export const getRandomItemFromArray = (array: Array<any>) => {

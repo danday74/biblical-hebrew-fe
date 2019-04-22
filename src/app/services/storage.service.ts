@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
-import { select, Store } from '@ngrx/store'
-import { State } from '@app/reducers'
 import { selectUser } from '@app/actions/users/users.selectors'
+import { State } from '@app/reducers'
+import { select, Store } from '@ngrx/store'
 
 @Injectable({providedIn: 'root'})
 

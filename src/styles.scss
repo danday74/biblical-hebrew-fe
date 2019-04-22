@@ -1,3 +1,4 @@
+@import 'app/globals';
 @import '~bootswatch/dist/spacelab/variables';
 @import '~bootstrap/scss/bootstrap';
 @import '~bootswatch/dist/spacelab/bootswatch';
@@ -13,9 +14,45 @@ html.supported .unsupported {
 }
 
 body {
-  min-width: 750px;
+  min-width: 900px;
+  color: $lightestGreyOnWhite;
+  text-rendering: optimizeLegibility;
 }
 
-.cursor-pointer {
+button.btn {
+  min-width: 80px;
+}
+
+.success-tick, .failure-cross {
+  font-size: 1.5em;
+}
+
+.success, .success-tick {
+  color: $successGreen;
+}
+
+.failure, .failure-cross {
+  color: $failureRed;
+}
+
+.small-print {
+  font-size: 0.8em;
+  margin: 5px -150px 0;
+}
+
+a, .fake-link {
+  font-size: 0.9em;
+  color: $bhBlue;
+
+  &:hover {
+    color: $bhBlue;
+  }
+}
+
+.fake-link {
   cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }

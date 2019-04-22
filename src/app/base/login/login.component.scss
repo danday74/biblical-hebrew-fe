@@ -7,11 +7,6 @@
 
 img.biblical-hebrew {
   margin-top: 25px;
-  opacity: 0;
-
-  &.animateTitleNow {
-    opacity: 1;
-  }
 }
 
 .user-finder {
@@ -20,60 +15,19 @@ img.biblical-hebrew {
   display: inline-block;
 }
 
-img.blank-board {
-  padding-left: 25px;
-  padding-right: 25px;
-}
-
-.board-text {
-  color: #888;
-  position: absolute;
-  transform: rotate(-18deg);
-  font-size: 1.5rem;
-  width: 131px;
-}
-
-.board-text-1 {
-  margin-top: -250px;
-  margin-left: 102px;
-}
-
-.board-text-2 {
-  margin-top: -221px;
-  margin-left: 112px;
-}
-
 form {
-  margin-top: -5px;
+  margin-top: -25px;
 }
 
-.success {
-  font-size: 1.5em;
-  color: darken($successGreen, 5%);
+.forget-wrapper {
+  margin-bottom: -14px;
 }
 
-.input-group-eye {
-  cursor: pointer;
+.enable-password-manager {
+  margin-top: -60px;
 
-  .input-group-text {
-    background-color: #F9F9F9;
+  a {
+    font-size: 0.9em;
+    color: $bhBlue;
   }
-
-  .eye {
-    color: #888;
-
-    &.disabled {
-      opacity: 0.5;
-    }
-  }
-}
-
-button {
-  min-width: 80px;
-}
-
-.small-print {
-  color: #888;
-  font-size: 0.8em;
-  margin: 5px -100px 0;
 }

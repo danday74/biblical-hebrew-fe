@@ -1,11 +1,11 @@
-<ng-container *ngIf="supported">
+<ng-container *ngIf="supported && whoAmICheck != null">
 
   <ng-container *ngIf="user; else noUser">
     <div class="animated fadeIn">
       <app-navbar></app-navbar>
-      <div class="outlet-wrapper">
+      <app-outlet-wrapper>
         <router-outlet></router-outlet>
-      </div>
+      </app-outlet-wrapper>
     </div>
   </ng-container>
 

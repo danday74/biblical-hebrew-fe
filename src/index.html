@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>Biblical Hebrew</title>
@@ -14,19 +15,54 @@
     }
 
     .unsupported .oops {
-      color: #5687B8
+      color: #416d9a;
     }
 
-    .unsupported .text {
-      color: #888
+    .unsupported .supported-list {
+      margin-top: 100px;
+    }
+
+    .browser-text {
+      display: inline-block;
+      font-size: 1.2em;
+      margin-top: 5px;
     }
   </style>
 </head>
+
 <body>
-<div class="unsupported animated fadeIn delay-1s slower">
-  <h1 class="oops">Oops</h1>
-  <p class="text"><strong>Biblical Hebrew</strong> does not support this browser</p>
-</div>
-<app-root></app-root>
+<main role="main">
+  <div class="unsupported animated fadeIn delay-1s slower">
+    <h1 class="oops">Oops</h1>
+    <p><strong>Biblical Hebrew</strong> does not support this browser but fully supports:</p>
+    <div class="supported-list">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-2 offset-3">
+            <img alt="Chrome" src="/assets/images/supported-browser-logos/chrome_128x128-tiny.png">
+          </div>
+          <div class="col-2">
+            <img alt="Edge" src="/assets/images/supported-browser-logos/edge_128x128-tiny.png">
+          </div>
+          <div class="col-2">
+            <img alt="Firefox" src="/assets/images/supported-browser-logos/firefox_128x128-tiny.png">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-2 offset-3">
+            <span class="browser-text">Chrome</span>
+          </div>
+          <div class="col-2">
+            <span class="browser-text">Edge</span>
+          </div>
+          <div class="col-2">
+            <span class="browser-text">Firefox</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-root></app-root>
+</main>
 </body>
 </html>

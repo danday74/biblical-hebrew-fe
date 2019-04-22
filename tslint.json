@@ -1,14 +1,19 @@
 {
   "extends": "tslint:recommended",
-  "rulesDirectory": [
-    "codelyzer"
-  ],
   "linterOptions": {
     "exclude": ["**/*.js"]
   },
+  "rulesDirectory": [
+    "codelyzer"
+  ],
   "rules": {
+    "angular-whitespace": [true, "check-interpolation", "check-pipe"],
     "array-type": false,
-    "arrow-parens": false,
+    "arrow-parens": [true, "ban-single-arg-parens"],
+    "component-class-suffix": true,
+    // "component-max-inline-declarations": true,
+    // "contextual-decorator": true,
+    "contextual-lifecycle": true,
     "curly": [
       true,
       "ignore-same-line"
@@ -16,10 +21,12 @@
     "deprecation": {
       "severity": "warn"
     },
+    "directive-class-suffix": true,
     "import-blacklist": [
       true,
       "rxjs/Rx"
     ],
+    "import-destructuring-spacing": true,
     "interface-name": false,
     "max-classes-per-file": false,
     "max-line-length": [
@@ -31,14 +38,25 @@
       true,
       {
         "order": [
-          "static-field",
-          "instance-field",
-          "static-method",
-          "instance-method"
+          "public-static-field",
+          "protected-static-field",
+          "private-static-field",
+          "public-instance-field",
+          "protected-instance-field",
+          "private-instance-field",
+          "public-static-method",
+          "protected-static-method",
+          "private-static-method",
+          "public-constructor",
+          "protected-constructor",
+          "private-constructor",
+          "public-instance-method",
+          "protected-instance-method",
+          "private-instance-method"
         ]
       }
     ],
-    "no-consecutive-blank-lines": false,
+    "no-consecutive-blank-lines": true,
     "no-console": [
       true,
       "debug",
@@ -52,9 +70,14 @@
       true,
       "ignore-params"
     ],
+    "no-input-prefix": [true, "can", "is", "should"],
+    "no-input-rename": true,
     "no-non-null-assertion": true,
+    "no-output-on-prefix": true,
+    "no-output-rename": true,
     "no-redundant-jsdoc": true,
     "no-switch-case-fall-through": true,
+    "no-unused-css": true,
     "no-use-before-declare": true,
     "no-var-requires": false,
     "object-literal-key-quotes": [
@@ -62,22 +85,44 @@
       "as-needed"
     ],
     "object-literal-sort-keys": false,
-    "ordered-imports": false,
+    "ordered-imports": true,
+    "prefer-output-readonly": true,
     "quotemark": [
       true,
       "single"
     ],
+    // "relative-url-prefix": true,
     "semicolon": [true, "never"],
-    "trailing-comma": false,
-    "no-output-on-prefix": true,
-    "use-input-property-decorator": true,
-    "use-output-property-decorator": true,
+    // "template-accessibility-alt-text": true,
+    // "template-accessibility-elements-content": true,
+    // "template-accessibility-label-for": [
+    //   true,
+    //   {
+    //     "labelComponents": ["app-label"],
+    //     "labelAttributes": ["id"],
+    //     "controlComponents": ["app-input", "app-select"]
+    //   }
+    // ],
+    // "template-accessibility-tabindex-no-positive": true,
+    // "template-accessibility-table-scope": true,
+    // "template-accessibility-valid-aria": true,
+    // "template-banana-in-box": true,
+    "template-conditional-complexity": true,
+    "template-cyclomatic-complexity": true,
+    // "template-no-call-expression": true,
+    // "template-use-track-by-function": true,
+    "trailing-comma": [
+      true, {
+        "multiline": "never",
+        "singleline": "never"
+      }
+    ],
+    // "use-component-selector": true,
     "use-host-property-decorator": true,
-    "no-input-rename": true,
-    "no-output-rename": true,
+    "use-input-property-decorator": true,
     "use-life-cycle-interface": true,
-    "use-pipe-transform-interface": true,
-    "component-class-suffix": true,
-    "directive-class-suffix": true
+    "use-output-property-decorator": true,
+    "use-pipe-decorator": true,
+    "use-pipe-transform-interface": true
   }
 }

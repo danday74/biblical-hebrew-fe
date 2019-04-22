@@ -1,26 +1,38 @@
 import { UsersActions, UsersActionTypes } from '@app/actions/users/users.actions'
 
 export interface UsersState {
+  lastUserLoggedIn: string
+  signUpInProgress: any
   user: any
   userExists: string
-  lastUserLoggedIn: string
-  signUpInProgress: boolean
+  webkitAutofillUsed: boolean
+  whoAmICheck: boolean
 }
 
 export const initialUsersState: UsersState = {
+  lastUserLoggedIn: null,
+  signUpInProgress: null,
   user: null,
   userExists: 'no',
-  lastUserLoggedIn: null,
-  signUpInProgress: false
+  webkitAutofillUsed: false,
+  whoAmICheck: null
 }
 
 export function usersReducer(state = initialUsersState, action: UsersActions): UsersState {
   switch (action.type) {
 
-    case UsersActionTypes.SetUserExists:
+    case UsersActionTypes.UserLoaded:
       return {
         ...state,
-        userExists: action.payload
+        user: action.payload,
+        whoAmICheck: true
+      }
+
+    case UsersActionTypes.UserFailed:
+    case UsersActionTypes.WhoAmIFailed:
+      return {
+        ...state,
+        whoAmICheck: false
       }
 
     case UsersActionTypes.LoginSuccess:
@@ -29,11 +41,10 @@ export function usersReducer(state = initialUsersState, action: UsersActions): U
         user: action.payload
       }
 
-    case UsersActionTypes.Logout:
+    case UsersActionTypes.SetUserExists:
       return {
         ...state,
-        user: initialUsersState.user,
-        userExists: initialUsersState.userExists
+        userExists: action.payload
       }
 
     case UsersActionTypes.SetLastUserLoggedIn:
@@ -46,6 +57,12 @@ export function usersReducer(state = initialUsersState, action: UsersActions): U
       return {
         ...state,
         signUpInProgress: action.payload
+      }
+
+    case UsersActionTypes.WebkitAutofillUsed:
+      return {
+        ...state,
+        webkitAutofillUsed: true
       }
 
     default:

@@ -1,11 +1,11 @@
 import { Injectable, Injector } from '@angular/core'
+import { InitAction, InitActionTypes, InitOnLoginAction } from '@app/actions/init/init.actions'
+import { QuestionsRequestedAction } from '@app/actions/questions/questions.actions'
+import { GetLastUserLoggedInAction, WhoAmIAction } from '@app/actions/users/users.actions'
+import { ServiceLocator } from '@app/service-locator.service'
 import { Actions, Effect, ofType } from '@ngrx/effects'
-import { InitAction, InitActionTypes } from '@app/actions/init/init.actions'
 import { defer, of } from 'rxjs'
 import { mergeMap } from 'rxjs/operators'
-import { ServiceLocator } from '@app/service-locator.service'
-import { QuestionsRequestedAction } from '@app/actions/questions/questions.actions'
-import { GetLastUserLoggedInAction } from '@app/actions/users/users.actions'
 
 @Injectable()
 
@@ -15,8 +15,16 @@ export class InitEffects {
   appInit$ = this.actions$.pipe(
     ofType<InitAction>(InitActionTypes.Init),
     mergeMap(() => of(
-      new QuestionsRequestedAction(),
+      new WhoAmIAction(),
       new GetLastUserLoggedInAction()
+    ))
+  )
+
+  @Effect()
+  appInitOnLogin$ = this.actions$.pipe(
+    ofType<InitOnLoginAction>(InitActionTypes.InitOnLogin),
+    mergeMap(() => of(
+      new QuestionsRequestedAction()
     ))
   )
 
