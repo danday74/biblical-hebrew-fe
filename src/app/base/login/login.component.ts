@@ -1,26 +1,24 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core'
-import { ActionsSubject, select, Store } from '@ngrx/store'
-import { State } from '@app/reducers'
-import { cloneDeep, debounce } from 'lodash'
-import { faCheck, faEye } from '@fortawesome/free-solid-svg-icons'
-import { selectLastUserLoggedIn, selectUser, selectUserExists } from '@app/actions/users/users.selectors'
+import { CustomAction } from '@app/actions/custom-action'
 import {
   GetUserExistsAction,
   LoginAction,
   SetLastUserLoggedInAction,
   SetSignUpInProgressAction,
   UsersActions,
-  UsersActionTypes
+  UsersActionTypes,
+  WebkitAutofillUsedAction
 } from '@app/actions/users/users.actions'
+import { selectLastUserLoggedIn, selectUser, selectWebkitAutofillUsed } from '@app/actions/users/users.selectors'
+import { PasswordComponent } from '@app/base/shared/password/password.component'
+import { State } from '@app/reducers'
+import { DestroyerComponent } from '@app/utils/destroyer.component'
+import { getBrowser } from '@app/utils/utils'
+import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { ActionsSubject, select, Store } from '@ngrx/store'
+import * as $ from 'jquery'
+import { cloneDeep, debounce } from 'lodash'
 import { filter, take, takeUntil } from 'rxjs/operators'
-import { Router } from '@angular/router'
-import { getRandomItemFromArray } from '@app/utils/utils'
-import { Subject } from 'rxjs'
-
-const LOGIN_ANIMATIONS = [
-  'bounceOut', 'bounceOutUp', 'bounceOutDown', 'fadeOut', 'fadeOutUp', 'fadeOutDown', 'flipOutX', 'flipOutY',
-  'zoomOut', 'zoomOutUp', 'zoomOutDown', 'zoomOutLeft', 'zoomOutRight'
-]
 
 @Component({
   selector: 'app-login',
@@ -28,109 +26,162 @@ const LOGIN_ANIMATIONS = [
   styleUrls: ['./login.component.scss']
 })
 
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent extends DestroyerComponent implements OnInit, OnDestroy {
 
   @ViewChild('usernameInput') usernameInput: ElementRef
-  @ViewChild('passwordInput') passwordInput: ElementRef
+  @ViewChild(PasswordComponent) passwordComponent: PasswordComponent
   @ViewChild('submitButton') submitButton: ElementRef
 
-  private unsubscribe$ = new Subject()
-
   faCheck = faCheck
-  faEye = faEye
-
-  boardText1 = ''
-  boardText2 = ''
-  boardTextUpdateInProgress = false
-  showBoardText = false
+  faTimes = faTimes
 
   user = {
     username: '',
     password: ''
   }
 
-  loginAnimation: string
-  animateLoginNow = false
-  animateTitleNow = false
-  userExists = 'no'
-  showPassword = false
-  pattern = '^[a-zA-Z0-9\u0590-\u05FF]+$'
-  badCredentials = false
+  alternativeUsernameUpdateInProgress = false
+  boardTextUpdateInProgress = false
+  usernameUpdateInProgress = false
 
-  constructor(private store: Store<State>, private actionsSubject$: ActionsSubject, private router: Router) {
-    this.usernameChange = debounce(this.usernameChange, 300, {leading: false, trailing: true})
+  animateLoginNow = false
+  badCredentials = false
+  boardText1 = ''
+  boardText2 = ''
+  loginInProgress = false
+  pattern = '^[a-zA-Z0-9\u0590-\u05FF]+$'
+  userExists = 'no'
+  webkitAutofillUsed = false
+
+  constructor(private store: Store<State>, private actionsSubject$: ActionsSubject) {
+    super()
     this.onSubmit = debounce(this.onSubmit, 300, {leading: true, trailing: false})
+    this.onUsernameChange = debounce(this.onUsernameChange, 300, {leading: false, trailing: true})
   }
 
   ngOnInit() {
 
-    this.loginAnimation = getRandomItemFromArray(LOGIN_ANIMATIONS)
-
-    setTimeout(() => {
-      this.animateTitleNow = true
-    }, 2000)
-
+    // initialise username and focus
     this.store.pipe(
-      takeUntil(this.unsubscribe$),
-      select(selectUser),
-      filter(user => !!user)
-    ).subscribe(user => {
-      this.animateLoginNow = true
-      setTimeout(() => {
-        const originalUrl = this.router.url
-        this.router.navigateByUrl('/blank', {replaceUrl: true}).then(() => {
-          return this.router.navigateByUrl(originalUrl, {replaceUrl: true})
-        }).then(() => {
-          this.store.dispatch(new SetLastUserLoggedInAction({username: user.username}))
-        })
-      }, 2000)
-    })
-    this.store.pipe(
-      takeUntil(this.unsubscribe$),
-      select(selectUserExists)
-    ).subscribe(userExists => {
-      this.userExists = userExists
-      this.updateBoardText()
-    })
-    this.store.pipe(
-      takeUntil(this.unsubscribe$),
       select(selectLastUserLoggedIn),
       take(1)
     ).subscribe((lastUserLoggedIn: any) => {
       if (lastUserLoggedIn) {
-        this.usernameChange(lastUserLoggedIn.username)
+        this.onUsernameChange(lastUserLoggedIn.username)
         setTimeout(() => { this.usernameInput.nativeElement.focus() }, 500)
       }
-      setTimeout(() => {this.showBoardText = true}, 500)
     })
+
+    // animate on login
+    this.store.pipe(
+      takeUntil(this.unsubscribe$),
+      select(selectUser),
+      filter(user => !!user)
+    ).subscribe(() => {
+      this.animateLoginNow = true
+    })
+
+    // handle password manager link
+    this.store.pipe(
+      takeUntil(this.unsubscribe$),
+      select(selectWebkitAutofillUsed),
+      take(1)
+    ).subscribe(webkitAutofillUsed => {
+      this.webkitAutofillUsed = webkitAutofillUsed
+    })
+
+    // need to listen for an action here (fires every time) instead of using a memoized selector
+    // handle username change
+    this.actionsSubject$.pipe(
+      takeUntil(this.unsubscribe$),
+      filter((action: UsersActions) => action.type === UsersActionTypes.SetUserExists)
+    ).subscribe((action: CustomAction) => {
+      this.userExists = action.payload
+      this.usernameUpdateInProgress = false
+      this.alternativeUsernameUpdateInProgress = false
+      this.updateBoardText()
+    })
+
+    // handle failed login
     this.actionsSubject$.pipe(
       takeUntil(this.unsubscribe$),
       filter((action: UsersActions) => action.type === UsersActionTypes.LoginFailed)
     ).subscribe(() => {
+      // TODO: Assumes a 401
       this.badCredentials = true
+      this.loginInProgress = false
       this.updateBoardText()
     })
+
+    this.updateBoardText()
   }
 
-  ngOnDestroy() {
-    this.unsubscribe$.next()
-    this.unsubscribe$.complete()
+  onUsernameChangeNoDebounce(username) {
+    this.preUsernameChange() // do this with no debounce
+    this.onUsernameChange(username)
   }
 
-  usernameChange(username) {
+  onPasswordChange(password) {
+    this.badCredentials = false
+    this.user.password = password
+    this.updateBoardText()
+  }
+
+  onEnter(evt) {
+    const name = evt.target.getAttribute('name')
+    if (name === 'bhUsername') {
+      this.passwordComponent.passwordInput.nativeElement.focus()
+    } else if (name === 'bhPassword') {
+      this.submitButton.nativeElement.click()
+    }
+  }
+
+  onForget() {
+    // Clear password too?
+    this.onUsernameChange('')
+    this.store.dispatch(new SetLastUserLoggedInAction(null))
+    this.usernameInput.nativeElement.focus()
+  }
+
+  onSubmit() {
+    let webkitAutofill = false
+    const browserSlug = getBrowser().slug
+    if (browserSlug === 'chrome') webkitAutofill = !!$(':-webkit-autofill').length
+    if (webkitAutofill) this.store.dispatch(new WebkitAutofillUsedAction())
+    if (this.userExists === 'yes') {
+      this.doLogin()
+    } else {
+      this.doSignUp()
+    }
+  }
+
+  private doLogin() {
+    this.loginInProgress = true
+    this.store.dispatch(new LoginAction(cloneDeep(this.user)))
+  }
+
+  private doSignUp() {
+    this.store.dispatch(new SetSignUpInProgressAction(this.user))
+  }
+
+  private preUsernameChange() {
+    if (!this.hasInvalidChars(this.user.username) && this.boardText1 !== 'Have we') {
+      this.usernameUpdateInProgress = true
+    } else {
+      this.alternativeUsernameUpdateInProgress = true
+    }
+  }
+
+  private onUsernameChange(username) {
+    this.preUsernameChange()
     this.store.dispatch(new GetUserExistsAction(username))
     this.badCredentials = false
     this.user.username = username
     this.updateBoardText()
   }
 
-  passwordChange(password) {
-    this.badCredentials = false
-    this.user.password = password
-    this.updateBoardText()
-  }
-
   private updateBoardText() {
+
     const prevBoardText1 = this.boardText1
     const prevBoardText2 = this.boardText2
 
@@ -165,38 +216,5 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   private hasInvalidChars(str) {
     return str && !RegExp(this.pattern).test(str)
-  }
-
-  onSubmit() {
-    if (this.userExists === 'yes') {
-      this.doLogin()
-    } else {
-      this.doSignUp()
-    }
-  }
-
-  private doLogin() {
-    this.store.dispatch(new LoginAction(cloneDeep(this.user)))
-  }
-
-  private doSignUp() {
-    this.store.dispatch(new SetSignUpInProgressAction(true))
-  }
-
-  showPwd() {
-    this.showPassword = true
-  }
-
-  noShowPwd() {
-    this.showPassword = false
-  }
-
-  onEnter(evt) {
-    const name = evt.target.getAttribute('name')
-    if (name === 'bhUsername') {
-      this.passwordInput.nativeElement.focus()
-    } else if (name === 'bhPassword') {
-      this.submitButton.nativeElement.click()
-    }
   }
 }
