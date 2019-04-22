@@ -1,11 +1,7 @@
 definite
 --------
 
-make vars private where possible
-
-husky tslint and eslint (for auth unit tests too and remove git hook)
-
-all into single repo (remove repo data from all package.json)
+all into single repo
 
 bot image should be resized to 302x302
 
