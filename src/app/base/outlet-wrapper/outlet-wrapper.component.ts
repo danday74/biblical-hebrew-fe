@@ -15,7 +15,7 @@ const debug = Debug('bh:auth-check')
 
 export class OutletWrapperComponent implements OnInit, OnDestroy {
 
-  private interval: number
+  private interval: any
 
   constructor(private userService: UserService, private store: Store<State>) {}
 

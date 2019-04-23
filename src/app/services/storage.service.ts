@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core'
 import { selectUser } from '@app/actions/users/users.selectors'
 import { State } from '@app/reducers'
 import { select, Store } from '@ngrx/store'
+import * as Debug from 'debug'
+
+const debug = Debug('bh:storage')
 
 @Injectable({providedIn: 'root'})
 
@@ -29,7 +32,7 @@ export class StorageService {
       key = this.username + '-' + key
       this.setLocalStorage(key, value)
     } else {
-      console.warn(`Unable to SET local storage for user with key ${key} because there is no user`)
+      debug(`Unable to SET local storage for user with key ${key} because there is no user`)
     }
   }
 
@@ -39,7 +42,7 @@ export class StorageService {
     if (value != null) {
       value = JSON.parse(value)
     } else {
-      console.warn('Unable to GET local storage with key', key)
+      debug('Unable to GET local storage with key', key)
     }
     return value
   }
@@ -49,7 +52,7 @@ export class StorageService {
       key = this.username + '-' + key
       this.getLocalStorage(key)
     } else {
-      console.warn(`Unable to GET local storage for user with key ${key} because there is no user`)
+      debug(`Unable to GET local storage for user with key ${key} because there is no user`)
     }
   }
 }

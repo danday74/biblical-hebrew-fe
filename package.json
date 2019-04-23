@@ -10,12 +10,13 @@
     "update": "ng update",
     "start": "ng serve -o",
     "start:prod": "ng serve -o --configuration=production",
-    "build": "ng build",
-    "test": "ng test",
+    "test": "ng test --configuration=unittest --watch=false",
     "e2e": "ng e2e --configuration=test",
-    "tslint": "ng lint",
     "eslint": "eslint **/*.js",
-    "lint": "npm-run-all tslint eslint"
+    "tslint": "ng lint",
+    "build": "ng build",
+    "lint": "npm-run-all tslint eslint",
+    "husky": "npm run lint"
   },
   "dependencies": {
     "@angular/animations": "~7.2.13",
@@ -78,7 +79,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "npm run lint"
+      "pre-push": "npm run husky"
     }
   }
 }

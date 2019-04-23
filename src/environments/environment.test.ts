@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   httpPhp: 'http://localhost:5000/api',
   wsPhp: 'ws://localhost:4002',
-  debug: 'bh:*'
+  debug: null
 }
 
 /*
