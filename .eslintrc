@@ -2,6 +2,7 @@
   "env": {
     "browser": true,
     "es6": true,
+    "jasmine": true,
     "mocha": false,
     "node": true
   },
@@ -35,7 +36,5 @@
       "never"
     ]
   },
-  "globals": {
-    "jasmine": false
-  }
+  "globals": {}
 }
