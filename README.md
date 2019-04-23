@@ -1,3 +1,3 @@
 # Biblical Hebrew FE
 
-**A tool for learning Biblical Hebrew vocabulary**
+**An online tool for learning Biblical Hebrew vocabulary**
