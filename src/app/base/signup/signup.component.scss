@@ -53,6 +53,6 @@ input[name=bhUsername] {
 }
 
 .small-print {
-  // margin-bottom: 20px; // if enable-password-manager is needed
-  margin-bottom: 65px;
+  margin-bottom: 20px; // if enable-password-manager is needed
+  // margin-bottom: 65px; // if enable-password-manager is not needed
 }
