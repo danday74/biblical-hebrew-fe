@@ -48,6 +48,7 @@ export class LoginComponent extends DestroyerComponent implements OnInit, OnDest
   badCredentials = false
   boardText1 = ''
   boardText2 = ''
+  dirForUsername = 'ltr'
   loginInProgress = false
   pattern = '^[a-zA-Z0-9\u0590-\u05FF]+$'
   userExists = 'no'
@@ -117,7 +118,7 @@ export class LoginComponent extends DestroyerComponent implements OnInit, OnDest
   }
 
   onUsernameChangeNoDebounce(username) {
-    this.preUsernameChange() // do this with no debounce
+    this.preUsernameChange(username) // do this with no debounce
     this.onUsernameChange(username)
   }
 
@@ -164,7 +165,8 @@ export class LoginComponent extends DestroyerComponent implements OnInit, OnDest
     this.store.dispatch(new SetSignUpInProgressAction(this.user))
   }
 
-  private preUsernameChange() {
+  private preUsernameChange(username) {
+    this.dirForUsername = this.hasHebrewCharsOnly(username) ? 'rtl' : 'ltr'
     if (!this.hasInvalidChars(this.user.username) && this.boardText1 !== 'Have we') {
       this.usernameUpdateInProgress = true
     } else {
@@ -173,7 +175,7 @@ export class LoginComponent extends DestroyerComponent implements OnInit, OnDest
   }
 
   private onUsernameChange(username) {
-    this.preUsernameChange()
+    this.preUsernameChange(username)
     this.store.dispatch(new GetUserExistsAction(username))
     this.badCredentials = false
     this.user.username = username
@@ -216,5 +218,10 @@ export class LoginComponent extends DestroyerComponent implements OnInit, OnDest
 
   private hasInvalidChars(str) {
     return str && !RegExp(this.pattern).test(str)
+  }
+
+  // noinspection JSMethodCanBeStatic
+  private hasHebrewCharsOnly(str) {
+    return str && RegExp('^[\u0590-\u05FF]+$').test(str)
   }
 }
