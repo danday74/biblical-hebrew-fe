@@ -13,7 +13,7 @@ import { selectLastUserLoggedIn, selectUser, selectWebkitAutofillUsed } from '@a
 import { PasswordComponent } from '@app/base/shared/password/password.component'
 import { State } from '@app/reducers'
 import { DestroyerComponent } from '@app/utils/destroyer.component'
-import { getBrowser } from '@app/utils/utils'
+import { getBrowser, getDir } from '@app/utils/utils'
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { ActionsSubject, select, Store } from '@ngrx/store'
 import * as $ from 'jquery'
@@ -166,7 +166,7 @@ export class LoginComponent extends DestroyerComponent implements OnInit, OnDest
   }
 
   private preUsernameChange(username) {
-    this.dirForUsername = this.hasHebrewCharsOnly(username) ? 'rtl' : 'ltr'
+    this.dirForUsername = getDir(username)
     if (!this.hasInvalidChars(this.user.username) && this.boardText1 !== 'Have we') {
       this.usernameUpdateInProgress = true
     } else {
@@ -218,10 +218,5 @@ export class LoginComponent extends DestroyerComponent implements OnInit, OnDest
 
   private hasInvalidChars(str) {
     return str && !RegExp(this.pattern).test(str)
-  }
-
-  // noinspection JSMethodCanBeStatic
-  private hasHebrewCharsOnly(str) {
-    return str && RegExp('^[\u0590-\u05FF]+$').test(str)
   }
 }

@@ -4,6 +4,7 @@ import { selectSignUpInProgress, selectUser } from '@app/actions/users/users.sel
 import { State } from '@app/reducers'
 import { UserService } from '@app/services/user.service'
 import { DestroyerComponent } from '@app/utils/destroyer.component'
+import { getDir } from '@app/utils/utils'
 import { ActionsSubject, select, Store } from '@ngrx/store'
 import { filter, takeUntil } from 'rxjs/operators'
 import config from 'src/config'
@@ -23,6 +24,7 @@ export class SignupComponent extends DestroyerComponent implements OnInit, OnDes
 
   animateLoginNow = false
   captchaSuccess = false
+  dirForUsername = 'ltr'
   loginError: string
   loginInProgress = false
   signUpInProgress: any
@@ -51,6 +53,7 @@ export class SignupComponent extends DestroyerComponent implements OnInit, OnDes
       select(selectSignUpInProgress)
     ).subscribe(signUpInProgress => {
       this.signUpInProgress = signUpInProgress
+      this.dirForUsername = getDir(signUpInProgress.username)
     })
 
     // handle failed login
