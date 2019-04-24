@@ -12,9 +12,9 @@ import { faCheck, faEye, faTimes } from '@fortawesome/free-solid-svg-icons'
 export class PasswordComponent implements OnInit {
 
   @ViewChild('passwordInput') passwordInput: ElementRef // this is used
+  @Input() autocomplete: boolean
   @Input() forceFailure = false
   @Input() hideFeedback = false
-  @Input() newPassword = true
   @Output() readonly enterKeyPress = new EventEmitter<any>()
   @Output() readonly passwordChange = new EventEmitter<string>()
 
@@ -22,13 +22,13 @@ export class PasswordComponent implements OnInit {
   faTimes = faTimes
   faEye = faEye
 
-  autocomplete: string
   password = ''
   pattern = '^[a-zA-Z0-9\u0590-\u05FF]+$'
   showPassword = false
+  strAutocomplete: string
 
   ngOnInit() {
-    this.autocomplete = this.newPassword ? 'new-password' : 'on'
+    this.strAutocomplete = this.autocomplete === true ? 'on' : this.autocomplete === false ? 'off' : 'new-password'
   }
 
   onEnter(evt) {

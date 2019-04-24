@@ -34,7 +34,7 @@
             <span *ngIf="!loginError">Confirm password</span>
             <span *ngIf="loginError" class="failure">{{ loginError }}</span>
           </label>
-          <app-password [forceFailure]="loginError === incorrectPasswordText" [hideFeedback]="loginError === failedToCreateUserText" [newPassword]="false"
+          <app-password [forceFailure]="loginError === incorrectPasswordText" [hideFeedback]="loginError === failedToCreateUserText" [autocomplete]="true"
                         (enterKeyPress)="onEnter()" (passwordChange)="onPasswordChange($event)"></app-password>
 
           <!-- Cancel or Submit -->
