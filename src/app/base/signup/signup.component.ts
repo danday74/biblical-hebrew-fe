@@ -26,7 +26,7 @@ export class SignupComponent extends DestroyerComponent implements OnInit, OnDes
   loginError: string
   loginInProgress = false
   signUpInProgress: any
-  siteKey = config.recaptcha.siteKey
+  siteKey = atob(config.recaptcha.siteKey)
 
   private passwordConfirmation = ''
 
