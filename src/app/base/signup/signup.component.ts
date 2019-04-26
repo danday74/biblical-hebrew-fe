@@ -53,7 +53,7 @@ export class SignupComponent extends DestroyerComponent implements OnInit, OnDes
       select(selectSignUpInProgress)
     ).subscribe(signUpInProgress => {
       this.signUpInProgress = signUpInProgress
-      this.dirForUsername = getDir(signUpInProgress.username)
+      this.dirForUsername = getDir(this.signUpInProgress.username)
     })
 
     // handle failed login

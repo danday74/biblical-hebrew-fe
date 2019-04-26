@@ -1,0 +1,23 @@
+$botEyesWidth: 200;
+
+.bot-eyes {
+  width: $botEyesWidth + unquote('px');
+  position: absolute;
+  left: 50%;
+  margin-left: -$botEyesWidth / 2 + unquote('px');
+  margin-top: -149px;
+
+  .bot-eye {
+    cursor: pointer;
+  }
+
+  .bot-eye.left {
+    position: relative;
+    right: 28px;
+  }
+
+  .bot-eye.right {
+    position: relative;
+    left: 27px;
+  }
+}

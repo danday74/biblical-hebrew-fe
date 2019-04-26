@@ -22,6 +22,7 @@ import { NavbarComponent } from './base/navbar/navbar.component'
 import { OutletWrapperComponent } from './base/outlet-wrapper/outlet-wrapper.component'
 import { AnimateInOutWrapperComponent } from './base/shared/animate-in-out-wrapper/animate-in-out-wrapper.component'
 import { PasswordComponent } from './base/shared/password/password.component'
+import { BotEyesComponent } from './base/signup/bot-eyes/bot-eyes.component'
 import { SignupComponent } from './base/signup/signup.component'
 import { AuthInterceptor } from './interceptors/auth-interceptor'
 import { metaReducers, reducers } from './reducers'
@@ -33,6 +34,7 @@ import { DestroyerComponent } from './utils/destroyer.component'
     AnimateInOutWrapperComponent,
     BlankBoardComponent,
     BlankComponent,
+    BotEyesComponent,
     DestroyerComponent,
     LoginComponent,
     NavbarComponent,

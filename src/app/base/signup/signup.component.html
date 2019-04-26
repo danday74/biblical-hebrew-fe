@@ -13,12 +13,8 @@
       <div class="signup">
 
         <!-- Signup image -->
-        <ng-container *ngIf="captchaSuccess">
-          <img alt="Man holding a key" class="signup-image with-border animated fadeIn" src="assets/images/man-key/man-key-tiny.png">
-        </ng-container>
-        <ng-container *ngIf="!captchaSuccess">
-          <img alt="No bots" class="signup-image" src="assets/images/bot/bot-tiny.png">
-        </ng-container>
+        <img alt="No bots" class="signup-image" src="assets/images/bot/bot-no-eyes-tiny.png">
+        <app-bot-eyes [captchaSuccess]="captchaSuccess"></app-bot-eyes>
 
         <form #signUpForm="ngForm" (ngSubmit)="onSubmit()" (keydown.enter)="$event.preventDefault()" novalidate>
 

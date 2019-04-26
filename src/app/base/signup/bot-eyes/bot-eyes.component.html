@@ -1,0 +1,16 @@
+<div class="bot-eyes">
+  <ng-container *ngTemplateOutlet="templateRef; context: {leftEyeSrc: leftEyeSrc, rightEyeSrc: rightEyeSrc}"></ng-container>
+</div>
+
+<div class="bot-eyes">
+  <ng-container *ngIf="captchaSuccess">
+    <span class="animated fadeIn slower">
+      <ng-container *ngTemplateOutlet="templateRef; context: {leftEyeSrc: leftEyeOrangeSrc, rightEyeSrc: rightEyeOrangeSrc}"></ng-container>
+    </span>
+  </ng-container>
+</div>
+
+<ng-template #templateRef let-leftEyeSrc="leftEyeSrc" let-rightEyeSrc="rightEyeSrc">
+  <img alt="Bot eye left" class="bot-eye left animated" [ngClass]="{tada: eyes.left.out}" (click)="onLeftEyeClick()" [src]="leftEyeSrc">
+  <img alt="Bot eye right" class="bot-eye right animated" [ngClass]="{tada: eyes.right.out}" (click)="onRightEyeClick()" [src]="rightEyeSrc">
+</ng-template>
