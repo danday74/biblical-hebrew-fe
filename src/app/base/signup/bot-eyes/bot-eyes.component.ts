@@ -2,6 +2,8 @@ import { Component, Input, OnChanges, OnDestroy } from '@angular/core'
 import * as $ from 'jquery'
 import { memoize } from 'lodash'
 
+// based on http://jsfiddle.net/opherv/ddGHz
+
 @Component({
   selector: 'app-bot-eyes',
   templateUrl: './bot-eyes.component.html',
