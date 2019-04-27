@@ -20,7 +20,7 @@
           <div class="form-row">
             <div class="col-8 mb-3 offset-2">
               <div class="text-right">
-                <span class="fake-link" [ngClass]="{invisible: !bhUsername.pristine || !user.username}" (click)="onForget()">
+                <span class="fake-link small" [ngClass]="{invisible: !bhUsername.pristine || !user.username}" (click)="onForget()">
                   forget {{ user.username }}
                 </span>
               </div>
@@ -80,7 +80,7 @@
     <!-- Enable password manager -->
     <ng-container *ngIf="webkitAutofillUsed">
       <div class="enable-password-manager">
-        <a href=".">enable password manager</a>
+        <a class="small" href=".">enable password manager</a>
       </div>
     </ng-container>
 

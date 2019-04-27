@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnDestroy } from '@angular/core'
+import { Component, HostListener, Input, OnChanges } from '@angular/core'
 import * as $ from 'jquery'
 import { memoize } from 'lodash'
 
@@ -10,7 +10,7 @@ import { memoize } from 'lodash'
   styleUrls: ['./bot-eyes.component.scss']
 })
 
-export class BotEyesComponent implements OnChanges, OnDestroy {
+export class BotEyesComponent implements OnChanges {
 
   @Input() captchaSuccess = false
 
@@ -44,10 +44,6 @@ export class BotEyesComponent implements OnChanges, OnDestroy {
     setTimeout(() => {
       this.initBotEyes()
     })
-  }
-
-  ngOnDestroy() {
-    $(document).off('mousemove')
   }
 
   get leftEyeSrc() {
@@ -86,37 +82,7 @@ export class BotEyesComponent implements OnChanges, OnDestroy {
     this.onEyeClick(this.eyes.right)
   }
 
-  private onEyeClick(eye) {
-    if (!eye.out) {
-      eye.out = true
-      eye.clickCount++
-      setTimeout(() => {
-        if (eye.clickCount < this.maxEyeClickCount) eye.out = false
-      }, this.eyeOutTimer)
-    }
-  }
-
-  private reset() {
-    this.eyes.left.clickCount = 0
-    this.eyes.right.clickCount = 0
-    this.eyes.left.out = false
-    this.eyes.right.out = false
-  }
-
-  private initBotEyes() {
-    this.eyes.left.el = $('.bot-eye.left')
-    this.eyes.left.center =
-      [this.eyes.left.el.offset().left + this.eyes.left.el.width() / 2, this.eyes.left.el.offset().top + this.eyes.left.el.height() / 2]
-
-    this.eyes.right.el = $('.bot-eye.right')
-    this.eyes.right.center =
-      [this.eyes.right.el.offset().left + this.eyes.right.el.width() / 2, this.eyes.right.el.offset().top + this.eyes.right.el.height() / 2]
-
-    $(document).off('mousemove')
-    $(document).on('mousemove', this.onMouseMove)
-    this.onMouseMove()
-  }
-
+  @HostListener('document:mousemove', ['$event'])
   private onMouseMove(evt = null) {
     this.mouseX = evt ? evt.pageX : this.mouseX
     this.mouseY = evt ? evt.pageY : this.mouseY
@@ -128,5 +94,39 @@ export class BotEyesComponent implements OnChanges, OnDestroy {
 
     this.eyes.left.el.css({transform: strEyeLeftAngle})
     this.eyes.right.el.css({transform: strEyeRightAngle})
+  }
+
+  @HostListener('window:resize')
+  private onResize() {
+    this.initBotEyes()
+  }
+
+  private onEyeClick(eye) {
+    if (!eye.out) {
+      eye.out = true
+      eye.clickCount++
+      setTimeout(() => {
+        if (eye.clickCount < this.maxEyeClickCount) eye.out = false
+      }, this.eyeOutTimer)
+    }
+  }
+
+  private initBotEyes() {
+    this.eyes.left.el = $('.bot-eye.left')
+    this.eyes.left.center =
+      [this.eyes.left.el.offset().left + this.eyes.left.el.width() / 2, this.eyes.left.el.offset().top + this.eyes.left.el.height() / 2]
+
+    this.eyes.right.el = $('.bot-eye.right')
+    this.eyes.right.center =
+      [this.eyes.right.el.offset().left + this.eyes.right.el.width() / 2, this.eyes.right.el.offset().top + this.eyes.right.el.height() / 2]
+
+    this.onMouseMove()
+  }
+
+  private reset() {
+    this.eyes.left.clickCount = 0
+    this.eyes.right.clickCount = 0
+    this.eyes.left.out = false
+    this.eyes.right.out = false
   }
 }

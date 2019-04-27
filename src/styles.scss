@@ -23,6 +23,10 @@ button.btn {
   min-width: 80px;
 }
 
+input[type=checkbox] {
+  transform: scale(1.5);
+}
+
 .success-tick, .failure-cross {
   font-size: 1.5em;
 }
@@ -41,7 +45,10 @@ button.btn {
 }
 
 a, .fake-link {
-  font-size: 0.9em;
+  &.small {
+    font-size: 0.9em;
+  }
+
   color: $bhBlue;
 
   &:hover {
@@ -59,4 +66,14 @@ a, .fake-link {
 
 .rtl {
   direction: rtl;
+}
+
+.table-striped > tbody > tr:nth-child(odd) > td,
+.table-striped > tbody > tr:nth-child(odd) > th {
+  color: #6E6E6E;
+}
+
+.table-striped > tbody > tr:nth-child(even) > td,
+.table-striped > tbody > tr:nth-child(even) > th {
+  color: $lightestGreyOnWhite;
 }

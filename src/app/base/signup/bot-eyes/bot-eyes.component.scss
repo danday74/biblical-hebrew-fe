@@ -1,10 +1,7 @@
-$botEyesWidth: 200;
-
 .bot-eyes {
-  width: $botEyesWidth + unquote('px');
+  width: 200px;
   position: absolute;
-  left: 50%;
-  margin-left: -$botEyesWidth / 2 + unquote('px');
+  margin-left: 75px;
   margin-top: -149px;
 
   .bot-eye {

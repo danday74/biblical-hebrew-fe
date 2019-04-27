@@ -16,13 +16,16 @@ import { UsersEffects } from './actions/users/users.effects'
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
 import { BlankComponent } from './base/blank/blank.component'
+import { CookiePolicyComponent } from './base/cookie-policy/cookie-policy.component'
 import { BlankBoardComponent } from './base/login/blank-board/blank-board.component'
 import { LoginComponent } from './base/login/login.component'
 import { NavbarComponent } from './base/navbar/navbar.component'
 import { OutletWrapperComponent } from './base/outlet-wrapper/outlet-wrapper.component'
+import { OverlayComponent } from './base/overlay/overlay.component'
 import { AnimateInOutWrapperComponent } from './base/shared/animate-in-out-wrapper/animate-in-out-wrapper.component'
 import { PasswordComponent } from './base/shared/password/password.component'
 import { BotEyesComponent } from './base/signup/bot-eyes/bot-eyes.component'
+import { CookiePolicyCheckboxComponent } from './base/signup/cookie-policy-checkbox/cookie-policy-checkbox.component'
 import { SignupComponent } from './base/signup/signup.component'
 import { AuthInterceptor } from './interceptors/auth-interceptor'
 import { metaReducers, reducers } from './reducers'
@@ -35,10 +38,13 @@ import { DestroyerComponent } from './utils/destroyer.component'
     BlankBoardComponent,
     BlankComponent,
     BotEyesComponent,
+    CookiePolicyCheckboxComponent,
+    CookiePolicyComponent,
     DestroyerComponent,
     LoginComponent,
     NavbarComponent,
     OutletWrapperComponent,
+    OverlayComponent,
     PasswordComponent,
     SignupComponent
   ],

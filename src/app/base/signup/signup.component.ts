@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { CreateUserAction, SetSignUpInProgressAction, UsersActions, UsersActionTypes } from '@app/actions/users/users.actions'
 import { selectSignUpInProgress, selectUser } from '@app/actions/users/users.selectors'
+import { CookiePolicyCheckboxComponent } from '@app/base/signup/cookie-policy-checkbox/cookie-policy-checkbox.component'
 import { State } from '@app/reducers'
 import { UserService } from '@app/services/user.service'
 import { DestroyerComponent } from '@app/utils/destroyer.component'
@@ -17,6 +18,7 @@ import config from 'src/config'
 
 export class SignupComponent extends DestroyerComponent implements OnInit, OnDestroy {
 
+  @ViewChild('cookiePolicyCheckboxComponent') cookiePolicyCheckboxComponent: CookiePolicyCheckboxComponent
   @ViewChild('submitButton') submitButton: ElementRef
 
   failedToCreateUserText = 'Failed to create user'
@@ -27,6 +29,7 @@ export class SignupComponent extends DestroyerComponent implements OnInit, OnDes
   dirForUsername = 'ltr'
   loginError: string
   loginInProgress = false
+  showCookiePolicyOverlay = false
   signUpInProgress: any
   siteKey = atob(config.recaptcha.siteKey)
 
@@ -81,8 +84,13 @@ export class SignupComponent extends DestroyerComponent implements OnInit, OnDes
     this.store.dispatch(new SetSignUpInProgressAction(null))
   }
 
-  onEnter() {
-    this.submitButton.nativeElement.click()
+  onEnter(evt) {
+    const name = evt.target.getAttribute('name')
+    if (name === 'bhPassword') {
+      this.cookiePolicyCheckboxComponent.cookiePolicyCheckbox.nativeElement.focus()
+    } else if (name === 'accept') {
+      this.submitButton.nativeElement.click()
+    }
   }
 
   onSubmit() {
@@ -91,6 +99,10 @@ export class SignupComponent extends DestroyerComponent implements OnInit, OnDes
     } else {
       this.doLogin()
     }
+  }
+
+  onToggleShowCookiePolicyOverlay() {
+    this.showCookiePolicyOverlay = !this.showCookiePolicyOverlay
   }
 
   private doLogin() {

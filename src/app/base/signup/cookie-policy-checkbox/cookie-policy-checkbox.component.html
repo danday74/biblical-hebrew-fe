@@ -1,0 +1,5 @@
+<label>
+  <input #cookiePolicyCheckbox type="checkbox" name="accept" required="required" [ngModel]="accept" (keyup.enter)="onEnter($event)">
+  <span class="accept-cookie-policy-text accept-cookie-policy">I accept the&nbsp;</span>
+</label>
+<span class="fake-link accept-cookie-policy" (click)="onCookiePolicyClick()">cookie policy</span>

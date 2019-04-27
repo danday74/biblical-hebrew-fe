@@ -1,69 +1,84 @@
+<ng-container *ngIf="showCookiePolicyOverlay">
+  <app-overlay>
+    <app-cookie-policy (back)="onToggleShowCookiePolicyOverlay()"></app-cookie-policy>
+  </app-overlay>
+</ng-container>
+
 <ng-container *ngIf="signUpInProgress">
-  <app-animate-in-out-wrapper [animateNow]="animateLoginNow">
-    <div class="signup-wrapper">
+  <div [ngClass]="{invisible: showCookiePolicyOverlay}"> <!-- not needed but simplifies use of Axe accessibility -->
+    <app-animate-in-out-wrapper [animateNow]="animateLoginNow">
+      <div class="signup-wrapper">
 
-      <!-- Welcome -->
-      <ng-container *ngIf="dirForUsername === 'ltr'">
-        <h4 class="welcome">Welcome {{ signUpInProgress.username }}</h4>
-      </ng-container>
-      <ng-container *ngIf="dirForUsername === 'rtl'">
-        <h4 class="welcome rtl"><span>שָלוֹם</span>&nbsp;<span>{{ signUpInProgress.username }}</span></h4>
-      </ng-container>
+        <!-- Welcome -->
+        <ng-container *ngIf="dirForUsername === 'ltr'">
+          <h4 class="welcome">Welcome {{ signUpInProgress.username }}</h4>
+        </ng-container>
+        <ng-container *ngIf="dirForUsername === 'rtl'">
+          <h4 class="welcome rtl"><span>שָלוֹם</span>&nbsp;<span>{{ signUpInProgress.username }}</span></h4>
+        </ng-container>
 
-      <div class="signup">
+        <div class="signup">
 
-        <!-- Signup image -->
-        <img alt="No bots" class="signup-image" src="assets/images/bot/bot-no-eyes-tiny.png">
-        <app-bot-eyes [captchaSuccess]="captchaSuccess"></app-bot-eyes>
+          <!-- Signup image -->
+          <img alt="No bots" class="signup-image" src="assets/images/bot/bot-no-eyes-tiny.png">
+          <app-bot-eyes [captchaSuccess]="captchaSuccess"></app-bot-eyes>
 
-        <form #signUpForm="ngForm" (ngSubmit)="onSubmit()" (keydown.enter)="$event.preventDefault()" novalidate>
+          <form #signUpForm="ngForm" (ngSubmit)="onSubmit()" (keydown.enter)="$event.preventDefault()" novalidate>
 
-          <!-- Captcha -->
-          <div class="form-row">
-            <div class="captcha-wrapper">
-              <re-captcha type="image" [siteKey]="siteKey" (resolved)="onCaptchaResolved($event)"></re-captcha>
+            <!-- Captcha -->
+            <div class="form-row">
+              <div class="captcha-wrapper">
+                <re-captcha type="image" [siteKey]="siteKey" (resolved)="onCaptchaResolved($event)"></re-captcha>
+              </div>
             </div>
+
+            <!-- Hidden username -->
+            <!--suppress HtmlFormInputWithoutLabel -->
+            <input name="bhUsername" [ngModel]="signUpInProgress.username" readonly>
+
+            <!-- Password -->
+            <!--suppress XmlInvalidId -->
+            <label class="password-label" for="password">
+              <span *ngIf="!loginError">Confirm password</span>
+              <span *ngIf="loginError" class="failure">{{ loginError }}</span>
+            </label>
+            <app-password [forceFailure]="loginError === incorrectPasswordText" [hideFeedback]="loginError === failedToCreateUserText" [autocomplete]="true"
+                          (enterKeyPress)="onEnter($event)" (passwordChange)="onPasswordChange($event)"></app-password>
+
+            <!-- Cookies checkbox -->
+            <div class="cookie-policy-checkbox">
+              <app-cookie-policy-checkbox #cookiePolicyCheckboxComponent (cookiePolicyClick)="onToggleShowCookiePolicyOverlay()"
+                                          (enterKeyPress)="onEnter($event)"></app-cookie-policy-checkbox>
+            </div>
+
+            <!-- Cancel or Submit -->
+            <div class="form-row">
+              <div class="button-wrapper">
+                <button type="button" class="btn btn-secondary mr-1" [disabled]="loginInProgress" (click)="onCancel()"> <!-- type button is needed -->
+                  <span>Cancel</span>
+                </button>
+                <button #submitButton type="submit" class="btn btn-primary ml-1"
+                        [disabled]="!signUpForm.valid || loginError || loginInProgress || captchaSuccess !== true">
+                  <span>Login</span>
+                </button>
+              </div>
+            </div>
+
+          </form>
+
+          <!-- Small print -->
+          <div class="row">
+            <div class="col-8 mb-3 offset-2">
+              <div class="small-print">
+                <div><strong class="small-print-strong">Prove you&apos;re not a bot and confirm your password</strong> to create an account.</div>
+                <div>You may then login to start your Biblical Hebrew adventure.</div>
+              </div>
+            </div>
+            <div class="col-2 mb-3">&nbsp;</div>
           </div>
 
-          <!-- Hidden username -->
-          <!--suppress HtmlFormInputWithoutLabel -->
-          <input name="bhUsername" [ngModel]="signUpInProgress.username" readonly>
-
-          <!-- Password -->
-          <!--suppress XmlInvalidId -->
-          <label class="password-label" for="password">
-            <span *ngIf="!loginError">Confirm password</span>
-            <span *ngIf="loginError" class="failure">{{ loginError }}</span>
-          </label>
-          <app-password [forceFailure]="loginError === incorrectPasswordText" [hideFeedback]="loginError === failedToCreateUserText" [autocomplete]="true"
-                        (enterKeyPress)="onEnter()" (passwordChange)="onPasswordChange($event)"></app-password>
-
-          <!-- Cancel or Submit -->
-          <div class="form-row">
-            <div class="button-wrapper">
-              <button type="button" class="btn btn-secondary mr-1" [disabled]="loginInProgress" (click)="onCancel()"> <!-- type button is needed -->
-                <span>Cancel</span>
-              </button>
-              <button #submitButton type="submit" class="btn btn-primary ml-1"
-                      [disabled]="!signUpForm.valid || loginError || loginInProgress || captchaSuccess !== true">
-                <span>Login</span>
-              </button>
-            </div>
-          </div>
-        </form>
-
-        <!-- Small print -->
-        <div class="row">
-          <div class="col-8 mb-3 offset-2">
-            <div class="small-print">
-              <div><strong class="small-print-strong">Prove you&apos;re not a bot and confirm your password</strong> to create an account.</div>
-              <div>You may then login to start your Biblical Hebrew adventure.</div>
-            </div>
-          </div>
-          <div class="col-2 mb-3">&nbsp;</div>
         </div>
-
       </div>
-    </div>
-  </app-animate-in-out-wrapper>
+    </app-animate-in-out-wrapper>
+  </div>
 </ng-container>
