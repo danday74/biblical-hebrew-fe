@@ -53,7 +53,8 @@ export class SignupComponent extends DestroyerComponent implements OnInit, OnDes
     // defensive wrapper and stores credentials
     this.store.pipe(
       takeUntil(this.unsubscribe$),
-      select(selectSignUpInProgress)
+      select(selectSignUpInProgress),
+      filter(signUpInProgress => !!signUpInProgress)
     ).subscribe(signUpInProgress => {
       this.signUpInProgress = signUpInProgress
       this.dirForUsername = getDir(this.signUpInProgress.username)
