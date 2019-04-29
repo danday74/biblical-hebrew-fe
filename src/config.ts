@@ -1,4 +1,4 @@
-import app from '../../package.json'
+import app from '../package.json'
 
 const config = {
   loginAnimations: [

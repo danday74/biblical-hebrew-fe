@@ -1,5 +1,6 @@
 {
   "name": "biblical-hebrew-fe",
+  "label": "Biblical Hebrew",
   "version": "1.0.0",
   "description": "An online tool for learning Biblical Hebrew vocabulary",
   "author": "danday74",

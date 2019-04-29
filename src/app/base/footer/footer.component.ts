@@ -10,11 +10,11 @@ import config from '../../../config'
 
 export class FooterComponent implements OnInit {
 
-  version: string
+  app: any
   year: number
 
   ngOnInit() {
-    this.version = config.app.version
+    this.app = config.app
     this.year = moment().year()
   }
 }
