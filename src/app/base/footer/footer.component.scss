@@ -2,10 +2,23 @@
 
 .footer {
   border-top: 1px solid #CCC;
-  padding: 0 15px 1px;
-  background-color: #EEE;
-  color: #555;
+  padding: 2px 15px 3px;
+  background-color: #F7F7F7; // lightest grey on background
+  color: #717171;
   font-size: 0.8em;
   min-width: $bodyMinWidth;
   z-index: 9999;
+}
+
+.copyright {
+}
+
+.call-us {
+  a {
+    font-weight: bold;
+  }
+}
+
+.version {
+  margin-left: 25px;
 }
