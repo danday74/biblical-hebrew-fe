@@ -33,7 +33,7 @@
         <div class="form-row">
           <div class="col-8 mb-3 offset-2">
             <div class="input-group">
-              <input #usernameInput class="form-control" spellcheck="false" autofocus [dir]="dirForUsername"
+              <input #usernameInput class="form-control gentle-shade" spellcheck="false" autofocus [dir]="dirForUsername"
                      name="bhUsername" #bhUsername="ngModel" placeholder="Username" aria-label="Username"
                      minlength="6" maxlength="15" required="required" [pattern]="pattern"
                      [ngModel]="user.username" (ngModelChange)="onUsernameChangeNoDebounce($event)" (keyup.enter)="onEnter($event)">

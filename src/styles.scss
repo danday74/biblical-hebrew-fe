@@ -23,6 +23,10 @@ button.btn {
   min-width: 80px;
 }
 
+input.gentle-shade {
+  background-color: lighten(#E8F0FE, 3%) !important;
+}
+
 input[type=checkbox] {
   transform: scale(1.5);
 }
