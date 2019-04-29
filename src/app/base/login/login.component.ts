@@ -67,10 +67,8 @@ export class LoginComponent extends DestroyerComponent implements OnInit, OnDest
       select(selectLastUserLoggedIn),
       take(1)
     ).subscribe((lastUserLoggedIn: any) => {
-      if (lastUserLoggedIn) {
-        this.onUsernameChange(lastUserLoggedIn.username)
-        setTimeout(() => { this.usernameInput.nativeElement.focus() }, 500)
-      }
+      if (lastUserLoggedIn) this.onUsernameChange(lastUserLoggedIn.username)
+      setTimeout(() => { this.usernameInput.nativeElement.focus() }, 500)
     })
 
     // animate on login
