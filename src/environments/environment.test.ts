@@ -2,12 +2,15 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import pkg from '../../package.json'
+
 export const environment = {
-  production: false,
-  httpPhp: 'http://localhost:5000/api',
-  wsPhp: 'ws://localhost:4002',
   debug: null,
-  googleAnalyticsId: null
+  googleAnalyticsId: null,
+  httpPhp: 'http://localhost:5000/api',
+  production: false,
+  version: pkg.version,
+  wsPhp: 'ws://localhost:4002'
 }
 
 /*

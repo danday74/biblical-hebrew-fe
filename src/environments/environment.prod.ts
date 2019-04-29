@@ -1,8 +1,10 @@
-// noinspection JSUnusedGlobalSymbols
+import pkg from '../../package.json'
+
 export const environment = {
-  production: true,
-  httpPhp: 'http://localhost:4000/api',
-  wsPhp: 'ws://localhost:4002',
   debug: null,
-  googleAnalyticsId: 'UA-139209087-2'
+  googleAnalyticsId: 'UA-139209087-2',
+  httpPhp: 'http://localhost:4000/api',
+  production: true,
+  version: pkg.version,
+  wsPhp: 'ws://localhost:4002'
 }

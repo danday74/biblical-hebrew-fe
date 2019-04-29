@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'
-import * as moment from 'moment'
+import { environment } from '@environments/environment'
+import moment from 'moment'
 
 @Component({
   selector: 'app-footer',
@@ -8,9 +9,12 @@ import * as moment from 'moment'
 })
 
 export class FooterComponent implements OnInit {
+
+  version: string
   year: number
 
   ngOnInit() {
+    this.version = environment.version
     this.year = moment().year()
   }
 }
