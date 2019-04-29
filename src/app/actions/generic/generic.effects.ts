@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
+import { customLog } from '@app/utils/rxjs-custom-operators'
 import { getActionHttpPath, getFailedAction, getLoadedAction } from '@app/utils/utils'
 import { Actions, Effect } from '@ngrx/effects'
 import * as Debug from 'debug'
@@ -17,6 +18,7 @@ export class GenericEffects {
   @Effect()
   requested$ = this.actions$.pipe(
     filter(action => action.type.endsWith('Requested')),
+    customLog(debug),
     map(action => ({
       action,
       path: getActionHttpPath(action),

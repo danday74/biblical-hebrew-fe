@@ -17,6 +17,7 @@ import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
 import { BlankComponent } from './base/blank/blank.component'
 import { CookiePolicyComponent } from './base/cookie-policy/cookie-policy.component'
+import { FooterComponent } from './base/footer/footer.component'
 import { BlankBoardComponent } from './base/login/blank-board/blank-board.component'
 import { LoginComponent } from './base/login/login.component'
 import { NavbarComponent } from './base/navbar/navbar.component'
@@ -27,6 +28,7 @@ import { PasswordComponent } from './base/shared/password/password.component'
 import { BotEyesComponent } from './base/signup/bot-eyes/bot-eyes.component'
 import { CookiePolicyCheckboxComponent } from './base/signup/cookie-policy-checkbox/cookie-policy-checkbox.component'
 import { SignupComponent } from './base/signup/signup.component'
+import { GaClickEventTrackerDirective } from './directives/ga-click-event-tracker.directive'
 import { AuthInterceptor } from './interceptors/auth-interceptor'
 import { metaReducers, reducers } from './reducers'
 import { DestroyerComponent } from './utils/destroyer.component'
@@ -41,6 +43,8 @@ import { DestroyerComponent } from './utils/destroyer.component'
     CookiePolicyCheckboxComponent,
     CookiePolicyComponent,
     DestroyerComponent,
+    FooterComponent,
+    GaClickEventTrackerDirective,
     LoginComponent,
     NavbarComponent,
     OutletWrapperComponent,

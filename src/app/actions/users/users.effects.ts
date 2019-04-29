@@ -16,6 +16,7 @@ import {
   WhoAmIAction,
   WhoAmIFailedAction
 } from '@app/actions/users/users.actions'
+import { GoogleAnalyticsService } from '@app/services/google-analytics.service'
 import { StorageService } from '@app/services/storage.service'
 import { UserService } from '@app/services/user.service'
 import { Actions, Effect, ofType } from '@ngrx/effects'
@@ -35,7 +36,10 @@ export class UsersEffects {
       this.userService.login(action.payload)
     ),
     map(user => {
-      if (user) return new LoginSuccessAction(user)
+      if (user) {
+        this.googleAnalyticsService.sendEvent('system', 'login', user.username)
+        return new LoginSuccessAction(user)
+      }
       return new LoginFailedAction()
     })
   )
@@ -102,7 +106,10 @@ export class UsersEffects {
       this.userService.create(action.payload)
     ),
     map(user => {
-      if (user) return new LoginSuccessAction(user)
+      if (user) {
+        this.googleAnalyticsService.sendEvent('system', 'signup', user.username)
+        return new LoginSuccessAction(user)
+      }
       return new LoginFailedAction()
     })
   )
@@ -114,5 +121,6 @@ export class UsersEffects {
     map(() => new ResetStoreAction())
   )
 
-  constructor(private actions$: Actions, private userService: UserService, private storageService: StorageService, private router: Router) {}
+  constructor(private actions$: Actions, private googleAnalyticsService: GoogleAnalyticsService, private router: Router,
+              private storageService: StorageService, private userService: UserService) {}
 }

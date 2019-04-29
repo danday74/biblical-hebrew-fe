@@ -41,6 +41,7 @@
     "core-js": "^2.5.4",
     "debug": "^4.1.1",
     "jquery": "^3.4.0",
+    "moment": "^2.24.0",
     "ng-recaptcha": "^4.2.1",
     "popper.js": "^1.15.0",
     "replace-last": "^1.2.6",

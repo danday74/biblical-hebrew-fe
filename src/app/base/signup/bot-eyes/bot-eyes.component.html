@@ -11,6 +11,8 @@
 </div>
 
 <ng-template #templateRef let-leftEyeSrc="leftEyeSrc" let-rightEyeSrc="rightEyeSrc">
-  <img alt="Bot eye left" class="bot-eye left animated" [ngClass]="{tada: eyes.left.out}" (click)="onLeftEyeClick()" [src]="leftEyeSrc">
-  <img alt="Bot eye right" class="bot-eye right animated" [ngClass]="{tada: eyes.right.out}" (click)="onRightEyeClick()" [src]="rightEyeSrc">
+  <img [appGaClickEventTracker]="'bot-eye'" alt="Bot eye left" class="bot-eye left animated"
+       [ngClass]="{tada: eyes.left.out}" (click)="onLeftEyeClick()" [src]="leftEyeSrc">
+  <img [appGaClickEventTracker]="'bot-eye'" alt="Bot eye right" class="bot-eye right animated"
+       [ngClass]="{tada: eyes.right.out}" (click)="onRightEyeClick()" [src]="rightEyeSrc">
 </ng-template>

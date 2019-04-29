@@ -1,0 +1,10 @@
+@import '../../globals';
+
+.footer {
+  border-top: 1px solid #CCC;
+  padding: 0 15px 1px;
+  background-color: #EEE;
+  color: #555;
+  font-size: 0.8em;
+  min-width: $bodyMinWidth;
+}

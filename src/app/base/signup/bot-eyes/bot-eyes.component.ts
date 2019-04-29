@@ -87,13 +87,14 @@ export class BotEyesComponent implements OnChanges {
     this.mouseX = evt ? evt.pageX : this.mouseX
     this.mouseY = evt ? evt.pageY : this.mouseY
 
-    const eyeLeftAngle = (Math.atan2(this.mouseX - this.eyes.left.center[0], -(this.mouseY - this.eyes.left.center[1])) * (180 / Math.PI)) + 45
-    const strEyeLeftAngle = `rotate(${eyeLeftAngle}deg)`
-    const eyeRightAngle = (Math.atan2(this.mouseX - this.eyes.right.center[0], -(this.mouseY - this.eyes.right.center[1])) * (180 / Math.PI)) + 45
-    const strEyeRightAngle = `rotate(${eyeRightAngle}deg)`
-
-    this.eyes.left.el.css({transform: strEyeLeftAngle})
-    this.eyes.right.el.css({transform: strEyeRightAngle})
+    if (this.eyes.left.center && this.eyes.right.center) {
+      const eyeLeftAngle = (Math.atan2(this.mouseX - this.eyes.left.center[0], -(this.mouseY - this.eyes.left.center[1])) * (180 / Math.PI)) + 45
+      const strEyeLeftAngle = `rotate(${eyeLeftAngle}deg)`
+      const eyeRightAngle = (Math.atan2(this.mouseX - this.eyes.right.center[0], -(this.mouseY - this.eyes.right.center[1])) * (180 / Math.PI)) + 45
+      const strEyeRightAngle = `rotate(${eyeRightAngle}deg)`
+      this.eyes.left.el.css({transform: strEyeLeftAngle})
+      this.eyes.right.el.css({transform: strEyeRightAngle})
+    }
   }
 
   @HostListener('window:resize')

@@ -14,7 +14,7 @@ html.supported .unsupported {
 }
 
 body {
-  min-width: 900px;
+  min-width: $bodyMinWidth;
   color: $lightestGreyOnWhite;
   text-rendering: optimizeLegibility;
 }
