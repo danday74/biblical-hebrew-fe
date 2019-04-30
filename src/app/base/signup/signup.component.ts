@@ -25,6 +25,7 @@ export class SignupComponent extends DestroyerComponent implements OnInit, OnDes
   incorrectPasswordText = 'Incorrect password'
 
   animateLoginNow = false
+  app: any
   captchaSuccess = false
   dirForUsername = 'ltr'
   loginError: string
@@ -40,6 +41,8 @@ export class SignupComponent extends DestroyerComponent implements OnInit, OnDes
   }
 
   ngOnInit() {
+
+    this.app = config.app
 
     // animate on login
     this.store.pipe(

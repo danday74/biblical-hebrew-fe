@@ -19,6 +19,7 @@ import { ActionsSubject, select, Store } from '@ngrx/store'
 import * as $ from 'jquery'
 import { cloneDeep, debounce } from 'lodash'
 import { filter, take, takeUntil } from 'rxjs/operators'
+import config from '../../../config'
 
 @Component({
   selector: 'app-login',
@@ -45,6 +46,7 @@ export class LoginComponent extends DestroyerComponent implements OnInit, OnDest
   usernameUpdateInProgress = false
 
   animateLoginNow = false
+  app: any
   badCredentials = false
   boardText1 = ''
   boardText2 = ''
@@ -61,6 +63,8 @@ export class LoginComponent extends DestroyerComponent implements OnInit, OnDest
   }
 
   ngOnInit() {
+
+    this.app = config.app
 
     // initialise username and focus
     this.store.pipe(
