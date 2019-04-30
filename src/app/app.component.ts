@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { State } from '@app/reducers'
 import { GoogleAnalyticsService } from '@app/services/google-analytics.service'
+import { TitleService } from '@app/services/title/title.service'
 import { getBrowser } from '@app/utils/utils'
 import { select, Store } from '@ngrx/store'
 import * as $ from 'jquery'
@@ -23,12 +24,13 @@ export class AppComponent implements OnInit {
   public user: any
   public whoAmICheck: boolean
 
-  constructor(private googleAnalyticsService: GoogleAnalyticsService, private store: Store<State>) {}
+  constructor(private googleAnalyticsService: GoogleAnalyticsService, private store: Store<State>, private titleService: TitleService) {}
 
   ngOnInit() {
 
     this.manageBrowserSupport()
     this.googleAnalyticsService.loadGoogleAnalytics()
+    this.titleService.initTitleService()
 
     // whoami
     this.store.pipe(

@@ -3,6 +3,7 @@ import { NavigationEnd, Router } from '@angular/router'
 import { ScriptService } from '@app/services/script.service'
 import { environment } from '@environments/environment'
 import * as Debug from 'debug'
+import config from '../../config'
 
 const debug = Debug('bh:google-analytics')
 
@@ -10,9 +11,10 @@ const debug = Debug('bh:google-analytics')
 
 export class GoogleAnalyticsService {
 
+  private static blacklistedUrls = config.blacklistedUrls
+
   private lastUrl: string = null
   private tracker: any
-  private untrackedUrls = ['/', '/blank']
 
   constructor(private router: Router, private scriptService: ScriptService) {}
 
@@ -63,7 +65,7 @@ export class GoogleAnalyticsService {
     this.router.events.subscribe(evt => {
       if (evt instanceof NavigationEnd) {
         const url = evt.urlAfterRedirects
-        if (!this.untrackedUrls.includes(url)) {
+        if (!GoogleAnalyticsService.blacklistedUrls.includes(url)) {
           if (url !== this.lastUrl) {
             this.lastUrl = url
             this.sendPageView(url)
