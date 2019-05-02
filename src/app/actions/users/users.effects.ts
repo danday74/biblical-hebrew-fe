@@ -16,9 +16,9 @@ import {
   WhoAmIAction,
   WhoAmIFailedAction
 } from '@app/actions/users/users.actions'
-import { GoogleAnalyticsService } from '@app/services/google-analytics.service'
-import { StorageService } from '@app/services/storage.service'
-import { UserService } from '@app/services/user.service'
+import { GoogleAnalyticsService } from '@app/services/google-analytics/google-analytics.service'
+import { StorageService } from '@app/services/storage/storage.service'
+import { UserService } from '@app/services/user/user.service'
 import { Actions, Effect, ofType } from '@ngrx/effects'
 import { fromPromise } from 'rxjs/internal-compatibility'
 import { delay, map, mapTo, mergeMap, tap } from 'rxjs/operators'

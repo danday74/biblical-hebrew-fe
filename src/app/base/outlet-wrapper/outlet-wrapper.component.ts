@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { InitOnLoginAction } from '@app/actions/init/init.actions'
 import { State } from '@app/reducers'
-import { UserService } from '@app/services/user.service'
+import { UserService } from '@app/services/user/user.service'
 import { Store } from '@ngrx/store'
 import * as Debug from 'debug'
 

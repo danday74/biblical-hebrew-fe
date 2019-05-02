@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
-import { CustomAction } from '@app/actions/custom-action'
-import { environment } from '@environments/environment'
+import { CustomAction } from '../../actions/custom-action'
+import { environment } from '../../../environments/environment'
 import { Observable, Subject } from 'rxjs'
 import io from 'socket.io-client'
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { State } from '@app/reducers'
-import { GoogleAnalyticsService } from '@app/services/google-analytics.service'
+import { GoogleAnalyticsService } from '@app/services/google-analytics/google-analytics.service'
 import { TitleService } from '@app/services/title/title.service'
 import { getBrowser } from '@app/utils/utils'
 import { select, Store } from '@ngrx/store'

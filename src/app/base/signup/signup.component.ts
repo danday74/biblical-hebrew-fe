@@ -3,7 +3,7 @@ import { CreateUserAction, SetSignUpInProgressAction, UsersActions, UsersActionT
 import { selectSignUpInProgress, selectUser } from '@app/actions/users/users.selectors'
 import { CookiePolicyCheckboxComponent } from '@app/base/signup/cookie-policy-checkbox/cookie-policy-checkbox.component'
 import { State } from '@app/reducers'
-import { UserService } from '@app/services/user.service'
+import { UserService } from '@app/services/user/user.service'
 import { DestroyerComponent } from '@app/utils/destroyer.component'
 import { getDir } from '@app/utils/utils'
 import { ActionsSubject, select, Store } from '@ngrx/store'

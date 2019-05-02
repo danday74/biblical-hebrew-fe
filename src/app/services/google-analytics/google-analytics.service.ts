@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core'
 import { NavigationEnd, Router } from '@angular/router'
-import { ScriptService } from '@app/services/script.service'
-import { environment } from '@environments/environment'
+import { ScriptService } from '../script/script.service'
+import { environment } from '../../../environments/environment'
 import * as Debug from 'debug'
-import config from '../../config'
+import config from '../../../config'
 
 const debug = Debug('bh:google-analytics')
 

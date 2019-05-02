@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
-import { selectUser } from '@app/actions/users/users.selectors'
-import { State } from '@app/reducers'
+import { selectUser } from '../../actions/users/users.selectors'
+import { State } from '../../reducers'
 import { select, Store } from '@ngrx/store'
 import * as Debug from 'debug'
 

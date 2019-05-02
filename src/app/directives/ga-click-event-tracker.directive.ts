@@ -1,5 +1,5 @@
 import { Directive, HostListener, Input } from '@angular/core'
-import { GoogleAnalyticsService } from '@app/services/google-analytics.service'
+import { GoogleAnalyticsService } from '@app/services/google-analytics/google-analytics.service'
 import * as $ from 'jquery'
 
 @Directive({
