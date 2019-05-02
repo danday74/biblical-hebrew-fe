@@ -10,16 +10,19 @@ import {
   LoginSuccessAction,
   LogoutAction,
   SetLastUserLoggedInAction,
+  SetSignUpInProgressAction,
   SetUserExistsAction,
   UserRequestedAction,
   UsersActionTypes,
   WhoAmIAction,
   WhoAmIFailedAction
 } from '@app/actions/users/users.actions'
+import { State } from '@app/reducers'
 import { GoogleAnalyticsService } from '@app/services/google-analytics/google-analytics.service'
 import { StorageService } from '@app/services/storage/storage.service'
 import { UserService } from '@app/services/user/user.service'
 import { Actions, Effect, ofType } from '@ngrx/effects'
+import { Store } from '@ngrx/store'
 import { fromPromise } from 'rxjs/internal-compatibility'
 import { delay, map, mapTo, mergeMap, tap } from 'rxjs/operators'
 
@@ -48,6 +51,7 @@ export class UsersEffects {
   loginSuccess$ = this.actions$.pipe(
     ofType<LoginSuccessAction>(UsersActionTypes.LoginSuccess),
     delay(2000),
+    tap(() => this.store.dispatch(new SetSignUpInProgressAction(null))),
     map(action => ({
       action,
       originalUrl: this.router.url
@@ -122,5 +126,5 @@ export class UsersEffects {
   )
 
   constructor(private actions$: Actions, private googleAnalyticsService: GoogleAnalyticsService, private router: Router,
-              private storageService: StorageService, private userService: UserService) {}
+              private storageService: StorageService, private store: Store<State>, private userService: UserService) {}
 }
