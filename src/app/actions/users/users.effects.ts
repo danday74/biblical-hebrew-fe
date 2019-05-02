@@ -25,6 +25,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects'
 import { Store } from '@ngrx/store'
 import { fromPromise } from 'rxjs/internal-compatibility'
 import { delay, map, mapTo, mergeMap, tap } from 'rxjs/operators'
+import config from '../../../config'
 
 const lastUserLoggedInKey = 'lastUserLoggedIn'
 
@@ -50,7 +51,7 @@ export class UsersEffects {
   @Effect()
   loginSuccess$ = this.actions$.pipe(
     ofType<LoginSuccessAction>(UsersActionTypes.LoginSuccess),
-    delay(2000),
+    delay(config.loginDelay),
     tap(() => this.store.dispatch(new SetSignUpInProgressAction(null))),
     map(action => ({
       action,

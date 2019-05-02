@@ -7,6 +7,7 @@ import { select, Store } from '@ngrx/store'
 import * as $ from 'jquery'
 import { combineLatest } from 'rxjs'
 import { filter, take } from 'rxjs/operators'
+import config from '../config'
 import { selectSignUpInProgress, selectUser, selectWhoAmICheck } from './actions/users/users.selectors'
 
 const browserBlacklist = ['internet-explorer']
@@ -51,7 +52,7 @@ export class AppComponent implements OnInit {
       if (user && whoAmICheck === false) {
         setTimeout(() => {
           this.user = user
-        }, 2000)
+        }, config.loginDelay)
       } else {
         this.user = user
       }

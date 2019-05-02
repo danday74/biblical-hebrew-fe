@@ -24,7 +24,7 @@ export class TitleService {
     setTimeout(() => {
       this.ready = true
       this.setTitle()
-    }, 2000)
+    }, config.loginDelay)
 
     this.store.pipe(
       select(selectUser)
@@ -33,7 +33,7 @@ export class TitleService {
       if (user) {
         setTimeout(() => {
           this.setTitle()
-        }, 2000)
+        }, config.loginDelay)
       } else {
         this.setTitle()
       }
