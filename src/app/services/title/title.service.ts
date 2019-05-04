@@ -56,7 +56,12 @@ export class TitleService {
     })
   }
 
-  private setTitle() {
+  forceSetTitle() {
+    this.setTitle(this.router.url)
+  }
+
+  private setTitle(url = this.url) {
+    this.url = url
     if (this.url) {
       if (this.signUpInProgress) {
         this.title.setTitle(`${TitleService.appLabel} - Sign Up`)

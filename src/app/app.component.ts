@@ -49,9 +49,10 @@ export class AppComponent implements OnInit {
   }
 
   proceedAnyway() {
-    $('html').addClass('proceed')
     // intentionally not using service here (keep code simple until access is allowed)
     localStorage.setItem(ignorePartialBrowserWarningKey, 'true')
+    $('html').addClass('proceed')
+    this.titleService.forceSetTitle()
     this.proceed()
   }
 
