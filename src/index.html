@@ -8,32 +8,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <style>
-    .unsupported {
+    .useless {
       text-align: center;
       margin-top: 100px;
       opacity: 0;
     }
 
-    .unsupported .oops h1 {
+    .useless .oops h1 {
       color: #416d9a;
       font-size: 3.5em;
     }
 
-    .unsupported .oops p {
+    .useless .oops p {
       margin-top: 15px;
       font-size: 1.25em;
     }
 
-    .unsupported .supported-list {
+    .useless .supported-list {
       margin-top: 40px;
     }
 
-    .unsupported .supported-list img {
+    .useless .supported-list img {
       height: 128px;
       width: 128px;
     }
 
-    .browser-text {
+    .useless .browser-text {
       display: inline-block;
       font-size: 1.2em;
       margin-top: 5px;
@@ -43,10 +43,10 @@
 
 <body>
 <main role="main">
-  <div class="unsupported animated fadeIn delay-1s slower">
+  <div class="useless animated fadeIn delay-1s slower">
     <div class="oops">
       <h1>Oops</h1>
-      <p><strong>Biblical Hebrew</strong> does not support this browser but fully supports:</p>
+      <p><strong>Biblical Hebrew</strong> <span id="js-hook-unsupported">does not support this browser but fully supports:</span></p>
     </div>
     <div class="supported-list">
       <div class="container-fluid">

@@ -9,7 +9,11 @@ html {
   overflow-x: hidden;
 }
 
-html.supported .unsupported, html.partial.proceed .unsupported {
+html.supported .useless, html.partial.proceed .useless {
+  display: none;
+}
+
+html.mobile .supported-list {
   display: none;
 }
 

@@ -17,7 +17,7 @@ enum BrowserSupport {
 }
 
 const browserBlacklist = ['internet-explorer']
-const browserWhitelist = ['chrome', 'edge', 'firefox']
+const browserWhitelist = ['chrome', 'microsoft-edge', 'firefox']
 const ignorePartialBrowserWarningKey = 'ignorePartialBrowserSupportWarning'
 
 @Component({
@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
     this.manageBrowserSupport()
     if (this.supported === BrowserSupport.Supported) {
       this.proceed()
-    } else {
+    } else if (this.supported === BrowserSupport.Partial) {
       // intentionally not using service here (keep code simple until access is allowed)
       if (localStorage.getItem(ignorePartialBrowserWarningKey) === 'true') {
         this.proceedAnyway()
@@ -95,14 +95,26 @@ export class AppComponent implements OnInit {
   }
 
   private manageBrowserSupport() {
-    const browserSlug = getBrowser().slug
-    if (browserWhitelist.includes(browserSlug)) {
+
+    const browser = getBrowser()
+
+    const slug = browser.browser.slug
+
+    if (browserWhitelist.includes(slug)) {
       this.supported = BrowserSupport.Supported
-    } else if (browserBlacklist.includes(browserSlug)) {
+    } else if (browserBlacklist.includes(slug)) {
       this.supported = BrowserSupport.Unsupported
     } else {
       this.supported = BrowserSupport.Partial
     }
-    $('html').addClass(this.supported).addClass(browserSlug)
+
+    const platform = browser.platform.type
+
+    if (platform === 'mobile') {
+      this.supported = BrowserSupport.Unsupported
+      $('#js-hook-unsupported').text('does not support mobile devices')
+    }
+
+    $('html').addClass(this.supported).addClass(slug).addClass(platform)
   }
 }

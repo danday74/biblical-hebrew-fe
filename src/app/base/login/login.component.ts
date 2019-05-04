@@ -148,7 +148,7 @@ export class LoginComponent extends DestroyerComponent implements OnInit, OnDest
 
   onSubmit() {
     let webkitAutofill = false
-    const browserSlug = getBrowser().slug
+    const browserSlug = getBrowser().browser.slug
     if (browserSlug === 'chrome') webkitAutofill = !!$(':-webkit-autofill').length
     if (webkitAutofill) this.store.dispatch(new WebkitAutofillUsedAction())
     if (this.userExists === 'yes') {

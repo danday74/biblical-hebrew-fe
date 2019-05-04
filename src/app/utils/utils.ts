@@ -3,7 +3,7 @@ import { CustomAction } from '@app/actions/custom-action'
 import { environment } from '@environments/environment'
 import { Action } from '@ngrx/store'
 import * as Bowser from 'bowser'
-import { cloneDeep, forOwn } from 'lodash'
+import { forOwn } from 'lodash'
 
 declare var replaceLast: (str, pattern, replacement) => string
 declare var slugify: (str, options) => any
@@ -34,9 +34,8 @@ export const getFailedAction = (action: Action) => {
 }
 
 export const getBrowser = () => {
-  const bro = Bowser.getParser(window.navigator.userAgent)
-  const browser = cloneDeep(bro.getBrowser())
-  browser.slug = slugify(browser.name, {lower: true})
+  const browser: { browser: any, engine: any, os: any, platform: any } = Bowser.parse(window.navigator.userAgent)
+  browser.browser.slug = slugify(browser.browser.name, {lower: true})
   return browser
 }
 
