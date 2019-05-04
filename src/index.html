@@ -14,12 +14,23 @@
       opacity: 0;
     }
 
-    .unsupported .oops {
+    .unsupported .oops h1 {
       color: #416d9a;
+      font-size: 3.5em;
+    }
+
+    .unsupported .oops p {
+      margin-top: 15px;
+      font-size: 1.25em;
     }
 
     .unsupported .supported-list {
-      margin-top: 100px;
+      margin-top: 40px;
+    }
+
+    .unsupported .supported-list img {
+      height: 128px;
+      width: 128px;
     }
 
     .browser-text {
@@ -33,8 +44,10 @@
 <body>
 <main role="main">
   <div class="unsupported animated fadeIn delay-1s slower">
-    <h1 class="oops">Oops</h1>
-    <p><strong>Biblical Hebrew</strong> does not support this browser but fully supports:</p>
+    <div class="oops">
+      <h1>Oops</h1>
+      <p><strong>Biblical Hebrew</strong> does not support this browser but fully supports:</p>
+    </div>
     <div class="supported-list">
       <div class="container-fluid">
         <div class="row">

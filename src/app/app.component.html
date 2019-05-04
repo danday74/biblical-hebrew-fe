@@ -1,4 +1,4 @@
-<ng-container *ngIf="supported && whoAmICheck != null">
+<ng-container *ngIf="allowAccess && whoAmICheck != null">
 
   <ng-container *ngIf="user; else noUser">
     <div class="animated fadeIn">
@@ -20,4 +20,17 @@
 
 </ng-container>
 
-<app-footer></app-footer>
+<ng-container *ngIf="!allowAccess && supported === 'partial'">
+  <div class="proceed animated fadeIn delay-1s slower">
+    <div class="warning">
+      I understand that, if I proceed without using a supported browser, user experience may be suboptimal
+    </div>
+    <div class="anyway">
+      <span class="fake-link" (click)="proceedAnyway()">Proceed Anyway</span>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="allowAccess && whoAmICheck != null">
+  <app-footer></app-footer>
+</ng-container>

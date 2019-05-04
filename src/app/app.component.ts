@@ -10,7 +10,15 @@ import { filter, take } from 'rxjs/operators'
 import config from '../config'
 import { selectSignUpInProgress, selectUser, selectWhoAmICheck } from './actions/users/users.selectors'
 
+enum BrowserSupport {
+  Unsupported = 'unsupported',
+  Partial = 'partial',
+  Supported = 'supported'
+}
+
 const browserBlacklist = ['internet-explorer']
+const browserWhitelist = ['chrome', 'edge', 'firefox']
+const ignorePartialBrowserWarningKey = 'ignorePartialBrowserSupportWarning'
 
 @Component({
   selector: 'app-root',
@@ -20,16 +28,36 @@ const browserBlacklist = ['internet-explorer']
 
 export class AppComponent implements OnInit {
 
-  public signUpInProgress: boolean
-  public supported: boolean
-  public user: any
-  public whoAmICheck: boolean
+  allowAccess = false
+  signUpInProgress: any
+  supported: BrowserSupport
+  user: any
+  whoAmICheck: boolean
 
   constructor(private googleAnalyticsService: GoogleAnalyticsService, private store: Store<State>, private titleService: TitleService) {}
 
   ngOnInit() {
-
     this.manageBrowserSupport()
+    if (this.supported === BrowserSupport.Supported) {
+      this.proceed()
+    } else {
+      // intentionally not using service here (keep code simple until access is allowed)
+      if (localStorage.getItem(ignorePartialBrowserWarningKey) === 'true') {
+        this.proceedAnyway()
+      }
+    }
+  }
+
+  proceedAnyway() {
+    $('html').addClass('proceed')
+    // intentionally not using service here (keep code simple until access is allowed)
+    localStorage.setItem(ignorePartialBrowserWarningKey, 'true')
+    this.proceed()
+  }
+
+  proceed() {
+
+    this.allowAccess = true
     this.googleAnalyticsService.loadGoogleAnalytics()
     this.titleService.initTitleService()
 
@@ -68,7 +96,13 @@ export class AppComponent implements OnInit {
 
   private manageBrowserSupport() {
     const browserSlug = getBrowser().slug
-    this.supported = !browserBlacklist.includes(browserSlug)
-    if (this.supported) $('html').addClass('supported').addClass(browserSlug)
+    if (browserWhitelist.includes(browserSlug)) {
+      this.supported = BrowserSupport.Supported
+    } else if (browserBlacklist.includes(browserSlug)) {
+      this.supported = BrowserSupport.Unsupported
+    } else {
+      this.supported = BrowserSupport.Partial
+    }
+    $('html').addClass(this.supported).addClass(browserSlug)
   }
 }

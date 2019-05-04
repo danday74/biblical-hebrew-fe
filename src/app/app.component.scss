@@ -1,0 +1,19 @@
+.proceed {
+
+  border-top: 1px solid #CCC;
+  border-bottom: 1px solid #CCC;
+  padding: 20px;
+  background-color: #F9F9F9;
+  text-align: center;
+  margin-top: 55px;
+
+  .warning {
+    color: #737373;
+    font-weight: bold;
+  }
+
+  .anyway {
+    margin-top: 10px;
+    font-size: 1.3em;
+  }
+}

@@ -4,16 +4,18 @@
   margin-left: 75px;
   margin-top: -149px;
 
-  .bot-eye {
+  img.bot-eye {
     cursor: pointer;
+    height: 40px;
+    width: 40px;
   }
 
-  .bot-eye.left {
+  img.bot-eye.left {
     position: relative;
     right: 28px;
   }
 
-  .bot-eye.right {
+  img.bot-eye.right {
     position: relative;
     left: 27px;
   }

@@ -11,8 +11,12 @@
 .cookies-image {
   margin-top: 25px;
   margin-bottom: 20px;
-  height: 133px;
   text-align: center;
+
+  img.cookies {
+    width: 300px;
+    height: 133px;
+  }
 }
 
 .heading {

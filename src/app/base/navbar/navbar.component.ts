@@ -13,8 +13,9 @@ import { select, Store } from '@ngrx/store'
 
 export class NavbarComponent implements OnInit {
 
-  public user$
   faSignOutAlt = faSignOutAlt
+
+  user$
 
   constructor(private store: Store<State>) {}
 
