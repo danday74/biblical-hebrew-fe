@@ -38,7 +38,7 @@ export class StorageService {
 
   // noinspection JSMethodCanBeStatic
   getLocalStorage(key) {
-    let value = localStorage.getItem(key)
+    let value: any = localStorage.getItem(key)
     if (value != null) {
       value = JSON.parse(value)
     } else {

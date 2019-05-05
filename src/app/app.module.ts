@@ -4,12 +4,15 @@ import { FormsModule } from '@angular/forms'
 import { BrowserModule } from '@angular/platform-browser'
 import { GenericEffects } from '@app/actions/generic/generic.effects'
 import { InitEffects } from '@app/actions/init/init.effects'
+import { KeyboardButtonComponent } from '@app/base/keyboard-button/keyboard-button.component'
+import { KeyboardComponent } from '@app/base/keyboard-button/keyboard/keyboard.component'
 import { environment } from '@environments/environment'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { EffectsModule } from '@ngrx/effects'
 import { StoreRouterConnectingModule } from '@ngrx/router-store'
 import { StoreModule } from '@ngrx/store'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
+import { AngularDraggableModule } from 'angular2-draggable'
 import * as Debug from 'debug'
 import { RecaptchaModule } from 'ng-recaptcha'
 import { UsersEffects } from './actions/users/users.effects'
@@ -45,6 +48,8 @@ import { DestroyerComponent } from './utils/destroyer.component'
     DestroyerComponent,
     FooterComponent,
     GaClickEventTrackerDirective,
+    KeyboardButtonComponent,
+    KeyboardComponent,
     LoginComponent,
     NavbarComponent,
     OutletWrapperComponent,
@@ -53,6 +58,7 @@ import { DestroyerComponent } from './utils/destroyer.component'
     SignupComponent
   ],
   imports: [
+    AngularDraggableModule,
     AppRoutingModule,
     BrowserModule,
     FontAwesomeModule,
@@ -60,9 +66,9 @@ import { DestroyerComponent } from './utils/destroyer.component'
     HttpClientModule,
     RecaptchaModule,
     EffectsModule.forRoot([UsersEffects, GenericEffects, InitEffects]),
-    StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
     StoreModule.forRoot(reducers, {metaReducers}),
-    StoreRouterConnectingModule.forRoot()
+    StoreRouterConnectingModule.forRoot(),
+    StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production})
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}

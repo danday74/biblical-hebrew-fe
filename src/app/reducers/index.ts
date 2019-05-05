@@ -1,4 +1,5 @@
 import { InitActionTypes } from '@app/actions/init/init.actions'
+import { uiReducer, UiState } from '@app/reducers/ui/ui.reducer'
 import { environment } from '@environments/environment'
 import { routerReducer } from '@ngrx/router-store'
 import { ActionReducerMap, MetaReducer } from '@ngrx/store'
@@ -11,12 +12,14 @@ const debug = Debug('bh:logger')
 
 export interface State {
   questions: QuestionsState
+  ui: UiState
   users: UsersState
   router: any
 }
 
 export const reducers: ActionReducerMap<State> = {
   questions: questionsReducer,
+  ui: uiReducer,
   users: usersReducer,
   router: routerReducer
 }
