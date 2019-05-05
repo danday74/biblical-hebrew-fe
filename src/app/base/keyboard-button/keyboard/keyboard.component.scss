@@ -1,0 +1,45 @@
+@import '../../../globals';
+
+$keyboardBorderColor: #111;
+
+.keyboard {
+  width: $keyboardWidth + unquote('px');
+  max-height: 0;
+  height: $keyboardHeight + unquote('px');
+  overflow: hidden;
+  background-color: #222;
+  color: #FFF;
+  opacity: 0.8;
+  user-select: none;
+  animation: slide-keyboard-up 1s;
+  animation-fill-mode: forwards; // retains animation on completion
+  border-radius: 5px;
+  box-shadow: 4px 4px 5px #888;
+  border: 3px solid $keyboardBorderColor;
+}
+
+.keyboard-drag-handle {
+  background-color: #444;
+  user-select: none;
+  padding-left: 10px;
+  border-bottom: 2px solid $keyboardBorderColor;
+  padding-bottom: 2px;
+}
+
+.window-control {
+  margin-right: 10px;
+  cursor: pointer;
+
+  &.disabled {
+    opacity: 0.4;
+  }
+}
+
+@keyframes slide-keyboard-up {
+  from {
+    max-height: 0;
+  }
+  to {
+    max-height: $keyboardHeight + unquote('px');
+  }
+}
