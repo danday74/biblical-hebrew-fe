@@ -1,0 +1,11 @@
+<div #bounds class="bounds"></div>
+
+<ng-container *ngIf="!keyboardOpen">
+  <div class="keyboard-button animated fadeIn" (click)="onOpenKeyboard()">keyboard</div>
+</ng-container>
+
+<ng-container *ngIf="keyboardOpen">
+  <div class="keyboard-wrapper">
+    <app-keyboard [bounds]="bounds"></app-keyboard>
+  </div>
+</ng-container>

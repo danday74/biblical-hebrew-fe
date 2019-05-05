@@ -1,0 +1,41 @@
+@import '../../globals';
+
+$footerHeight: 25px;
+$keyboardToggleBorder: 1px solid #222;
+$keyboardToggleBorderRadius: 5px;
+$keyboardToggleWidth: 80;
+
+.bounds {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: $footerHeight;
+  pointer-events: none;
+}
+
+.keyboard-button {
+  font-size: 12px;
+  color: #FFF;
+  background-color: #696969;
+  text-align: center;
+  user-select: none;
+  border-top: $keyboardToggleBorder;
+  border-right: $keyboardToggleBorder;
+  border-left: $keyboardToggleBorder;
+  padding-bottom: 2px;
+  border-radius: $keyboardToggleBorderRadius $keyboardToggleBorderRadius 0 0;
+  cursor: pointer;
+  position: absolute;
+  bottom: $footerHeight;
+  left: 50%;
+  margin-left: -($keyboardToggleWidth / 2) + unquote('px');
+  width: $keyboardToggleWidth + unquote('px');
+}
+
+.keyboard-wrapper {
+  position: absolute;
+  bottom: $footerHeight;
+  left: 50%;
+  margin-left: -($keyboardWidth / 2) + unquote('px');
+}
