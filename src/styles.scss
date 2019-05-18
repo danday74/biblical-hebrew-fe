@@ -35,6 +35,13 @@ input.gentle-shade {
 
 input[type=checkbox] {
   transform: scale(1.5);
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+input[type=checkbox]:focus {
+  outline: none;
+  opacity: 1;
 }
 
 .success-tick, .failure-cross {
