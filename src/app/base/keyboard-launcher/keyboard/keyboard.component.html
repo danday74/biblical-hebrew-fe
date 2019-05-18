@@ -17,7 +17,9 @@
         <fa-icon [icon]="'bullseye'"></fa-icon>
       </span>
       <span class="keyboard-control" [ngClass]="{disabled: !nextInputButtonEnabled}" (click)="onNextInput()" title="next input">
-        <fa-icon [icon]="'step-forward'"></fa-icon>
+        <span class="next-input">
+          <fa-icon [icon]="'step-forward'"></fa-icon>
+        </span>
       </span>
       <span class="keyboard-control" (click)="onToggleLanguage()" title="toggle language">
         <fa-icon [icon]="'globe'"></fa-icon>

@@ -46,6 +46,11 @@ $keyboardRowIndent: ($keyboardKeySize + $keyboardKeyMargin) / 2;
       &.disabled {
         opacity: 0.4;
       }
+
+      .next-input {
+        position: relative;
+        left: -1px;
+      }
     }
   }
 }
