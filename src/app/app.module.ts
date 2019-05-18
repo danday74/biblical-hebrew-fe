@@ -5,8 +5,7 @@ import { BrowserModule } from '@angular/platform-browser'
 import { GenericEffects } from '@app/actions/generic/generic.effects'
 import { InitEffects } from '@app/actions/init/init.effects'
 import { UiEffects } from '@app/actions/ui/ui.effects'
-import { KeyboardLauncherComponent } from '@app/base/keyboard-launcher/keyboard-launcher.component'
-import { KeyboardComponent } from '@app/base/keyboard-launcher/keyboard/keyboard.component'
+import { KeyboardLauncherModule } from '@app/base/keyboard-launcher/keyboard-launcher.module'
 import { environment } from '@environments/environment'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -42,7 +41,6 @@ import { AppComponent } from './app.component'
 import { BlankComponent } from './base/blank/blank.component'
 import { CookiePolicyComponent } from './base/cookie-policy/cookie-policy.component'
 import { FooterComponent } from './base/footer/footer.component'
-import { KeyComponent } from './base/keyboard-launcher/keyboard/key/key.component'
 import { BlankBoardComponent } from './base/login/blank-board/blank-board.component'
 import { LoginComponent } from './base/login/login.component'
 import { NavbarComponent } from './base/navbar/navbar.component'
@@ -74,9 +72,6 @@ import { DestroyerDirective } from './utils/destroyer.directive'
     FooterComponent,
     GaClickEventTrackerDirective,
     InputBlurDirective,
-    KeyboardComponent,
-    KeyboardLauncherComponent,
-    KeyComponent,
     LoginComponent,
     NavbarComponent,
     OutletWrapperComponent,
@@ -85,12 +80,12 @@ import { DestroyerDirective } from './utils/destroyer.directive'
     SignupComponent
   ],
   imports: [
-    AngularDraggableModule,
     AppRoutingModule,
     BrowserModule,
     FontAwesomeModule,
     FormsModule,
     HttpClientModule,
+    KeyboardLauncherModule,
     RecaptchaModule,
     EffectsModule.forRoot([UiEffects, UsersEffects, GenericEffects, InitEffects]),
     StoreModule.forRoot(reducers, {metaReducers}),
