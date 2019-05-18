@@ -1,14 +1,14 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { CreateUserAction, SetSignUpInProgressAction, UsersActions, UsersActionTypes } from '@app/actions/users/users.actions'
 import { selectSignUpInProgress, selectUser } from '@app/actions/users/users.selectors'
-import { CookiePolicyCheckboxComponent } from '@app/base/signup/cookie-policy-checkbox/cookie-policy-checkbox.component'
+import { CookiePolicyCheckboxComponent } from '@app/base/signup/signup/cookie-policy-checkbox/cookie-policy-checkbox.component'
 import { State } from '@app/reducers'
 import { UserService } from '@app/services/user/user.service'
 import { DestroyerComponent } from '@app/utils/destroyer.component'
 import { getDir } from '@app/utils/utils'
 import { ActionsSubject, select, Store } from '@ngrx/store'
 import { filter, takeUntil } from 'rxjs/operators'
-import config from 'src/app/app.config'
+import config from '@app/app.config'
 
 @Component({
   selector: 'app-signup',
