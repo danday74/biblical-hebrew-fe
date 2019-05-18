@@ -30,6 +30,7 @@ export class SignupComponent extends DestroyerComponent implements OnInit, OnDes
   dirForUsername = 'ltr'
   loginError: string
   loginInProgress = false
+  passwordInputName = 'bhPasswordConfirm'
   showCookiePolicyOverlay = false
   signUpInProgress: any
   siteKey = atob(config.recaptcha.siteKey)
@@ -89,8 +90,8 @@ export class SignupComponent extends DestroyerComponent implements OnInit, OnDes
   }
 
   onEnter(evt) {
-    const name = evt.target.getAttribute('name')
-    if (name === 'bhPassword') {
+    const name = evt.target.name
+    if (name === this.passwordInputName) {
       this.cookiePolicyCheckboxComponent.cookiePolicyCheckbox.nativeElement.focus()
     } else if (name === 'accept') {
       this.submitButton.nativeElement.click()

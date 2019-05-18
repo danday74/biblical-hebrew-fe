@@ -42,7 +42,8 @@
               <span *ngIf="!loginError">Confirm password</span>
               <span *ngIf="loginError" class="failure">{{ loginError }}</span>
             </label>
-            <app-password [forceFailure]="loginError === incorrectPasswordText" [hideFeedback]="loginError === failedToCreateUserText" [autocomplete]="true"
+            <app-password [inputName]="passwordInputName" [appInputBlurControl]="true" [forceFailure]="loginError === incorrectPasswordText"
+                          [hideFeedback]="loginError === failedToCreateUserText" [autocomplete]="true"
                           (enterKeyPress)="onEnter($event)" (passwordChange)="onPasswordChange($event)"></app-password>
 
             <!-- Cookies checkbox -->

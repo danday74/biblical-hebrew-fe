@@ -11,9 +11,11 @@ import { ControlContainer, NgForm } from '@angular/forms'
 export class PasswordComponent implements OnInit {
 
   @ViewChild('passwordInput') passwordInput: ElementRef // this is used
+  @Input() appInputBlurControl = false
   @Input() autocomplete: boolean
   @Input() forceFailure = false
   @Input() hideFeedback = false
+  @Input() inputName = 'bhPassword'
   @Output() readonly enterKeyPress = new EventEmitter<any>()
   @Output() readonly passwordChange = new EventEmitter<string>()
 

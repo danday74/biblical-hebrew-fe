@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core'
 import { memoize } from '@app/decorators/memoize'
 import hebrewConsonants from '@app/json/hebrew-consonants.json'
 import hebrewVowels from '@app/json/hebrew-vowels.json'
-import { isNumeric as isItNumeric } from '@app/utils/utils'
+import { isInteger } from '@app/utils/utils'
 import { find } from 'lodash'
 
 const specials = ['backspace', 'caps', 'enter', 'left', 'right']
@@ -48,7 +48,7 @@ export class KeyComponent {
         value = this.he
       }
     }
-    const isNumeric = isItNumeric(this.en)
+    const isNumeric = isInteger(this.en)
     const isSpecial = specials.includes(this.en)
     return {name, title, value, isHeVowel, isNumeric, isSpecial}
   }
