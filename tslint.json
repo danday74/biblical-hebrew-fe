@@ -106,7 +106,7 @@
     // "template-accessibility-valid-aria": true,
     // "template-banana-in-box": true,
     "template-conditional-complexity": true,
-    "template-cyclomatic-complexity": [true, 7],
+    "template-cyclomatic-complexity": [true, 8],
     // "template-no-call-expression": true,
     // "template-use-track-by-function": true,
     "trailing-comma": [
