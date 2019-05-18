@@ -72,6 +72,7 @@ export class AppComponent implements OnInit {
     })
 
     // get user and allow delay for login animation (when set login pages disappear)
+    // noinspection JSUnusedLocalSymbols
     combineLatest(
       this.store.pipe(select(selectUser)),
       this.store.pipe(select(selectWhoAmICheck))

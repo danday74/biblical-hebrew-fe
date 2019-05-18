@@ -10,6 +10,7 @@ export const initialQuestionsState: QuestionsState = {
 
 export const questionsReducer = (state = initialQuestionsState, action: QuestionsActions): QuestionsState => {
 
+  // noinspection JSRedundantSwitchStatement
   switch (action.type) {
 
     case QuestionsActionTypes.QuestionsLoaded:
