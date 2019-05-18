@@ -1,0 +1,67 @@
+<ng-container *ngIf="!char.isHeVowel && char.value && char.value.length <= 1; else vowel">
+  <div class="key" [title]="char.title" [ngClass]="lower ? lang + ' lower' : lang + ' upper'" (click)="onKey()">
+    <span class="text">{{ char.value }}</span>
+  </div>
+</ng-container>
+
+<ng-template #vowel>
+  <ng-container *ngIf="char.isHeVowel && vowelToggle; else number">
+    <div class="key he vowel" [title]="char.title" (click)="onKey()">
+      <span class="text" [ngClass]="char.name">{{ char.value }}</span>
+    </div>
+  </ng-container>
+</ng-template>
+
+<ng-template #number>
+  <ng-container *ngIf="char.isNumeric; else caps">
+    <div class="key en upper" (click)="onKey()">
+      <span class="text">{{ en }}</span>
+    </div>
+  </ng-container>
+</ng-template>
+
+<ng-template #caps>
+  <ng-container *ngIf="char.value === 'caps'; else backspace">
+    <div class="key" (click)="onCaps()">
+      <span class="key caps" [ngClass]="{'spin-down': lower, 'spin-up': !lower}">
+        <span class="text"><fa-icon [icon]="'arrow-alt-circle-up'"></fa-icon></span>
+      </span>
+    </div>
+  </ng-container>
+</ng-template>
+
+<ng-template #backspace>
+  <ng-container *ngIf="char.value === 'backspace'; else enter">
+    <div class="key big backspace" (click)="onKey()">
+      <span class="text"><fa-icon [icon]="'backspace'" size="lg"></fa-icon></span>
+    </div>
+  </ng-container>
+</ng-template>
+
+<ng-template #enter>
+  <ng-container *ngIf="char.value === 'enter'; else left">
+    <div class="key big enter" (click)="onKey()">
+      <span class="text"><fa-icon [icon]="'level-down-alt'" size="lg" rotate="90"></fa-icon></span>
+    </div>
+  </ng-container>
+</ng-template>
+
+<ng-template #left>
+  <ng-container *ngIf="char.value === 'left'; else right">
+    <div class="key direction left" (click)="onKey()">
+      <span class="text"><fa-icon [icon]="'caret-left'"></fa-icon></span>
+    </div>
+  </ng-container>
+</ng-template>
+
+<ng-template #right>
+  <ng-container *ngIf="char.value === 'right'; else blank">
+    <div class="key direction right" (click)="onKey()">
+      <span class="text"><fa-icon [icon]="'caret-right'"></fa-icon></span>
+    </div>
+  </ng-container>
+</ng-template>
+
+<ng-template #blank>
+  <div class="key blank"></div>
+</ng-template>

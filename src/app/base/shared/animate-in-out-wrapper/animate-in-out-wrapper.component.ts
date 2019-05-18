@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { getRandomItemFromArray } from '@app/utils/utils'
-import config from '../../../../config'
+import config from '../../../app.config'
 
 @Component({
   selector: 'app-animate-in-out-wrapper',

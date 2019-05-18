@@ -1,0 +1,183 @@
+@import '../../../../globals';
+
+.key {
+  margin-left: $keyboardKeyMargin + unquote('px');
+  margin-top: $keyboardKeyMargin + unquote('px');
+  width: $keyboardKeySize + unquote('px');
+  height: $keyboardKeySize + unquote('px');
+  background-color: #0C1011;
+  border: 1px solid #000;
+  border-radius: 5px;
+  color: #DDD;
+  cursor: pointer;
+  float: left;
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.key:hover {
+  background-color: #000;
+  color: #FFF;
+}
+
+.key .text {
+  position: relative;
+}
+
+// blank
+
+.key.blank {
+  background-color: #383838;
+  cursor: default;
+}
+
+// caps
+
+.key.caps {
+  position: absolute;
+  left: 0;
+  margin-top: -1px;
+  background-color: transparent;
+  border: none;
+  transition: transform 300ms linear;
+}
+
+.spin-up {
+  transform: rotate(0deg);
+}
+
+.spin-down {
+  transform: rotate(180deg);
+}
+
+.key.caps .text {
+  font-size: 16px;
+  top: 0;
+}
+
+// backspace and enter
+
+.key.big {
+  width: ($keyboardKeySize * 1.8) + unquote('px');
+}
+
+.key.backspace .text {
+  font-size: 13px;
+  top: -2px;
+}
+
+.key.enter .text {
+  font-size: 13px;
+  top: -3px;
+}
+
+// left and right
+
+.key.direction .text {
+  top: -1px;
+}
+
+.key.left .text {
+  left: -1px;
+}
+
+.key.right .text {
+  right: -1px;
+}
+
+// char keys
+
+// also applies to numbers
+.key.en.upper .text {
+  font-size: 13px;
+  top: -2px;
+}
+
+.key.en.lower .text {
+  font-size: 15px;
+  top: -2px;
+}
+
+.key.he .text {
+  font-size: 16px;
+  top: -3px;
+}
+
+// hebrew vowel keys
+
+.key.he.vowel {
+  .text {
+    font-size: 36px;
+    top: -33px;
+    left: -5px;
+  }
+
+  .text.sheva {
+    left: -1px;
+  }
+
+  .text.hataf-segol {
+  }
+
+  .text.hataf-patah {
+  }
+
+  .text.hataf-qamats {
+  }
+
+  .text.hiriq {
+    top: -26px;
+    left: -1px;
+  }
+
+  .text.tsere {
+    left: -3px;
+  }
+
+  .text.segol {
+    left: -3px;
+  }
+
+  .text.patah {
+    top: -32px;
+    left: -3px;
+  }
+
+  .text.qamats {
+    left: -3px;
+  }
+
+  .text.sin-dot {
+    top: -13px;
+    left: -2px;
+  }
+
+  .text.shin-dot {
+    top: -13px;
+    left: -9px;
+  }
+
+  .text.holem {
+    top: -14px;
+    left: 0;
+  }
+
+  .text.dagesh {
+    top: -18px;
+  }
+
+  .text.qubbuts {
+  }
+
+  .text.holem-vav {
+    font-size: 16px;
+    top: -3px;
+    left: 0;
+  }
+
+  .text.shuruq {
+    font-size: 16px;
+    top: -3px;
+    left: -1px;
+  }
+}

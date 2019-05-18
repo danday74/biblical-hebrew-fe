@@ -1,0 +1,137 @@
+{
+  "alef": {
+    "name": "alef",
+    "title": "álef",
+    "value": "א"
+  },
+  "bet": {
+    "name": "bet",
+    "title": "bet / vet",
+    "value": "ב"
+  },
+  "gimel": {
+    "name": "gimel",
+    "title": "gímel",
+    "value": "ג"
+  },
+  "dalet": {
+    "name": "dalet",
+    "title": "dálet",
+    "value": "ד"
+  },
+  "heh": {
+    "name": "heh",
+    "title": "heh",
+    "value": "ה"
+  },
+  "vav": {
+    "name": "vav",
+    "title": "vav",
+    "value": "ו"
+  },
+  "zayin": {
+    "name": "zayin",
+    "title": "záyin",
+    "value": "ז"
+  },
+  "chet": {
+    "name": "chet",
+    "title": "chet",
+    "value": "ח"
+  },
+  "tet": {
+    "name": "tet",
+    "title": "tet",
+    "value": "ט"
+  },
+  "yod": {
+    "name": "yod",
+    "title": "yod",
+    "value": "י"
+  },
+  "kaf": {
+    "name": "kaf",
+    "title": "kaf / khaf",
+    "value": "כ"
+  },
+  "kaf-final": {
+    "name": "kaf-final",
+    "title": "kaf / khaf (final)",
+    "value": "ך"
+  },
+  "lamed": {
+    "name": "lamed",
+    "title": "lámed",
+    "value": "ל"
+  },
+  "mem": {
+    "name": "mem",
+    "title": "mem",
+    "value": "מ"
+  },
+  "mem-final": {
+    "name": "mem-final",
+    "title": "mem (final)",
+    "value": "ם"
+  },
+  "nun": {
+    "name": "nun",
+    "title": "nun",
+    "value": "נ"
+  },
+  "nun-final": {
+    "name": "nun-final",
+    "title": "nun (final)",
+    "value": "ן"
+  },
+  "samekh": {
+    "name": "samekh",
+    "title": "sámekh",
+    "value": "ס"
+  },
+  "ayin": {
+    "name": "ayin",
+    "title": "áyin",
+    "value": "ע"
+  },
+  "peh": {
+    "name": "peh",
+    "title": "peh / feh",
+    "value": "פ"
+  },
+  "peh-final": {
+    "name": "peh-final",
+    "title": "peh / feh (final)",
+    "value": "ף"
+  },
+  "tsadeh": {
+    "name": "tsadeh",
+    "title": "tsádeh",
+    "value": "צ"
+  },
+  "tsadeh-final": {
+    "name": "tsadeh-final",
+    "title": "tsádeh (final)",
+    "value": "ץ"
+  },
+  "qof": {
+    "name": "qof",
+    "title": "qof",
+    "value": "ק"
+  },
+  "resh": {
+    "name": "resh",
+    "title": "resh",
+    "value": "ר"
+  },
+  "shin": {
+    "name": "shin",
+    "title": "shin / sin",
+    "value": "ש"
+  },
+  "tav": {
+    "name": "tav",
+    "title": "tav",
+    "value": "ת"
+  }
+}

@@ -1,6 +1,5 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core'
 import { ControlContainer, NgForm } from '@angular/forms'
-import { faCheck, faEye, faTimes } from '@fortawesome/free-solid-svg-icons'
 
 @Component({
   selector: 'app-password',
@@ -17,10 +16,6 @@ export class PasswordComponent implements OnInit {
   @Input() hideFeedback = false
   @Output() readonly enterKeyPress = new EventEmitter<any>()
   @Output() readonly passwordChange = new EventEmitter<string>()
-
-  faCheck = faCheck
-  faTimes = faTimes
-  faEye = faEye
 
   password = ''
   pattern = '^[a-zA-Z0-9\u0590-\u05FF]+$'

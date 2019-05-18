@@ -11,15 +11,15 @@ import {
 } from '@app/actions/users/users.actions'
 import { selectLastUserLoggedIn, selectUser, selectWebkitAutofillUsed } from '@app/actions/users/users.selectors'
 import { PasswordComponent } from '@app/base/shared/password/password.component'
+import { debounce } from '@app/decorators/debounce'
 import { State } from '@app/reducers'
 import { DestroyerComponent } from '@app/utils/destroyer.component'
 import { getBrowser, getDir } from '@app/utils/utils'
-import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { ActionsSubject, select, Store } from '@ngrx/store'
 import * as $ from 'jquery'
-import { cloneDeep, debounce } from 'lodash'
+import { cloneDeep } from 'lodash'
 import { filter, take, takeUntil } from 'rxjs/operators'
-import config from '../../../config'
+import config from '../../app.config'
 
 @Component({
   selector: 'app-login',
@@ -32,9 +32,6 @@ export class LoginComponent extends DestroyerComponent implements OnInit, OnDest
   @ViewChild('usernameInput') usernameInput: ElementRef
   @ViewChild(PasswordComponent) passwordComponent: PasswordComponent
   @ViewChild('submitButton') submitButton: ElementRef
-
-  faCheck = faCheck
-  faTimes = faTimes
 
   user = {
     username: '',
@@ -51,6 +48,8 @@ export class LoginComponent extends DestroyerComponent implements OnInit, OnDest
   boardText1 = ''
   boardText2 = ''
   dirForUsername = 'ltr'
+  initialUsername: string
+  isUsernamePristine = true
   loginInProgress = false
   pattern = '^[a-zA-Z0-9\u0590-\u05FF]+$'
   userExists = 'no'
@@ -58,8 +57,6 @@ export class LoginComponent extends DestroyerComponent implements OnInit, OnDest
 
   constructor(private store: Store<State>, private actionsSubject$: ActionsSubject) {
     super()
-    this.onSubmit = debounce(this.onSubmit, 300, {leading: true, trailing: false})
-    this.onUsernameChange = debounce(this.onUsernameChange, 300, {leading: false, trailing: true})
   }
 
   ngOnInit() {
@@ -71,7 +68,10 @@ export class LoginComponent extends DestroyerComponent implements OnInit, OnDest
       select(selectLastUserLoggedIn),
       take(1)
     ).subscribe((lastUserLoggedIn: any) => {
-      if (lastUserLoggedIn) this.onUsernameChange(lastUserLoggedIn.username)
+      if (lastUserLoggedIn) {
+        this.onUsernameChange(lastUserLoggedIn.username)
+        this.initialUsername = lastUserLoggedIn.username
+      }
       setTimeout(() => { this.usernameInput.nativeElement.focus() }, 500)
     })
 
@@ -93,7 +93,7 @@ export class LoginComponent extends DestroyerComponent implements OnInit, OnDest
       this.webkitAutofillUsed = webkitAutofillUsed
     })
 
-    // need to listen for an action here (fires every time) instead of using a memoized selector
+    // we listen for an action here (fires every time) instead of using a memoized selector
     // handle username change
     this.actionsSubject$.pipe(
       takeUntil(this.unsubscribe$),
@@ -122,6 +122,7 @@ export class LoginComponent extends DestroyerComponent implements OnInit, OnDest
   onUsernameChangeNoDebounce(username) {
     this.preUsernameChange(username) // do this with no debounce
     this.onUsernameChange(username)
+    this.user.username = username // laggy without this line for unknown reason
   }
 
   onPasswordChange(password) {
@@ -131,7 +132,7 @@ export class LoginComponent extends DestroyerComponent implements OnInit, OnDest
   }
 
   onEnter(evt) {
-    const name = evt.target.getAttribute('name')
+    const name = evt.target.name
     if (name === 'bhUsername') {
       this.passwordComponent.passwordInput.nativeElement.focus()
     } else if (name === 'bhPassword') {
@@ -146,6 +147,7 @@ export class LoginComponent extends DestroyerComponent implements OnInit, OnDest
     this.usernameInput.nativeElement.focus()
   }
 
+  @debounce(300, true, false)
   onSubmit() {
     let webkitAutofill = false
     const browserSlug = getBrowser().browser.slug
@@ -168,6 +170,7 @@ export class LoginComponent extends DestroyerComponent implements OnInit, OnDest
   }
 
   private preUsernameChange(username) {
+    if (username !== this.initialUsername) this.isUsernamePristine = false
     this.dirForUsername = getDir(username)
     if (!this.hasInvalidChars(this.user.username) && this.boardText1 !== 'Have we') {
       this.usernameUpdateInProgress = true
@@ -176,6 +179,7 @@ export class LoginComponent extends DestroyerComponent implements OnInit, OnDest
     }
   }
 
+  @debounce(300, false, true)
   private onUsernameChange(username) {
     this.preUsernameChange(username)
     this.store.dispatch(new GetUserExistsAction(username))

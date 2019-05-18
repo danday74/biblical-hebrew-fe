@@ -1,0 +1,82 @@
+{
+  "sheva": {
+    "name": "sheva",
+    "title": "sheva",
+    "value": "\u05B0"
+  },
+  "hataf-segol": {
+    "name": "hataf-segol",
+    "title": "hataf segol",
+    "value": "\u05B1"
+  },
+  "hataf-patah": {
+    "name": "hataf-patah",
+    "title": "hataf pataḥ",
+    "value": "\u05B2"
+  },
+  "hataf-qamats": {
+    "name": "hataf-qamats",
+    "title": "hataf qamats",
+    "value": "\u05B3"
+  },
+  "hiriq": {
+    "name": "hiriq",
+    "title": "ḥíriq",
+    "value": "\u05B4"
+  },
+  "tsere": {
+    "name": "tsere",
+    "title": "tsére",
+    "value": "\u05B5"
+  },
+  "segol": {
+    "name": "segol",
+    "title": "segol",
+    "value": "\u05B6"
+  },
+  "patah": {
+    "name": "patah",
+    "title": "pataḥ",
+    "value": "\u05B7"
+  },
+  "qamats": {
+    "name": "qamats",
+    "title": "qamats",
+    "value": "\u05B8"
+  },
+  "sin-dot": {
+    "name": "sin-dot",
+    "title": "sin dot",
+    "value": "\u05C2"
+  },
+  "shin-dot": {
+    "name": "shin-dot",
+    "title": "shin dot",
+    "value": "\u05C1"
+  },
+  "holem": {
+    "name": "holem",
+    "title": "ḥólem",
+    "value": "\u05B9"
+  },
+  "dagesh": {
+    "name": "dagesh",
+    "title": "dagesh",
+    "value": "\u05BC"
+  },
+  "qubbuts": {
+    "name": "qubbuts",
+    "title": "qubbuts",
+    "value": "\u05BB"
+  },
+  "holem-vav": {
+    "name": "holem-vav",
+    "title": "ḥólem vav",
+    "value": "וֹ"
+  },
+  "shuruq": {
+    "name": "shuruq",
+    "title": "shúruq",
+    "value": "וּ"
+  }
+}

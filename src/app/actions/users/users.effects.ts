@@ -25,7 +25,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects'
 import { Store } from '@ngrx/store'
 import { fromPromise } from 'rxjs/internal-compatibility'
 import { delay, map, mapTo, mergeMap, tap } from 'rxjs/operators'
-import config from '../../../config'
+import config from '../../app.config'
 
 const lastUserLoggedInKey = 'lastUserLoggedIn'
 

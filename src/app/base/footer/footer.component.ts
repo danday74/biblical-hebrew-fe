@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import moment from 'moment'
-import config from '../../../config'
+import config from '../../app.config'
 
 @Component({
   selector: 'app-footer',

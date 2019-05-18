@@ -17,8 +17,8 @@ export class GaClickEventTrackerDirective {
 
   constructor(private googleAnalyticsService: GoogleAnalyticsService) {}
 
-  @HostListener('click', ['$event']) onClick(evt) {
-
+  @HostListener('click', ['$event'])
+  onClick(evt) {
     const tempEl = $(evt.target)
     const elNodeName = GaClickEventTrackerDirective.getNodeName(tempEl)
     const parentNodeName = GaClickEventTrackerDirective.getNodeName(tempEl.parent())

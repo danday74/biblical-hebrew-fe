@@ -4,7 +4,7 @@ import { NavigationEnd, Router } from '@angular/router'
 import { selectSignUpInProgress, selectUser } from '@app/actions/users/users.selectors'
 import { State } from '@app/reducers'
 import { select, Store } from '@ngrx/store'
-import config from '../../../config'
+import config from '../../app.config'
 import titleLookup from './title-lookup.json'
 
 @Injectable({providedIn: 'root'})

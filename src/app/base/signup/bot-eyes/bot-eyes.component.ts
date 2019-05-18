@@ -1,6 +1,6 @@
 import { Component, HostListener, Input, OnChanges } from '@angular/core'
+import { memoize } from '@app/decorators/memoize'
 import * as $ from 'jquery'
-import { memoize } from 'lodash'
 
 // based on http://jsfiddle.net/opherv/ddGHz
 
@@ -46,32 +46,24 @@ export class BotEyesComponent implements OnChanges {
     })
   }
 
+  @memoize(['this.eyes.left.clickCount'])
   get leftEyeSrc() {
-    const memo = memoize(leftEyeClickCount => {
-      return leftEyeClickCount < this.maxEyeClickCount ? this.botEyesDir + '/bot-eye-tiny.png' : this.botEyesDir + '/bot-eye-black-tiny.png'
-    })
-    return memo(this.eyes.left.clickCount)
+    return this.eyes.left.clickCount < this.maxEyeClickCount ? this.botEyesDir + '/bot-eye-tiny.png' : this.botEyesDir + '/bot-eye-black-tiny.png'
   }
 
+  @memoize(['this.eyes.left.clickCount'])
   get leftEyeOrangeSrc() {
-    const memo = memoize(leftEyeClickCount => {
-      return leftEyeClickCount < this.maxEyeClickCount ? this.botEyesDir + '/bot-eye-orange-tiny.png' : this.botEyesDir + '/bot-eye-black-tiny.png'
-    })
-    return memo(this.eyes.left.clickCount)
+    return this.eyes.left.clickCount < this.maxEyeClickCount ? this.botEyesDir + '/bot-eye-orange-tiny.png' : this.botEyesDir + '/bot-eye-black-tiny.png'
   }
 
+  @memoize(['this.eyes.right.clickCount'])
   get rightEyeSrc() {
-    const memo = memoize(rightEyeClickCount => {
-      return rightEyeClickCount < this.maxEyeClickCount ? this.botEyesDir + '/bot-eye-tiny.png' : this.botEyesDir + '/bot-eye-black-tiny.png'
-    })
-    return memo(this.eyes.right.clickCount)
+    return this.eyes.right.clickCount < this.maxEyeClickCount ? this.botEyesDir + '/bot-eye-tiny.png' : this.botEyesDir + '/bot-eye-black-tiny.png'
   }
 
+  @memoize(['this.eyes.right.clickCount'])
   get rightEyeOrangeSrc() {
-    const memo = memoize(rightEyeClickCount => {
-      return rightEyeClickCount < this.maxEyeClickCount ? this.botEyesDir + '/bot-eye-orange-tiny.png' : this.botEyesDir + '/bot-eye-black-tiny.png'
-    })
-    return memo(this.eyes.right.clickCount)
+    return this.eyes.right.clickCount < this.maxEyeClickCount ? this.botEyesDir + '/bot-eye-orange-tiny.png' : this.botEyesDir + '/bot-eye-black-tiny.png'
   }
 
   onLeftEyeClick() {

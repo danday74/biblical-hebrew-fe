@@ -7,7 +7,7 @@ import { select, Store } from '@ngrx/store'
 import * as $ from 'jquery'
 import { combineLatest } from 'rxjs'
 import { filter, take } from 'rxjs/operators'
-import config from '../config'
+import config from './app.config'
 import { selectSignUpInProgress, selectUser, selectWhoAmICheck } from './actions/users/users.selectors'
 
 enum BrowserSupport {

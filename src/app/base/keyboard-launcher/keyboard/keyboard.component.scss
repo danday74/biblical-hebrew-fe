@@ -1,0 +1,76 @@
+@import '../../../globals';
+
+$keyboardBorderColor: #111;
+$keyboardRowIndent: ($keyboardKeySize + $keyboardKeyMargin) / 2;
+
+.keyboard {
+  width: $keyboardWidth + unquote('px');
+  height: $keyboardHeight + unquote('px');
+  max-height: 0;
+  background-color: #222;
+  border: 3px solid $keyboardBorderColor;
+  border-radius: 5px;
+  box-shadow: 4px 4px 5px #888;
+  color: #FFF;
+  opacity: 0.85;
+  overflow: hidden;
+  user-select: none;
+  animation: slide-keyboard-up 1s;
+  animation-fill-mode: forwards; // retains animation on completion
+}
+
+@keyframes slide-keyboard-up {
+  from {
+    max-height: 0;
+  }
+  to {
+    max-height: $keyboardHeight + unquote('px');
+  }
+}
+
+.keyboard-controls {
+
+  padding-bottom: 4px;
+
+  .keyboard-control-group {
+    margin-right: 20px;
+
+    &:nth-child(1) {
+      margin-right: 5px;
+    }
+
+    .keyboard-control {
+      padding: 4px 5px 3px;
+      cursor: pointer;
+
+      &.disabled {
+        opacity: 0.4;
+      }
+    }
+  }
+}
+
+.keyboard-drag-handle {
+  background-color: #444;
+  padding-left: 10px;
+  border-bottom: 2px solid $keyboardBorderColor;
+  padding-bottom: 2px;
+}
+
+.keyboard-row {
+  clear: both;
+}
+
+.keyboard-row-1 {
+}
+
+.keyboard-row-2 {
+  margin-left: $keyboardRowIndent + unquote('px');
+}
+
+.keyboard-row-3 {
+}
+
+.keyboard-row-4 {
+  margin-left: ($keyboardRowIndent * 3) + unquote('px');
+}

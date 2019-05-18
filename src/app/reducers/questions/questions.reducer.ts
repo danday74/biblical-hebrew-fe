@@ -8,7 +8,8 @@ export const initialQuestionsState: QuestionsState = {
   questions: {}
 }
 
-export function questionsReducer(state = initialQuestionsState, action: QuestionsActions): QuestionsState {
+export const questionsReducer = (state = initialQuestionsState, action: QuestionsActions): QuestionsState => {
+
   switch (action.type) {
 
     case QuestionsActionTypes.QuestionsLoaded:

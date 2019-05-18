@@ -19,7 +19,7 @@
           <div class="form-row">
             <div class="col-8 mb-3 offset-2">
               <div class="text-right">
-                <span class="fake-link small" [ngClass]="{invisible: !bhUsername.pristine || !user.username}" (click)="onForget()">
+                <span class="fake-link small" [ngClass]="{ invisible: !bhUsername.pristine || !user.username || !isUsernamePristine }" (click)="onForget()">
                   forget {{ user.username }}
                 </span>
               </div>
@@ -32,7 +32,8 @@
         <div class="form-row">
           <div class="col-8 mb-3 offset-2">
             <div class="input-group">
-              <input #usernameInput class="form-control gentle-shade" spellcheck="false" autofocus [dir]="dirForUsername"
+              <input #usernameInput appInputBlur (appInputBlurValue)="onUsernameChangeNoDebounce($event)" (appInputBlurEnter)="onEnter($event)"
+                     class="form-control gentle-shade" spellcheck="false" autofocus [dir]="dirForUsername"
                      name="bhUsername" #bhUsername="ngModel" placeholder="Username" aria-label="Username"
                      minlength="6" maxlength="15" required="required" [pattern]="pattern"
                      [ngModel]="user.username" (ngModelChange)="onUsernameChangeNoDebounce($event)" (keyup.enter)="onEnter($event)">
@@ -40,10 +41,10 @@
           </div>
           <div class="col-2 mb-3">
             <ng-container *ngIf="!bhUsername.errors">
-              <fa-icon class="success-tick" [icon]="faCheck"></fa-icon>
+              <fa-icon class="success-tick" [icon]="'check'"></fa-icon>
             </ng-container>
             <ng-container *ngIf="bhUsername.errors?.pattern">
-              <fa-icon class="failure-cross" [icon]="faTimes"></fa-icon>
+              <fa-icon class="failure-cross" [icon]="'times'"></fa-icon>
             </ng-container>
           </div>
         </div>

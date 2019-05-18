@@ -8,7 +8,7 @@ import { DestroyerComponent } from '@app/utils/destroyer.component'
 import { getDir } from '@app/utils/utils'
 import { ActionsSubject, select, Store } from '@ngrx/store'
 import { filter, takeUntil } from 'rxjs/operators'
-import config from 'src/config'
+import config from 'src/app/app.config'
 
 @Component({
   selector: 'app-signup',

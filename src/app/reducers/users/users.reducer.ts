@@ -18,7 +18,7 @@ export const initialUsersState: UsersState = {
   whoAmICheck: null
 }
 
-export function usersReducer(state = initialUsersState, action: UsersActions): UsersState {
+export const usersReducer = (state = initialUsersState, action: UsersActions): UsersState => {
   switch (action.type) {
 
     case UsersActionTypes.UserLoaded:

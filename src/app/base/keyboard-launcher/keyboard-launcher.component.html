@@ -6,6 +6,6 @@
 
 <ng-container *ngIf="keyboardOpen">
   <div class="keyboard-wrapper">
-    <app-keyboard [bounds]="bounds"></app-keyboard>
+    <app-keyboard [bounds]="bounds" [inputHasFocus]="inputHasFocus" [nextInputButtonEnabled]="signUpInProgress"></app-keyboard>
   </div>
 </ng-container>

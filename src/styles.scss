@@ -90,6 +90,24 @@ a, .fake-link {
 
 //noinspection CssOverwrittenProperties
 .ng-draggable {
+  &.ng-dragging {
+    cursor: move;
+    cursor: grabbing;
+    background-color: #333 !important;
+  }
+
   cursor: move;
   cursor: grab;
+}
+
+html.keyboard input.just-under-keyboard-control:not(:focus) {
+  // bootswatch spacelab
+  border-color: #90aece;
+  box-shadow: 0 0 0 0.2rem rgba(68, 110, 155, 0.25);
+}
+
+$underKeyboardControlColor: #444;
+html.keyboard input.under-keyboard-control:not(:focus) {
+  border-color: rgba($underKeyboardControlColor, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba($underKeyboardControlColor, 0.25);
 }

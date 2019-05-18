@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core'
 import { LogoutAction } from '@app/actions/users/users.actions'
 import { selectUser } from '@app/actions/users/users.selectors'
 import { State } from '@app/reducers'
-import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import { select, Store } from '@ngrx/store'
 
 @Component({
@@ -12,8 +11,6 @@ import { select, Store } from '@ngrx/store'
 })
 
 export class NavbarComponent implements OnInit {
-
-  faSignOutAlt = faSignOutAlt
 
   user$
 

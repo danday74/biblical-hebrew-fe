@@ -3,7 +3,7 @@ import { CustomAction } from '@app/actions/custom-action'
 import { environment } from '@environments/environment'
 import { Action } from '@ngrx/store'
 import * as Bowser from 'bowser'
-import { forOwn } from 'lodash'
+import { forOwn, uniq } from 'lodash'
 
 declare var replaceLast: (str, pattern, replacement) => string
 declare var slugify: (str, options) => any
@@ -49,4 +49,32 @@ export const hasHebrewCharsOnly = str => {
 
 export const getDir = str => {
   return hasHebrewCharsOnly(str) ? 'rtl' : 'ltr'
+}
+
+export const isNumeric = str => {
+  return /^\d+$/.test(str)
+}
+
+export const splitAtIndex = (str: string, idx: number) => {
+  const part1 = str.substring(0, idx)
+  const part2 = str.substring(idx)
+  return [part1, part2]
+}
+
+export const splitAtIndices = (str: string, indices: number[]) => {
+  indices = uniq(indices.sort())
+  let prevIdx = 0
+  indices = indices.map(idx => {
+    idx = idx - prevIdx
+    prevIdx = idx
+    return idx
+  })
+  const parts = []
+  indices.forEach(idx => {
+    const temp = splitAtIndex(str, idx)
+    parts.push(temp[0])
+    str = temp[1]
+  })
+  parts.push(str)
+  return parts
 }
