@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser'
 import { GenericEffects } from '@app/actions/generic/generic.effects'
 import { InitEffects } from '@app/actions/init/init.effects'
 import { UiEffects } from '@app/actions/ui/ui.effects'
-import { KeyboardLauncherModule } from '@app/base/keyboard-launcher/keyboard-launcher.module'
+import { KeyboardModule } from '@app/base/keyboard/keyboard.module'
 import { environment } from '@environments/environment'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -85,7 +85,7 @@ import { DestroyerDirective } from './utils/destroyer.directive'
     FontAwesomeModule,
     FormsModule,
     HttpClientModule,
-    KeyboardLauncherModule,
+    KeyboardModule,
     RecaptchaModule,
     EffectsModule.forRoot([UiEffects, UsersEffects, GenericEffects, InitEffects]),
     StoreModule.forRoot(reducers, {metaReducers}),
