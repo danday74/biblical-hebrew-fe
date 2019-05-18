@@ -39,16 +39,16 @@ export const getBrowser = () => {
   return browser
 }
 
+export const hasHebrewCharsOnly = str => {
+  return str && RegExp('^[\u0590-\u05FF]+$').test(str)
+}
+
 export const getDir = str => {
   return hasHebrewCharsOnly(str) ? 'rtl' : 'ltr'
 }
 
 export const getRandomItemFromArray = (array: Array<any>) => {
   return array[Math.floor(Math.random() * array.length)]
-}
-
-export const hasHebrewCharsOnly = str => {
-  return str && RegExp('^[\u0590-\u05FF]+$').test(str)
 }
 
 export const asNumber = str => {
