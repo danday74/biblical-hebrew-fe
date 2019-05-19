@@ -10,7 +10,7 @@ import {
   WebkitAutofillUsedAction
 } from '@app/actions/users/users.actions'
 import { selectLastUserLoggedIn, selectUser, selectWebkitAutofillUsed } from '@app/actions/users/users.selectors'
-import { PasswordComponent } from '@app/base/shared/password/password.component'
+import { PasswordComponent } from '@app/base/base-shared/password/password.component'
 import { debounce } from '@app/decorators/debounce'
 import { State } from '@app/reducers'
 import { DestroyerComponent } from '@app/utils/destroyer.component'
@@ -19,7 +19,7 @@ import { ActionsSubject, select, Store } from '@ngrx/store'
 import * as $ from 'jquery'
 import { cloneDeep } from 'lodash'
 import { filter, take, takeUntil } from 'rxjs/operators'
-import config from '../../app.config'
+import config from '../../../app.config'
 
 @Component({
   selector: 'app-login',
