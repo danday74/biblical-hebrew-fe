@@ -37,5 +37,5 @@ $keyboardToggleWidth: 80;
   position: absolute;
   bottom: $footerHeight;
   left: 50%;
-  margin-left: -($keyboardWidth / 2) + unquote('px');
+  margin-left: -($keyboardSmallWidth / 2) + unquote('px');
 }

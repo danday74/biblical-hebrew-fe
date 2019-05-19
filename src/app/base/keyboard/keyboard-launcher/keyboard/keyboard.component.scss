@@ -1,11 +1,11 @@
 @import '../../../../globals';
 
 $keyboardBorderColor: #111;
-$keyboardRowIndent: ($keyboardKeySize + $keyboardKeyMargin) / 2;
+$keyboardRowIndent: ($keyboardSmallKeySize + $keyboardSmallKeyMargin) / 2;
 
 .keyboard {
-  width: $keyboardWidth + unquote('px');
-  height: $keyboardHeight + unquote('px');
+  width: $keyboardSmallWidth + unquote('px');
+  height: $keyboardSmallHeight + unquote('px');
   max-height: 0;
   background-color: #222;
   border: 3px solid $keyboardBorderColor;
@@ -24,7 +24,7 @@ $keyboardRowIndent: ($keyboardKeySize + $keyboardKeyMargin) / 2;
     max-height: 0;
   }
   to {
-    max-height: $keyboardHeight + unquote('px');
+    max-height: $keyboardSmallHeight + unquote('px');
   }
 }
 

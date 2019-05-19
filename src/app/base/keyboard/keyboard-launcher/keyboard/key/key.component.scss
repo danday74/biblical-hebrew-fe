@@ -1,10 +1,10 @@
 @import '../../../../../globals';
 
 .key {
-  margin-left: $keyboardKeyMargin + unquote('px');
-  margin-top: $keyboardKeyMargin + unquote('px');
-  width: $keyboardKeySize + unquote('px');
-  height: $keyboardKeySize + unquote('px');
+  margin-left: $keyboardSmallKeyMargin + unquote('px');
+  margin-top: $keyboardSmallKeyMargin + unquote('px');
+  width: $keyboardSmallKeySize + unquote('px');
+  height: $keyboardSmallKeySize + unquote('px');
   background-color: #0C1011;
   border: 1px solid #000;
   border-radius: 5px;
@@ -58,7 +58,7 @@
 // backspace and enter
 
 .key.big {
-  width: ($keyboardKeySize * 1.8) + unquote('px');
+  width: ($keyboardSmallKeySize * 1.8) + unquote('px');
 }
 
 .key.backspace .text {
