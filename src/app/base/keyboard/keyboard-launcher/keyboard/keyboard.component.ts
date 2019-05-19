@@ -2,6 +2,7 @@ import { Component, HostListener, Input, OnChanges, OnInit, SimpleChanges, ViewC
 import { SetKeyboardOpenAction } from '@app/actions/ui/ui.actions'
 import { selectInputBlur } from '@app/actions/ui/ui.selectors'
 import { debounce } from '@app/decorators/debounce'
+import { KeyboardSize } from '@app/enums/keyboard-size.enum'
 import { State } from '@app/reducers'
 import { CommsEnum, CommsService } from '@app/services/comms/comms.service'
 import { StorageService } from '@app/services/storage/storage.service'
@@ -29,6 +30,7 @@ export class KeyboardComponent extends DestroyerComponent implements OnInit, OnC
   focusInputButtonEnabled = false
   hasBeenDragged: boolean
   hasMoved = false
+  keyboardSize: KeyboardSize = KeyboardSize.Small
   lang: string
   lower = false
   vowelToggle = true
@@ -72,6 +74,14 @@ export class KeyboardComponent extends DestroyerComponent implements OnInit, OnC
     }
   }
 
+  onLargerKeyboard() {
+    if (this.keyboardSize === KeyboardSize.Small) {
+      this.keyboardSize = KeyboardSize.Medium
+    } else if (this.keyboardSize === KeyboardSize.Medium) {
+      this.keyboardSize = KeyboardSize.Large
+    }
+  }
+
   onMinimise() {
     this.resetPositionNow()
   }
@@ -88,6 +98,14 @@ export class KeyboardComponent extends DestroyerComponent implements OnInit, OnC
         if (idx === inputBlur.length) idx = 0
         inputBlur[idx].focus()
       }
+    }
+  }
+
+  onSmallerKeyboard() {
+    if (this.keyboardSize === KeyboardSize.Large) {
+      this.keyboardSize = KeyboardSize.Medium
+    } else if (this.keyboardSize === KeyboardSize.Medium) {
+      this.keyboardSize = KeyboardSize.Small
     }
   }
 
