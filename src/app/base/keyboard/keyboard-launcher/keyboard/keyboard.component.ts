@@ -2,9 +2,10 @@ import { Component, HostListener, Input, OnChanges, OnInit, SimpleChanges, ViewC
 import { SetKeyboardOpenAction } from '@app/actions/ui/ui.actions'
 import { selectInputBlur } from '@app/actions/ui/ui.selectors'
 import { debounce } from '@app/decorators/debounce'
-import { KeyboardSize } from '@app/enums/keyboard-size.enum'
+import { CommsEnum } from '@app/enums/comms.enum'
+import { KeyboardSizeEnum } from '@app/enums/keyboard-size.enum'
 import { State } from '@app/reducers'
-import { CommsEnum, CommsService } from '@app/services/comms/comms.service'
+import { CommsService } from '@app/services/comms/comms.service'
 import { StorageService } from '@app/services/storage/storage.service'
 import { DestroyerComponent } from '@app/utils/destroyer.component'
 import { select, Store } from '@ngrx/store'
@@ -30,7 +31,7 @@ export class KeyboardComponent extends DestroyerComponent implements OnInit, OnC
   focusInputButtonEnabled = false
   hasBeenDragged: boolean
   hasMoved = false
-  keyboardSize: KeyboardSize = KeyboardSize.Small
+  keyboardSize: KeyboardSizeEnum = KeyboardSizeEnum.Small
   lang: string
   lower = false
   vowelToggle = true
@@ -75,10 +76,10 @@ export class KeyboardComponent extends DestroyerComponent implements OnInit, OnC
   }
 
   onLargerKeyboard() {
-    if (this.keyboardSize === KeyboardSize.Small) {
-      this.keyboardSize = KeyboardSize.Medium
-    } else if (this.keyboardSize === KeyboardSize.Medium) {
-      this.keyboardSize = KeyboardSize.Large
+    if (this.keyboardSize === KeyboardSizeEnum.Small) {
+      this.keyboardSize = KeyboardSizeEnum.Medium
+    } else if (this.keyboardSize === KeyboardSizeEnum.Medium) {
+      this.keyboardSize = KeyboardSizeEnum.Large
     }
   }
 
@@ -102,10 +103,10 @@ export class KeyboardComponent extends DestroyerComponent implements OnInit, OnC
   }
 
   onSmallerKeyboard() {
-    if (this.keyboardSize === KeyboardSize.Large) {
-      this.keyboardSize = KeyboardSize.Medium
-    } else if (this.keyboardSize === KeyboardSize.Medium) {
-      this.keyboardSize = KeyboardSize.Small
+    if (this.keyboardSize === KeyboardSizeEnum.Large) {
+      this.keyboardSize = KeyboardSizeEnum.Medium
+    } else if (this.keyboardSize === KeyboardSizeEnum.Medium) {
+      this.keyboardSize = KeyboardSizeEnum.Small
     }
   }
 

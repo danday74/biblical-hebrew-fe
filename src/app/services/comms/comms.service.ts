@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core'
+import { CommsEnum } from '@app/enums/comms.enum'
 import { Subject } from 'rxjs'
-
-export enum CommsEnum {
-  Keyboard = 'keyboard'
-}
 
 export interface Comm {
   type: CommsEnum,
