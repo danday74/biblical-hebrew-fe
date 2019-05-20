@@ -1,10 +1,25 @@
 @import '../../../../../globals';
 
+@mixin key-mixin($keyMargin, $keySize) {
+  margin-left: $keyMargin + unquote('px');
+  margin-top: $keyMargin + unquote('px');
+  width: $keySize + unquote('px');
+  height: $keySize + unquote('px');
+}
+
+:host-context(.keyboard-size.keyboard-small) .key {
+  @include key-mixin($keyboardSmallKeyMargin, $keyboardSmallKeySize);
+}
+
+:host-context(.keyboard-size.keyboard-medium) .key {
+  @include key-mixin($keyboardMediumKeyMargin, $keyboardMediumKeySize);
+}
+
+:host-context(.keyboard-size.keyboard-large) .key {
+  @include key-mixin($keyboardLargeKeyMargin, $keyboardLargeKeySize);
+}
+
 .key {
-  margin-left: $keyboardSmallKeyMargin + unquote('px');
-  margin-top: $keyboardSmallKeyMargin + unquote('px');
-  width: $keyboardSmallKeySize + unquote('px');
-  height: $keyboardSmallKeySize + unquote('px');
   background-color: #0C1011;
   border: 1px solid #000;
   border-radius: 5px;
@@ -36,7 +51,7 @@
 .key.caps {
   position: absolute;
   left: 0;
-  margin-top: -1px;
+  margin-top: -1px !important;
   background-color: transparent;
   border: none;
   transition: transform 300ms linear;
@@ -57,8 +72,20 @@
 
 // backspace and enter
 
-.key.big {
-  width: ($keyboardSmallKeySize * 1.8) + unquote('px');
+@mixin key-big-mixin($keySize) {
+  width: ($keySize * 1.8) + unquote('px');
+}
+
+:host-context(.keyboard-size.keyboard-small) .key.big {
+  @include key-big-mixin($keyboardSmallKeySize);
+}
+
+:host-context(.keyboard-size.keyboard-medium) .key.big {
+  @include key-big-mixin($keyboardMediumKeySize);
+}
+
+:host-context(.keyboard-size.keyboard-large) .key.big {
+  @include key-big-mixin($keyboardLargeKeySize);
 }
 
 .key.backspace .text {

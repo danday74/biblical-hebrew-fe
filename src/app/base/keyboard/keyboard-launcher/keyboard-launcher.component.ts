@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core'
 import { SetKeyboardOpenAction } from '@app/actions/ui/ui.actions'
 import { selectInputHasFocus, selectKeyboardOpen } from '@app/actions/ui/ui.selectors'
 import { selectSignUpInProgress } from '@app/actions/users/users.selectors'
+import config from '@app/app.config'
+import { CommsEnum } from '@app/enums/comms.enum'
 import { State } from '@app/reducers'
+import { CommsService } from '@app/services/comms/comms.service'
 import { DestroyerComponent } from '@app/utils/destroyer.component'
 import { select, Store } from '@ngrx/store'
 import { takeUntil } from 'rxjs/operators'
@@ -19,7 +22,7 @@ export class KeyboardLauncherComponent extends DestroyerComponent implements OnI
   keyboardOpen: boolean
   signUpInProgress: boolean
 
-  constructor(private store: Store<State>) {
+  constructor(private commsService: CommsService, private store: Store<State>) {
     super()
   }
 
@@ -47,6 +50,8 @@ export class KeyboardLauncherComponent extends DestroyerComponent implements OnI
     ).subscribe(signUpInProgress => {
       this.signUpInProgress = signUpInProgress == null
     })
+
+    this.commsService.sendBehavior({type: CommsEnum.KeyboardSize, payload: config.defaultKeyboardSize})
   }
 
   onOpenKeyboard() {

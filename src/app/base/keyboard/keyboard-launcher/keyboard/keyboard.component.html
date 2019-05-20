@@ -1,115 +1,113 @@
 <div [ngDraggable] #block="ngDraggable" class="keyboard" [bounds]="bounds" [inBounds]="true" [handle]="keyboardDragHandle" (endOffset)="onEndOffset($event)">
-  <div class="keyboard-size" [ngClass]="keyboardSize">
 
-    <!-- keyboard controls -->
-    <div class="keyboard-controls float-right">
+  <!-- keyboard controls -->
+  <div class="keyboard-controls float-right">
 
-      <div class="keyboard-control-group float-right">
-        <span class="keyboard-control" [ngClass]="{disabled: !hasMoved}" (click)="onMinimise()">
-          <fa-icon [icon]="'window-minimize'"></fa-icon>
-        </span>
-        <span class="keyboard-control" (click)="onClose()">
-          <fa-icon [icon]="'times-circle'"></fa-icon>
-        </span>
-      </div>
-
-      <div class="keyboard-control-group float-right">
-        <span class="keyboard-control" [ngClass]="{disabled: !focusInputButtonEnabled}" (click)="onKey('focus')" title="focus input">
-          <fa-icon [icon]="'bullseye'"></fa-icon>
-        </span>
-        <span class="keyboard-control" [ngClass]="{disabled: !nextInputButtonEnabled}" (click)="onNextInput()" title="next input">
-          <span class="next-input">
-            <fa-icon [icon]="'step-forward'"></fa-icon>
-          </span>
-        </span>
-        <span class="keyboard-control" (click)="onToggleLanguage()" title="toggle language">
-          <fa-icon [icon]="'globe'"></fa-icon>
-        </span>
-      </div>
-
-      <div class="keyboard-control-group float-right">
-        <span class="keyboard-control" [ngClass]="{disabled: keyboardSize === 'keyboard-small'}" (click)="onSmallerKeyboard()" title="smaller keyboard">
-          <fa-icon [icon]="'compress'"></fa-icon>
-        </span>
-        <span class="keyboard-control" [ngClass]="{disabled: keyboardSize === 'keyboard-large'}" (click)="onLargerKeyboard()" title="larger keyboard">
-          <fa-icon [icon]="'expand'"></fa-icon>
-        </span>
-      </div>
-
-      <div class="keyboard-control-group float-right">
-        <span *ngIf="lang==='he'" class="keyboard-control" (click)="onToggleVowels()" title="toggle vowels">
-          <fa-icon [icon]="'toggle-on'" [flip]="vowelToggle ? null : 'horizontal'"></fa-icon>
-        </span>
-      </div>
+    <div class="keyboard-control-group float-right">
+      <span class="keyboard-control" [ngClass]="{disabled: !hasMoved}" (click)="onMinimise()">
+        <fa-icon [icon]="'window-minimize'"></fa-icon>
+      </span>
+      <span class="keyboard-control" (click)="onClose()">
+        <fa-icon [icon]="'times-circle'"></fa-icon>
+      </span>
     </div>
 
-    <!-- keyboard drag handle -->
-    <div #keyboardDragHandle class="keyboard-drag-handle">
-      <span>{{ hasBeenDragged ? '&nbsp;' : 'drag me' }}</span>
+    <div class="keyboard-control-group float-right">
+      <span class="keyboard-control" [ngClass]="{disabled: !focusInputButtonEnabled}" (click)="onKey('focus')" title="focus input">
+        <fa-icon [icon]="'bullseye'"></fa-icon>
+      </span>
+      <span class="keyboard-control" [ngClass]="{disabled: !nextInputButtonEnabled}" (click)="onNextInput()" title="next input">
+        <span class="next-input">
+          <fa-icon [icon]="'step-forward'"></fa-icon>
+        </span>
+      </span>
+      <span class="keyboard-control" (click)="onToggleLanguage()" title="toggle language">
+        <fa-icon [icon]="'globe'"></fa-icon>
+      </span>
     </div>
 
-    <!-- keyboard keys -->
-    <div class="keyboard-keys">
-      <div class="keyboard-row keyboard-row-1">
-        <app-key en="1" he="sheva" [lang]="lang" [vowelToggle]="vowelToggle" (key)="onKey($event)"></app-key>
-        <app-key en="2" he="hataf-segol" [lang]="lang" [vowelToggle]="vowelToggle" (key)="onKey($event)"></app-key>
-        <app-key en="3" he="hataf-patah" [lang]="lang" [vowelToggle]="vowelToggle" (key)="onKey($event)"></app-key>
-        <app-key en="4" he="hataf-qamats" [lang]="lang" [vowelToggle]="vowelToggle" (key)="onKey($event)"></app-key>
-        <app-key en="5" he="hiriq" [lang]="lang" [vowelToggle]="vowelToggle" (key)="onKey($event)"></app-key>
-        <app-key en="6" he="tsere" [lang]="lang" [vowelToggle]="vowelToggle" (key)="onKey($event)"></app-key>
-        <app-key en="7" he="segol" [lang]="lang" [vowelToggle]="vowelToggle" (key)="onKey($event)"></app-key>
-        <app-key en="8" he="patah" [lang]="lang" [vowelToggle]="vowelToggle" (key)="onKey($event)"></app-key>
-        <app-key en="9" he="qamats" [lang]="lang" [vowelToggle]="vowelToggle" (key)="onKey($event)"></app-key>
-        <app-key en="0" he="sin-dot" [lang]="lang" [vowelToggle]="vowelToggle" (key)="onKey($event)"></app-key>
-        <app-key he="shin-dot" [lang]="lang" [vowelToggle]="vowelToggle" (key)="onKey($event)"></app-key>
-        <app-key he="holem" [lang]="lang" [vowelToggle]="vowelToggle" (key)="onKey($event)"></app-key>
-        <app-key he="dagesh" [lang]="lang" [vowelToggle]="vowelToggle" (key)="onKey($event)"></app-key>
-        <app-key en="backspace" he="backspace" [lang]="lang" (key)="onKey($event)"></app-key>
-      </div>
-      <div class="keyboard-row keyboard-row-2">
-        <app-key en="Q" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
-        <app-key en="W" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
-        <app-key en="E" he="qof" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
-        <app-key en="R" he="resh" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
-        <app-key en="T" he="alef" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
-        <app-key en="Y" he="tet" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
-        <app-key en="U" he="vav" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
-        <app-key en="I" he="nun-final" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
-        <app-key en="O" he="mem-final" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
-        <app-key en="P" he="peh" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
-        <app-key></app-key>
-        <app-key he="holem-vav" [lang]="lang" [vowelToggle]="vowelToggle" (key)="onKey($event)"></app-key>
-        <app-key he="shuruq" [lang]="lang" [vowelToggle]="vowelToggle" (key)="onKey($event)"></app-key>
-      </div>
-      <div class="keyboard-row keyboard-row-3">
-        <app-key en="caps" [lang]="lang" [lower]="lower" (toggleCase)="onToggleCase()"></app-key>
-        <app-key en="A" he="shin" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
-        <app-key en="S" he="dalet" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
-        <app-key en="D" he="gimel" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
-        <app-key en="F" he="kaf" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
-        <app-key en="G" he="ayin" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
-        <app-key en="H" he="yod" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
-        <app-key en="J" he="chet" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
-        <app-key en="K" he="lamed" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
-        <app-key en="L" he="kaf-final" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
-        <app-key he="peh-final" [lang]="lang" (key)="onKey($event)"></app-key>
-        <app-key></app-key>
-        <app-key he="qubbuts" [lang]="lang" [vowelToggle]="vowelToggle" (key)="onKey($event)"></app-key>
-        <app-key en="enter" he="enter" [lang]="lang" (key)="onKey($event)"></app-key>
-      </div>
-      <div class="keyboard-row keyboard-row-4">
-        <app-key en="Z" he="zayin" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
-        <app-key en="X" he="samekh" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
-        <app-key en="C" he="bet" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
-        <app-key en="V" he="heh" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
-        <app-key en="B" he="nun" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
-        <app-key en="N" he="mem" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
-        <app-key en="M" he="tsadeh" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
-        <app-key he="tav" [lang]="lang" (key)="onKey($event)"></app-key>
-        <app-key he="tsadeh-final" [lang]="lang" (key)="onKey($event)"></app-key>
-        <app-key en="left" he="left" [lang]="lang" (key)="onKey($event)"></app-key>
-        <app-key en="right" he="right" [lang]="lang" (key)="onKey($event)"></app-key>
-      </div>
+    <div class="keyboard-control-group float-right">
+      <span class="keyboard-control" [ngClass]="{disabled: keyboardSize === 'keyboard-small'}" (click)="onSmallerKeyboard()" title="smaller keyboard">
+        <fa-icon [icon]="'compress'"></fa-icon>
+      </span>
+      <span class="keyboard-control" [ngClass]="{disabled: keyboardSize === 'keyboard-large'}" (click)="onLargerKeyboard()" title="larger keyboard">
+        <fa-icon [icon]="'expand'"></fa-icon>
+      </span>
+    </div>
+
+    <div class="keyboard-control-group float-right">
+      <span *ngIf="lang==='he'" class="keyboard-control" (click)="onToggleVowels()" title="toggle vowels">
+        <fa-icon [icon]="'toggle-on'" [flip]="vowelToggle ? null : 'horizontal'"></fa-icon>
+      </span>
+    </div>
+  </div>
+
+  <!-- keyboard drag handle -->
+  <div #keyboardDragHandle class="keyboard-drag-handle">
+    <span>{{ hasBeenDragged ? '&nbsp;' : 'drag me' }}</span>
+  </div>
+
+  <!-- keyboard keys -->
+  <div class="keyboard-keys">
+    <div class="keyboard-row keyboard-row-1">
+      <app-key en="1" he="sheva" [lang]="lang" [vowelToggle]="vowelToggle" (key)="onKey($event)"></app-key>
+      <app-key en="2" he="hataf-segol" [lang]="lang" [vowelToggle]="vowelToggle" (key)="onKey($event)"></app-key>
+      <app-key en="3" he="hataf-patah" [lang]="lang" [vowelToggle]="vowelToggle" (key)="onKey($event)"></app-key>
+      <app-key en="4" he="hataf-qamats" [lang]="lang" [vowelToggle]="vowelToggle" (key)="onKey($event)"></app-key>
+      <app-key en="5" he="hiriq" [lang]="lang" [vowelToggle]="vowelToggle" (key)="onKey($event)"></app-key>
+      <app-key en="6" he="tsere" [lang]="lang" [vowelToggle]="vowelToggle" (key)="onKey($event)"></app-key>
+      <app-key en="7" he="segol" [lang]="lang" [vowelToggle]="vowelToggle" (key)="onKey($event)"></app-key>
+      <app-key en="8" he="patah" [lang]="lang" [vowelToggle]="vowelToggle" (key)="onKey($event)"></app-key>
+      <app-key en="9" he="qamats" [lang]="lang" [vowelToggle]="vowelToggle" (key)="onKey($event)"></app-key>
+      <app-key en="0" he="sin-dot" [lang]="lang" [vowelToggle]="vowelToggle" (key)="onKey($event)"></app-key>
+      <app-key he="shin-dot" [lang]="lang" [vowelToggle]="vowelToggle" (key)="onKey($event)"></app-key>
+      <app-key he="holem" [lang]="lang" [vowelToggle]="vowelToggle" (key)="onKey($event)"></app-key>
+      <app-key he="dagesh" [lang]="lang" [vowelToggle]="vowelToggle" (key)="onKey($event)"></app-key>
+      <app-key en="backspace" he="backspace" [lang]="lang" (key)="onKey($event)"></app-key>
+    </div>
+    <div class="keyboard-row keyboard-row-2">
+      <app-key en="Q" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
+      <app-key en="W" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
+      <app-key en="E" he="qof" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
+      <app-key en="R" he="resh" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
+      <app-key en="T" he="alef" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
+      <app-key en="Y" he="tet" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
+      <app-key en="U" he="vav" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
+      <app-key en="I" he="nun-final" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
+      <app-key en="O" he="mem-final" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
+      <app-key en="P" he="peh" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
+      <app-key></app-key>
+      <app-key he="holem-vav" [lang]="lang" [vowelToggle]="vowelToggle" (key)="onKey($event)"></app-key>
+      <app-key he="shuruq" [lang]="lang" [vowelToggle]="vowelToggle" (key)="onKey($event)"></app-key>
+    </div>
+    <div class="keyboard-row keyboard-row-3">
+      <app-key en="caps" [lang]="lang" [lower]="lower" (toggleCase)="onToggleCase()"></app-key>
+      <app-key en="A" he="shin" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
+      <app-key en="S" he="dalet" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
+      <app-key en="D" he="gimel" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
+      <app-key en="F" he="kaf" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
+      <app-key en="G" he="ayin" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
+      <app-key en="H" he="yod" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
+      <app-key en="J" he="chet" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
+      <app-key en="K" he="lamed" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
+      <app-key en="L" he="kaf-final" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
+      <app-key he="peh-final" [lang]="lang" (key)="onKey($event)"></app-key>
+      <app-key></app-key>
+      <app-key he="qubbuts" [lang]="lang" [vowelToggle]="vowelToggle" (key)="onKey($event)"></app-key>
+      <app-key en="enter" he="enter" [lang]="lang" (key)="onKey($event)"></app-key>
+    </div>
+    <div class="keyboard-row keyboard-row-4">
+      <app-key en="Z" he="zayin" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
+      <app-key en="X" he="samekh" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
+      <app-key en="C" he="bet" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
+      <app-key en="V" he="heh" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
+      <app-key en="B" he="nun" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
+      <app-key en="N" he="mem" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
+      <app-key en="M" he="tsadeh" [lang]="lang" [lower]="lower" (key)="onKey($event)"></app-key>
+      <app-key he="tav" [lang]="lang" (key)="onKey($event)"></app-key>
+      <app-key he="tsadeh-final" [lang]="lang" (key)="onKey($event)"></app-key>
+      <app-key en="left" he="left" [lang]="lang" (key)="onKey($event)"></app-key>
+      <app-key en="right" he="right" [lang]="lang" (key)="onKey($event)"></app-key>
     </div>
   </div>
 </div>

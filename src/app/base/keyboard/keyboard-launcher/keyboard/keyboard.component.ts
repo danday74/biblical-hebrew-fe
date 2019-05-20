@@ -5,12 +5,12 @@ import { debounce } from '@app/decorators/debounce'
 import { CommsEnum } from '@app/enums/comms.enum'
 import { KeyboardSizeEnum } from '@app/enums/keyboard-size.enum'
 import { State } from '@app/reducers'
-import { CommsService } from '@app/services/comms/comms.service'
+import { Comm, CommsService } from '@app/services/comms/comms.service'
 import { StorageService } from '@app/services/storage/storage.service'
 import { DestroyerComponent } from '@app/utils/destroyer.component'
 import { select, Store } from '@ngrx/store'
 import * as $ from 'jquery'
-import { takeUntil } from 'rxjs/operators'
+import { filter, takeUntil } from 'rxjs/operators'
 
 const keyboardHasBeenDraggedKey = 'keyboardHasBeenDragged'
 
@@ -31,7 +31,7 @@ export class KeyboardComponent extends DestroyerComponent implements OnInit, OnC
   focusInputButtonEnabled = false
   hasBeenDragged: boolean
   hasMoved = false
-  keyboardSize: KeyboardSizeEnum = KeyboardSizeEnum.Small
+  keyboardSize: KeyboardSizeEnum
   lang: string
   lower = false
   vowelToggle = true
@@ -50,6 +50,18 @@ export class KeyboardComponent extends DestroyerComponent implements OnInit, OnC
       select(selectInputBlur)
     ).subscribe(inputBlur => {
       this.inputBlur = inputBlur
+    })
+
+    this.commsService.commsBehavior$.pipe(
+      takeUntil(this.unsubscribe$),
+      filter((comm: Comm) => comm.type === CommsEnum.KeyboardSize)
+    ).subscribe((comm: Comm) => {
+      const keyboardSize: KeyboardSizeEnum = comm.payload
+      const htmlTag = $('html')
+      htmlTag.addClass('keyboard-size')
+      htmlTag.removeClass(KeyboardSizeEnum.Small).removeClass(KeyboardSizeEnum.Medium).removeClass(KeyboardSizeEnum.Large)
+      htmlTag.addClass(keyboardSize)
+      this.keyboardSize = keyboardSize
     })
   }
 
@@ -81,6 +93,7 @@ export class KeyboardComponent extends DestroyerComponent implements OnInit, OnC
     } else if (this.keyboardSize === KeyboardSizeEnum.Medium) {
       this.keyboardSize = KeyboardSizeEnum.Large
     }
+    this.sendKeyboardSize()
   }
 
   onMinimise() {
@@ -108,6 +121,7 @@ export class KeyboardComponent extends DestroyerComponent implements OnInit, OnC
     } else if (this.keyboardSize === KeyboardSizeEnum.Medium) {
       this.keyboardSize = KeyboardSizeEnum.Small
     }
+    this.sendKeyboardSize()
   }
 
   onToggleCase() {
@@ -139,6 +153,11 @@ export class KeyboardComponent extends DestroyerComponent implements OnInit, OnC
   private resetPositionNow() {
     this.block.resetPosition()
     this.hasMoved = false
+  }
+
+  private sendKeyboardSize() {
+    this.commsService.sendBehavior({type: CommsEnum.KeyboardSize, payload: this.keyboardSize})
+    this.resetPositionNow()
   }
 
   @debounce(200, false, true)

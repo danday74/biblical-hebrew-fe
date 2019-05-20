@@ -1,11 +1,15 @@
 @import '../../../../globals';
 
 $keyboardBorderColor: #111;
-$keyboardRowIndent: ($keyboardSmallKeySize + $keyboardSmallKeyMargin) / 2;
+
+@mixin keyboard-size-mixin($width, $height, $keyframes) {
+  width: $width + unquote('px');
+  height: $height + unquote('px');
+  animation: $keyframes 1s;
+  animation-fill-mode: forwards; // retains animation on completion
+}
 
 .keyboard {
-  width: $keyboardSmallWidth + unquote('px');
-  height: $keyboardSmallHeight + unquote('px');
   max-height: 0;
   background-color: #222;
   border: 3px solid $keyboardBorderColor;
@@ -15,17 +19,39 @@ $keyboardRowIndent: ($keyboardSmallKeySize + $keyboardSmallKeyMargin) / 2;
   opacity: 0.85;
   overflow: hidden;
   user-select: none;
-  animation: slide-keyboard-up 1s;
-  animation-fill-mode: forwards; // retains animation on completion
 }
 
-@keyframes slide-keyboard-up {
+:host-context(.keyboard-size.keyboard-small) .keyboard {
+  @include keyboard-size-mixin($keyboardSmallWidth, $keyboardSmallHeight, slide-keyboard-up-small);
+}
+
+:host-context(.keyboard-size.keyboard-medium) .keyboard {
+  @include keyboard-size-mixin($keyboardMediumWidth, $keyboardMediumHeight, slide-keyboard-up-medium);
+}
+
+:host-context(.keyboard-size.keyboard-large) .keyboard {
+  @include keyboard-size-mixin($keyboardLargeWidth, $keyboardLargeHeight, slide-keyboard-up-large);
+}
+
+@mixin slide-keyboard-up-mixin($height) {
   from {
     max-height: 0;
   }
   to {
-    max-height: $keyboardSmallHeight + unquote('px');
+    max-height: $height + unquote('px');
   }
+}
+
+@keyframes slide-keyboard-up-small {
+  @include slide-keyboard-up-mixin($keyboardSmallHeight);
+}
+
+@keyframes slide-keyboard-up-medium {
+  @include slide-keyboard-up-mixin($keyboardMediumHeight);
+}
+
+@keyframes slide-keyboard-up-large {
+  @include slide-keyboard-up-mixin($keyboardLargeHeight);
 }
 
 .keyboard-controls {
@@ -66,16 +92,31 @@ $keyboardRowIndent: ($keyboardSmallKeySize + $keyboardSmallKeyMargin) / 2;
   clear: both;
 }
 
-.keyboard-row-1 {
+@mixin keyboard-row-indent-mixin($keySize, $keyMargin, $factor) {
+  $rowIndent: ($keySize + $keyMargin) / 2;
+  margin-left: ($rowIndent * $factor) + unquote('px');
 }
 
-.keyboard-row-2 {
-  margin-left: $keyboardRowIndent + unquote('px');
+:host-context(.keyboard-size.keyboard-small) .keyboard-row-2 {
+  @include keyboard-row-indent-mixin($keyboardSmallKeySize, $keyboardSmallKeyMargin, 1);
 }
 
-.keyboard-row-3 {
+:host-context(.keyboard-size.keyboard-medium) .keyboard-row-2 {
+  @include keyboard-row-indent-mixin($keyboardMediumKeySize, $keyboardMediumKeyMargin, 1);
 }
 
-.keyboard-row-4 {
-  margin-left: ($keyboardRowIndent * 3) + unquote('px');
+:host-context(.keyboard-size.keyboard-large) .keyboard-row-2 {
+  @include keyboard-row-indent-mixin($keyboardLargeKeySize, $keyboardLargeKeyMargin, 1);
+}
+
+:host-context(.keyboard-size.keyboard-small) .keyboard-row-4 {
+  @include keyboard-row-indent-mixin($keyboardSmallKeySize, $keyboardSmallKeyMargin, 3);
+}
+
+:host-context(.keyboard-size.keyboard-medium) .keyboard-row-4 {
+  @include keyboard-row-indent-mixin($keyboardMediumKeySize, $keyboardMediumKeyMargin, 3);
+}
+
+:host-context(.keyboard-size.keyboard-large) .keyboard-row-4 {
+  @include keyboard-row-indent-mixin($keyboardLargeKeySize, $keyboardLargeKeyMargin, 3);
 }

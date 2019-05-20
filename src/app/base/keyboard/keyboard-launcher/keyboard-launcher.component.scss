@@ -37,5 +37,20 @@ $keyboardToggleWidth: 80;
   position: absolute;
   bottom: $footerHeight;
   left: 50%;
-  margin-left: -($keyboardSmallWidth / 2) + unquote('px');
+}
+
+@mixin keyboard-wrapper-mixin($width) {
+  margin-left: -($width / 2) + unquote('px');
+}
+
+:host-context(.keyboard-size.keyboard-small) .keyboard-wrapper {
+  @include keyboard-wrapper-mixin($keyboardSmallWidth);
+}
+
+:host-context(.keyboard-size.keyboard-medium) .keyboard-wrapper {
+  @include keyboard-wrapper-mixin($keyboardMediumWidth);
+}
+
+:host-context(.keyboard-size.keyboard-large) .keyboard-wrapper {
+  @include keyboard-wrapper-mixin($keyboardLargeWidth);
 }
