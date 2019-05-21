@@ -10,12 +10,12 @@
   // backspace and enter
 
   .key.backspace .text {
-    font-size: 15px;
+    font-size: 14px;
     top: 0;
   }
 
   .key.enter .text {
-    font-size: 15px;
+    font-size: 14px;
     top: 0;
   }
 
@@ -27,11 +27,11 @@
   }
 
   .key.left .text {
-    left: -2px;
+    left: -1px;
   }
 
   .key.right .text {
-    right: -2px;
+    right: -1px;
   }
 
   // char keys
@@ -43,8 +43,8 @@
   }
 
   .key.en.lower .text {
-    font-size: 18px;
-    top: -2px;
+    font-size: 17px;
+    top: -1px;
   }
 
   .key.he .text {
