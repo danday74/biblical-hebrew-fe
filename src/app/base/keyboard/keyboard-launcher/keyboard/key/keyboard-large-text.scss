@@ -3,27 +3,27 @@
   // caps
 
   .key.caps .text {
-    font-size: 18px;
-    top: 1px;
+    font-size: 20px;
+    top: 0;
   }
 
   // backspace and enter
 
   .key.backspace .text {
-    font-size: 14px;
-    top: 0;
+    font-size: 18px;
+    top: 2px;
   }
 
   .key.enter .text {
-    font-size: 14px;
-    top: 0;
+    font-size: 18px;
+    top: 2px;
   }
 
   // left and right
 
   .key.direction .text {
     font-size: 20px;
-    top: -3px;
+    top: -1px;
   }
 
   .key.left .text {
@@ -38,27 +38,27 @@
 
   // also applies to numbers
   .key.en.upper .text {
-    font-size: 17px;
-    top: 0;
-  }
-
-  .key.en.lower .text {
-    font-size: 17px;
+    font-size: 20px;
     top: -1px;
   }
 
-  .key.he .text {
+  .key.en.lower .text {
     font-size: 20px;
-    top: -5px;
+    top: -2px;
+  }
+
+  .key.he .text {
+    font-size: 24px;
+    top: -6px;
   }
 
   // hebrew vowel keys
 
   .key.he.vowel {
     .text {
-      font-size: 48px;
-      top: -45px;
-      left: -7px;
+      font-size: 56px;
+      top: -54px;
+      left: -8px;
     }
 
     .text.sheva {
@@ -75,12 +75,12 @@
     }
 
     .text.hiriq {
-      top: -37px;
-      left: -1px;
+      top: -43px;
+      left: -2px;
     }
 
     .text.tsere {
-      left: -4px;
+      left: -5px;
     }
 
     .text.segol {
@@ -88,47 +88,47 @@
     }
 
     .text.patah {
-      top: -46px;
+      top: -53px;
       left: -5px;
     }
 
     .text.qamats {
-      top: -48px;
+      top: -55px;
       left: -5px;
     }
 
     .text.sin-dot {
-      top: -17px;
-      left: -2px;
+      top: -21px;
+      left: -4px;
     }
 
     .text.shin-dot {
-      top: -17px;
-      left: -14px;
+      top: -21px;
+      left: -15px;
     }
 
     .text.holem {
-      top: -17px;
+      top: -22px;
       left: 0;
     }
 
     .text.dagesh {
-      top: -26px;
+      top: -31px;
     }
 
     .text.qubbuts {
-      font-size: 47px;
+      // font-size
     }
 
     .text.holem-vav {
-      font-size: 20px;
-      top: -5px;
+      font-size: 24px;
+      top: -6px;
       left: 0;
     }
 
     .text.shuruq {
-      font-size: 20px;
-      top: -5px;
+      font-size: 24px;
+      top: -6px;
       left: 0;
     }
   }
