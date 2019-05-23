@@ -19,11 +19,11 @@ import {
   faCaretLeft,
   faCaretRight,
   faCheck,
-  faCompress,
-  faExpand,
   faEye,
   faGlobe,
   faLevelDownAlt,
+  faMinusCircle,
+  faPlusCircle,
   fas,
   faSignOutAlt,
   faStepForward,
@@ -85,10 +85,12 @@ export class AppModule {
     library.add(far, fas)
     library.add(faArrowAltCircleUp)
     library.add(faBackspace, faBullseye)
-    library.add(faCaretLeft, faCaretRight, faCheck, faCompress)
-    library.add(faExpand, faEye)
+    library.add(faCaretLeft, faCaretRight, faCheck)
+    library.add(faEye)
     library.add(faGlobe)
     library.add(faLevelDownAlt)
+    library.add(faMinusCircle)
+    library.add(faPlusCircle)
     library.add(faSignOutAlt, faStepForward)
     library.add(faTimes, faTimesCircle, faToggleOn)
     library.add(faWindowMinimize)
