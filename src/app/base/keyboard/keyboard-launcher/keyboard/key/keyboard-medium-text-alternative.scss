@@ -1,0 +1,139 @@
+:host-context(.keyboard-size.keyboard-medium) {
+
+  .key {
+    font-family: sans-serif;
+  }
+
+  // caps
+
+  .key.caps .text {
+    font-size: 18px;
+    top: 1px;
+  }
+
+  // backspace and enter
+
+  .key.backspace .text {
+    font-size: 14px;
+    top: 0;
+  }
+
+  .key.enter .text {
+    font-size: 14px;
+    top: 0;
+  }
+
+  // left and right
+
+  .key.direction .text {
+    font-size: 20px;
+    top: -3px;
+  }
+
+  .key.left .text {
+    left: -1px;
+  }
+
+  .key.right .text {
+    right: -1px;
+  }
+
+  // char keys
+
+  // also applies to numbers
+  .key.en.upper .text {
+    font-size: 17px;
+    top: 0;
+  }
+
+  .key.en.lower .text {
+    font-size: 17px;
+    top: -1px;
+  }
+
+  .key.he .text {
+    font-size: 20px;
+    top: -5px;
+  }
+
+  // hebrew vowel keys
+
+  .key.he.vowel {
+    .text {
+      font-size: 48px;
+      top: -45px;
+      left: -7px;
+    }
+
+    .text.sheva {
+      left: -2px;
+    }
+
+    .text.hataf-segol {
+    }
+
+    .text.hataf-patah {
+    }
+
+    .text.hataf-qamats {
+    }
+
+    .text.hiriq {
+      top: -37px;
+      left: -1px;
+    }
+
+    .text.tsere {
+      left: -4px;
+    }
+
+    .text.segol {
+      left: -5px;
+    }
+
+    .text.patah {
+      top: -46px;
+      left: -5px;
+    }
+
+    .text.qamats {
+      top: -48px;
+      left: -5px;
+    }
+
+    .text.sin-dot {
+      top: -17px;
+      left: -2px;
+    }
+
+    .text.shin-dot {
+      top: -17px;
+      left: -14px;
+    }
+
+    .text.holem {
+      top: -17px;
+      left: 0;
+    }
+
+    .text.dagesh {
+      top: -26px;
+    }
+
+    .text.qubbuts {
+      font-size: 47px;
+    }
+
+    .text.holem-vav {
+      font-size: 20px;
+      top: -5px;
+      left: 0;
+    }
+
+    .text.shuruq {
+      font-size: 20px;
+      top: -5px;
+      left: 0;
+    }
+  }
+}
