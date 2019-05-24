@@ -1,5 +1,9 @@
 :host-context(.keyboard-size.keyboard-medium) {
 
+  .key {
+    font-family: sans-serif;
+  }
+
   // caps
 
   .key.caps .text {
