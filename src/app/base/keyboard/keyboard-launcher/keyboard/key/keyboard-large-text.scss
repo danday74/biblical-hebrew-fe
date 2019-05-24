@@ -1,4 +1,7 @@
-:host-context(.keyboard-size.keyboard-large) {
+:host-context(
+  .keyboard-size.keyboard-large.keyboard-font-english.keyboard-font-english-standard,
+  .keyboard-size.keyboard-large.keyboard-font-hebrew.keyboard-font-hebrew-standard
+) {
 
   .key {
     font-family: sans-serif;

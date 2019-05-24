@@ -1,7 +1,10 @@
-:host-context(.keyboard-size.keyboard-small) {
+:host-context(
+  .keyboard-size.keyboard-small.keyboard-font-english.keyboard-font-english-alternative,
+  .keyboard-size.keyboard-small.keyboard-font-hebrew.keyboard-font-hebrew-alternative
+) {
 
   .key {
-    font-family: sans-serif;
+    font-family: serif;
   }
 
   // caps
