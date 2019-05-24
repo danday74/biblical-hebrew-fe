@@ -1,8 +1,10 @@
 import { Component, HostListener, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core'
 import { SetKeyboardOpenAction } from '@app/actions/ui/ui.actions'
 import { selectInputBlur } from '@app/actions/ui/ui.selectors'
+import config from '@app/app.config'
 import { debounce } from '@app/decorators/debounce'
 import { CommsEnum } from '@app/enums/comms.enum'
+import { KeyboardFontCurrentEnum, KeyboardFontEnglishEnum, KeyboardFontHebrewEnum } from '@app/enums/keyboard-font.enum'
 import { KeyboardSizeEnum } from '@app/enums/keyboard-size.enum'
 import { State } from '@app/reducers'
 import { Comm, CommsService } from '@app/services/comms/comms.service'
@@ -31,6 +33,8 @@ export class KeyboardComponent extends DestroyerComponent implements OnInit, OnC
   focusInputButtonEnabled = false
   hasBeenDragged: boolean
   hasMoved = false
+  keyboardFontEnglish: KeyboardFontEnglishEnum
+  keyboardFontHebrew: KeyboardFontHebrewEnum
   keyboardSize: KeyboardSizeEnum
   lang: string
   lower = false
@@ -43,7 +47,7 @@ export class KeyboardComponent extends DestroyerComponent implements OnInit, OnC
   }
 
   ngOnInit() {
-    this.lang = navigator.language === 'he' ? 'he' : 'en'
+    this.setLanguage(navigator.language === 'he' ? 'he' : 'en')
     this.hasBeenDragged = this.storageService.getLocalStorage(keyboardHasBeenDraggedKey)
     this.store.pipe(
       takeUntil(this.unsubscribe$),
@@ -63,6 +67,9 @@ export class KeyboardComponent extends DestroyerComponent implements OnInit, OnC
       htmlTag.addClass(keyboardSize)
       this.keyboardSize = keyboardSize
     })
+
+    this.setKeyboardFontEnglish(config.defaultFontEnglish)
+    this.setKeyboardFontHebrew(config.defaultFontHebrew)
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -128,11 +135,32 @@ export class KeyboardComponent extends DestroyerComponent implements OnInit, OnC
     this.lower = !this.lower
   }
 
+  onToggleFont() {
+    if (this.lang === 'en') {
+      let font: KeyboardFontEnglishEnum
+      if (this.keyboardFontEnglish === KeyboardFontEnglishEnum.Standard) {
+        font = KeyboardFontEnglishEnum.Alternative
+      } else if (this.keyboardFontEnglish === KeyboardFontEnglishEnum.Alternative) {
+        font = KeyboardFontEnglishEnum.Standard
+      }
+      this.setKeyboardFontEnglish(font)
+    }
+    if (this.lang === 'he') {
+      let font: KeyboardFontHebrewEnum
+      if (this.keyboardFontHebrew === KeyboardFontHebrewEnum.Standard) {
+        font = KeyboardFontHebrewEnum.Alternative
+      } else if (this.keyboardFontHebrew === KeyboardFontHebrewEnum.Alternative) {
+        font = KeyboardFontHebrewEnum.Standard
+      }
+      this.setKeyboardFontHebrew(font)
+    }
+  }
+
   onToggleLanguage() {
     if (this.lang === 'en') {
-      this.lang = 'he'
+      this.setLanguage('he')
     } else if (this.lang === 'he') {
-      this.lang = 'en'
+      this.setLanguage('en')
     }
   }
 
@@ -163,5 +191,27 @@ export class KeyboardComponent extends DestroyerComponent implements OnInit, OnC
   @debounce(200, false, true)
   private setFocusInputButtonEnabled(inputHasFocus: boolean) {
     this.focusInputButtonEnabled = !inputHasFocus
+  }
+
+  private setKeyboardFontEnglish(font: KeyboardFontEnglishEnum) {
+    this.keyboardFontEnglish = font
+    const htmlTag = $('html')
+    htmlTag.removeClass(KeyboardFontEnglishEnum.Standard).removeClass(KeyboardFontEnglishEnum.Alternative)
+    htmlTag.addClass(this.keyboardFontEnglish)
+  }
+
+  private setKeyboardFontHebrew(font: KeyboardFontHebrewEnum) {
+    this.keyboardFontHebrew = font
+    const htmlTag = $('html')
+    htmlTag.removeClass(KeyboardFontHebrewEnum.Standard).removeClass(KeyboardFontHebrewEnum.Alternative)
+    htmlTag.addClass(this.keyboardFontHebrew)
+  }
+
+  private setLanguage(lang) {
+    this.lang = lang
+    const htmlTag = $('html')
+    htmlTag.removeClass(KeyboardFontCurrentEnum.Hebrew).removeClass(KeyboardFontCurrentEnum.English)
+    if (this.lang === 'he') htmlTag.addClass(KeyboardFontCurrentEnum.Hebrew)
+    if (this.lang === 'en') htmlTag.addClass(KeyboardFontCurrentEnum.English)
   }
 }

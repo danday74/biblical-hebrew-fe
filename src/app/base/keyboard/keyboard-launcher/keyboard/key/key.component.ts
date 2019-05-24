@@ -10,7 +10,11 @@ const specials = ['backspace', 'caps', 'enter', 'left', 'right']
 @Component({
   selector: 'app-key',
   templateUrl: './key.component.html',
-  styleUrls: ['./key.component.scss', './keyboard-small-text.scss', './keyboard-medium-text.scss', './keyboard-large-text.scss']
+  styleUrls: [
+    './key.component.scss',
+    './keyboard-small-text.scss', './keyboard-medium-text.scss', './keyboard-large-text.scss',
+    './keyboard-small-text-alternative.scss', './keyboard-medium-text-alternative.scss', './keyboard-large-text-alternative.scss'
+  ]
 })
 
 export class KeyComponent {

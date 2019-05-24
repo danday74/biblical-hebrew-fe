@@ -20,6 +20,7 @@ import {
   faCaretRight,
   faCheck,
   faEye,
+  faFont,
   faGlobe,
   faLevelDownAlt,
   faMinusCircle,
@@ -87,6 +88,7 @@ export class AppModule {
     library.add(faBackspace, faBullseye)
     library.add(faCaretLeft, faCaretRight, faCheck)
     library.add(faEye)
+    library.add(faFont)
     library.add(faGlobe)
     library.add(faLevelDownAlt)
     library.add(faMinusCircle)
