@@ -11,7 +11,7 @@ const specials = ['backspace', 'caps', 'enter', 'left', 'right']
   selector: 'app-key',
   templateUrl: './key.component.html',
   styleUrls: [
-    './key.component.scss',
+    './key.component.scss', './key-specials.scss',
     './keyboard-small-text.scss', './keyboard-medium-text.scss', './keyboard-large-text.scss',
     './keyboard-small-text-alternative.scss', './keyboard-medium-text-alternative.scss', './keyboard-large-text-alternative.scss'
   ]
