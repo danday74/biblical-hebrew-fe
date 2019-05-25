@@ -4,7 +4,7 @@
 ) {
 
   .key {
-    font-family: serif;
+    font-family: monospace;
   }
 
   // caps
@@ -45,28 +45,28 @@
 
   // also applies to numbers
   .key.en.upper .text {
-    font-size: 13px;
+    font-size: 16px;
     top: -2px;
   }
 
   .key.en.lower .text {
-    font-size: 15px;
-    top: -2px;
+    font-size: 16px;
+    top: -3px;
   }
 
   .key.he .text {
-    // font-family
-    font-size: 16px;
-    top: -3px;
+    font-family: serif;
+    font-size: 18px;
+    top: -4px;
   }
 
   // hebrew vowel keys
 
   .key.he.vowel {
     .text {
-      font-size: 36px;
-      top: -33px;
-      left: -5px;
+      font-size: 44px;
+      top: -43px;
+      left: -6px;
     }
 
     .text.sheva {
@@ -83,7 +83,7 @@
     }
 
     .text.hiriq {
-      top: -26px;
+      top: -35px;
       left: -1px;
     }
 
@@ -96,23 +96,23 @@
     }
 
     .text.patah {
-      top: -32px;
-      left: -3px;
+      top: -45px;
+      left: -4px;
     }
 
     .text.qamats {
-      // top
+      top: -44px;
       left: -3px;
     }
 
     .text.sin-dot {
-      top: -13px;
-      left: -2px;
+      top: -15px;
+      left: -4px;
     }
 
     .text.shin-dot {
-      top: -13px;
-      left: -9px;
+      top: -15px;
+      left: -10px;
     }
 
     .text.holem {
@@ -121,7 +121,7 @@
     }
 
     .text.dagesh {
-      top: -18px;
+      top: -26px;
       // left
     }
 
@@ -131,15 +131,15 @@
     }
 
     .text.holem-vav {
-      font-size: 16px;
-      top: -3px;
-      left: 0;
+      font-size: 18px;
+      top: -4px;
+      left: 1px;
     }
 
     .text.shuruq {
-      font-size: 16px;
-      top: -3px;
-      left: 0;
+      font-size: 18px;
+      top: -4px;
+      left: 1px;
     }
   }
 }
