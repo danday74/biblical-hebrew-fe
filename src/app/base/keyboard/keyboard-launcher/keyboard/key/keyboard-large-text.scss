@@ -7,40 +7,6 @@
     font-family: sans-serif;
   }
 
-  // caps
-
-  .key.caps .text {
-    font-size: 20px;
-    top: 0;
-  }
-
-  // backspace and enter
-
-  .key.backspace .text {
-    font-size: 18px;
-    top: 2px;
-  }
-
-  .key.enter .text {
-    font-size: 18px;
-    top: 2px;
-  }
-
-  // left and right
-
-  .key.direction .text {
-    font-size: 20px;
-    top: -1px;
-  }
-
-  .key.left .text {
-    left: -1px;
-  }
-
-  .key.right .text {
-    right: -1px;
-  }
-
   // char keys
 
   // also applies to numbers
