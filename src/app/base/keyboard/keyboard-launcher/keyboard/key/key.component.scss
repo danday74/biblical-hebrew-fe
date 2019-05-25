@@ -38,6 +38,13 @@
   position: relative;
 }
 
+.key.caps,
+.key.backspace,
+.key.enter,
+.key.direction {
+  font-family: serif !important;
+}
+
 // blank
 
 .key.blank {
