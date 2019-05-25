@@ -56,7 +56,7 @@
 
   .key.he .text {
     font-family: 'Segoe UI Biblical Hebrew', sans-serif;
-    font-size: 16px;
+    font-size: 15px;
     top: -3px;
   }
 
@@ -65,8 +65,8 @@
   .key.he.vowel {
     .text {
       font-size: 36px;
-      top: -33px;
-      left: -5px;
+      top: -37px;
+      left: -6px;
     }
 
     .text.sheva {
@@ -83,7 +83,7 @@
     }
 
     .text.hiriq {
-      top: -26px;
+      top: -29px;
       left: -1px;
     }
 
@@ -96,7 +96,7 @@
     }
 
     .text.patah {
-      top: -32px;
+      top: -37px;
       left: -3px;
     }
 
@@ -106,22 +106,23 @@
     }
 
     .text.sin-dot {
-      top: -13px;
-      left: -2px;
+      top: -12px;
+      left: 6px;
     }
 
     .text.shin-dot {
-      top: -13px;
-      left: -9px;
+      top: -12px;
+      left: -4px;
     }
 
     .text.holem {
-      top: -14px;
+      top: -11px;
       left: 0;
     }
 
     .text.dagesh {
-      top: -18px;
+      top: -21px;
+      left: 1px;
     }
 
     .text.qubbuts {
@@ -129,15 +130,15 @@
     }
 
     .text.holem-vav {
-      font-size: 16px;
+      font-size: 15px;
       top: -3px;
-      left: 0;
+      left: 1px;
     }
 
     .text.shuruq {
-      font-size: 16px;
+      font-size: 15px;
       top: -3px;
-      left: 0;
+      left: 1px;
     }
   }
 }
