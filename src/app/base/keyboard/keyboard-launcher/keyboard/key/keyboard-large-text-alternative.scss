@@ -4,7 +4,7 @@
 ) {
 
   .key {
-    font-family: serif;
+    font-family: monospace;
   }
 
   // caps
@@ -55,7 +55,7 @@
   }
 
   .key.he .text {
-    // font-family
+    font-family: serif;
     font-size: 24px;
     top: -6px;
   }
