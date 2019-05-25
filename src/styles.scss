@@ -4,6 +4,13 @@
 @import '~bootswatch/dist/spacelab/bootswatch';
 @import 'styles/cross-browser';
 
+@font-face {
+  font-family: 'Segoe UI Biblical Hebrew';
+  font-style: normal;
+  font-weight: normal;
+  src: url('fonts/segoeui/segoeui.ttf') format('truetype');
+}
+
 html {
   overflow-y: scroll;
   overflow-x: hidden;
