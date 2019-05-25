@@ -22,21 +22,21 @@
 
   .key.he .text {
     font-family: 'Segoe UI Biblical Hebrew', sans-serif;
-    font-size: 20px;
-    top: -5px;
+    font-size: 17px;
+    top: -2px;
   }
 
   // hebrew vowel keys
 
   .key.he.vowel {
     .text {
-      font-size: 48px;
+      font-size: 44px;
       top: -45px;
-      left: -7px;
+      left: -8px;
     }
 
     .text.sheva {
-      left: -2px;
+      left: -1px;
     }
 
     .text.hataf-segol {
@@ -49,12 +49,12 @@
     }
 
     .text.hiriq {
-      top: -37px;
+      top: -36px;
       left: -1px;
     }
 
     .text.tsere {
-      left: -4px;
+      left: -5px;
     }
 
     .text.segol {
@@ -62,49 +62,49 @@
     }
 
     .text.patah {
-      top: -46px;
-      left: -5px;
+      top: -45px;
+      left: -4px;
     }
 
     .text.qamats {
-      top: -48px;
-      left: -5px;
+      top: -45px;
+      left: -4px;
     }
 
     .text.sin-dot {
-      top: -17px;
-      left: -2px;
+      top: -15px;
+      left: 7px;
     }
 
     .text.shin-dot {
-      top: -17px;
-      left: -14px;
+      top: -15px;
+      left: -6px;
     }
 
     .text.holem {
-      top: -17px;
+      top: -14px;
       left: 0;
     }
 
     .text.dagesh {
-      top: -26px;
-      // left
+      top: -25px;
+      left: 0;
     }
 
     .text.qubbuts {
-      font-size: 47px;
-      // left
+      // font-size
+      left: -7px;
     }
 
     .text.holem-vav {
-      font-size: 20px;
-      top: -5px;
+      font-size: 17px;
+      top: -2px;
       left: 0;
     }
 
     .text.shuruq {
-      font-size: 20px;
-      top: -5px;
+      font-size: 17px;
+      top: -2px;
       left: 0;
     }
   }
